@@ -4,7 +4,7 @@
 
 | Change | Where to propose it | Who approves |
 |---|---|---|
-| A term in the shared vocabulary (tier, modifier, business line, use case, action class, control) | The [taxonomy repository](https://github.com/mlcommons/agent-reliability-profile-taxonomy) | Working Group; reaches the Kit through a taxonomy release |
+| A term in the shared vocabulary (tier, modifier, business line, use case, action class, control) | The [taxonomy repository](https://github.com/mlcommons/financial-profile-taxonomy) | Working Group; reaches the Kit through a taxonomy release |
 | A rule for a valid Profile, a schema, a conformance vector, or a specification-owned vocabulary (provenance classes, invalidation triggers, dispositions, conflict kinds, peer-control sets) | This repository: *Specification change* issue | Working Group |
 | A tool fix or improvement that does not change what is conformant | This repository: pull request | Kit maintainers |
 | A security problem or a checker that accepts what it should reject | Privately, per [SECURITY.md](../SECURITY.md) | Kit maintainers |

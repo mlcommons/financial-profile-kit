@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Check that the Kit's shared vocabulary matches the pinned taxonomy release.
 
-The taxonomy repository (mlcommons/agent-reliability-profile-taxonomy) is the single official source of
+The taxonomy repository (mlcommons/financial-profile-taxonomy) is the single official source of
 autonomy tiers and modifiers, business lines, use cases, action classes and the control catalogue. Its
 scripts/export_vocab.py writes them to vocab/ in the format of spec/vocab/. spec/taxonomy.lock.json names
 the release this Kit pins and which files and fields the taxonomy owns.

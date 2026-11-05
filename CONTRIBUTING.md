@@ -25,7 +25,7 @@ confirm; until it does, please send contributions through the Working Group
 
 | Change | Where |
 |---|---|
-| A tier, modifier, business line, use case, action class or control | The [taxonomy repository](https://github.com/mlcommons/agent-reliability-profile-taxonomy), which owns the shared vocabulary |
+| A tier, modifier, business line, use case, action class or control | The [taxonomy repository](https://github.com/mlcommons/financial-profile-taxonomy), which owns the shared vocabulary |
 | A rule, schema, conformance vector or specification-owned vocabulary | A *Specification change* issue here; needs Working Group approval |
 | A tool fix or improvement | A pull request here; Kit maintainers review it |
 | A security problem | Privately, per [SECURITY.md](SECURITY.md) |

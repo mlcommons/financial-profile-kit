@@ -4,7 +4,7 @@ The Agent Reliability Profile has three governed parts, each with its own versio
 
 | Part | Where it lives | Current version | Who approves changes |
 |---|---|---|---|
-| **Taxonomy** (shared vocabulary: autonomy tiers and modifiers, business lines, use cases, action classes, controls) | [mlcommons/agent-reliability-profile-taxonomy](https://github.com/mlcommons/agent-reliability-profile-taxonomy) | 0.1.0 | Financial Services Working Group |
+| **Taxonomy** (shared vocabulary: autonomy tiers and modifiers, business lines, use cases, action classes, controls) | [mlcommons/financial-profile-taxonomy](https://github.com/mlcommons/financial-profile-taxonomy) | 0.1.0 | Financial Services Working Group |
 | **Profile specification** (rules for a valid Profile, schemas, specification-owned vocabularies) | this repository, `spec/` | `arp/1.0-rc2` | Financial Services Working Group |
 | **Reference tools** (checker, Builder skill, workbooks, Viewer, Regulator Kit preview) | this repository | Kit release `1.0-rc2` | Kit maintainers |
 

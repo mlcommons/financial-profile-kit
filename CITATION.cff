@@ -5,8 +5,8 @@ type: software
 license: Apache-2.0
 version: 1.0-rc2
 date-released: 2026-10-22
-url: https://github.com/mlcommons/agent-reliability-profile-kit
-repository-code: https://github.com/mlcommons/agent-reliability-profile-kit
+url: https://github.com/mlcommons/financial-profile-kit
+repository-code: https://github.com/mlcommons/financial-profile-kit
 authors:
   - name: MLCommons Financial Services Working Group
 keywords:

@@ -6,7 +6,7 @@ All notable changes to the Agent Reliability Profile Kit. Finding IDs (A-, B-, C
 
 No change to the specification, schemas, vectors or tool behaviour.
 
-- Set up as a GitHub repository, `mlcommons/agent-reliability-profile-kit` (private until release).
+- Set up as a GitHub repository, `mlcommons/financial-profile-kit` (private until release).
 - `COMPATIBILITY.md`: the three governed parts (taxonomy, specification, tools), their versions, the supported combinations and the known wording differences with the pinned taxonomy release.
 - `spec/taxonomy.lock.json` pins taxonomy release 0.1.0 and records which vocabulary files and fields the taxonomy owns; `tools/check_taxonomy_vocab.py` checks `spec/vocab/` against that release (no identifier or assignment mismatch; seven wording differences listed in COMPATIBILITY.md).
 - `governance/`: roles, review process (specification changes: Working Group; tool changes: maintainers; vocabulary changes: taxonomy repository) and a shared release checklist built from the rc2 review gates.

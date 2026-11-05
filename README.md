@@ -125,7 +125,7 @@ After any change to `spec/` or `examples/`, regenerate the derived files: `pytho
 
 ## This repository and the taxonomy
 
-The Profile has three governed parts. The **taxonomy** (autonomy tiers and modifiers, business lines, use cases, action classes, controls) lives in its own repository, [mlcommons/agent-reliability-profile-taxonomy](https://github.com/mlcommons/agent-reliability-profile-taxonomy), and is the official source of that vocabulary. This repository holds the **Profile specification** (`spec/`) and the **reference tools**. Each Kit release pins one taxonomy release ([`spec/taxonomy.lock.json`](spec/taxonomy.lock.json)); supported combinations are in [COMPATIBILITY.md](COMPATIBILITY.md).
+The Profile has three governed parts. The **taxonomy** (autonomy tiers and modifiers, business lines, use cases, action classes, controls) lives in its own repository, [mlcommons/financial-profile-taxonomy](https://github.com/mlcommons/financial-profile-taxonomy), and is the official source of that vocabulary. This repository holds the **Profile specification** (`spec/`) and the **reference tools**. Each Kit release pins one taxonomy release ([`spec/taxonomy.lock.json`](spec/taxonomy.lock.json)); supported combinations are in [COMPATIBILITY.md](COMPATIBILITY.md).
 
 - Propose vocabulary changes in the taxonomy repository; specification changes and tool fixes here ([governance/review-process.md](governance/review-process.md)).
 - Releases follow one checklist shared with the taxonomy ([governance/release-checklist.md](governance/release-checklist.md)).

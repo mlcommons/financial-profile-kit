@@ -1,6 +1,6 @@
 {
   "description": "Pins the taxonomy release this Kit release draws its shared vocabulary from. The taxonomy repository is the single official source of the terms listed under taxonomy_owned; tools/check_taxonomy_vocab.py checks that spec/vocab/ matches the pinned release. The specification owns every other file in spec/vocab/.",
-  "taxonomy_repository": "https://github.com/mlcommons/agent-reliability-profile-taxonomy",
+  "taxonomy_repository": "https://github.com/mlcommons/financial-profile-taxonomy",
   "taxonomy_release": "0.1.0",
   "taxonomy_ref": "v0.1.0",
   "taxonomy_vocab_dir": "vocab",
