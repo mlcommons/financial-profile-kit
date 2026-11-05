@@ -1,0 +1,520 @@
+{
+  "inventory_spec": "arp-inventory/0.1",
+  "institution": {
+    "name": "Harbour & Vale Building Society (fictional)",
+    "firm_id": "DEMO-FIRM-04",
+    "jurisdictions": [
+      "GB"
+    ]
+  },
+  "snapshot": {
+    "sequence": 4,
+    "as_of": "2026-09-30",
+    "produced_at": "2026-10-05T09:13:00Z",
+    "trigger": "scheduled",
+    "previous_hash": "sha256:810a27e8f44f73810c67530be75a901cdf8af61f1a9bfc32a23169b4e757aabd"
+  },
+  "records": [
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-001",
+        "agent_name": "Loan servicing and modifications (back office)",
+        "deployment_status": "production",
+        "business_line": "lending_credit",
+        "use_case_id": "ODD.14",
+        "use_case": "Loan servicing and modifications",
+        "customer_facing": "no",
+        "autonomy_tier": "T1",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "unknown",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Credit Officer",
+        "last_reviewed": "2025-08-17"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-002",
+        "agent_name": "Mortgage origination (back office)",
+        "deployment_status": "production",
+        "business_line": "lending_credit",
+        "use_case_id": "ODD.10",
+        "use_case": "Mortgage origination",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "unknown",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Credit Officer",
+        "last_reviewed": "2025-01-30"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-003",
+        "agent_name": "Alert triage for structuring and rapid movement (group)",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.20",
+        "use_case": "Alert triage for structuring and rapid movement",
+        "customer_facing": "no",
+        "autonomy_tier": "T1",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "L1",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2024-07-20",
+        "full_profile_ref": "harbour.har-ag-003.v1.L1"
+      },
+      "profile": {
+        "profile_id": "harbour.har-ag-003.v1.L1",
+        "stage": "issued",
+        "headline": 1,
+        "valid_until": "2026-09-02",
+        "sha256": "sha256:21daaa2e4e6990ff505ce65b768fef637e101ead5e5efb8acd61f16bbbfcd359"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-004",
+        "agent_name": "Loan servicing and modifications",
+        "deployment_status": "production",
+        "business_line": "lending_credit",
+        "use_case_id": "ODD.14",
+        "use_case": "Loan servicing and modifications",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Credit Officer",
+        "last_reviewed": "2026-09-13"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-005",
+        "agent_name": "Employee services (back office)",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.52",
+        "use_case": "Employee services",
+        "customer_facing": "no",
+        "autonomy_tier": "T1",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2025-05-09"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-006",
+        "agent_name": "Complaint handling",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.2",
+        "use_case": "Complaint handling",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "absent",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-06-16"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-007",
+        "agent_name": "Financial close and reconciliation v2",
+        "deployment_status": "pilot",
+        "business_line": "treasury_finance",
+        "use_case_id": "ODD.44",
+        "use_case": "Financial close and reconciliation",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "none",
+        "accountable_owner_role": "Group Financial Controller",
+        "last_reviewed": "2026-07-23"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-008",
+        "agent_name": "Complaint handling",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.2",
+        "use_case": "Complaint handling",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-03-09"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-009",
+        "agent_name": "Loan servicing and modifications (UK)",
+        "deployment_status": "production",
+        "business_line": "lending_credit",
+        "use_case_id": "ODD.14",
+        "use_case": "Loan servicing and modifications",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "L1",
+        "accountable_owner_role": "Chief Credit Officer",
+        "last_reviewed": "2025-02-07",
+        "full_profile_ref": "harbour.har-ag-009.v1.L1"
+      },
+      "profile": {
+        "profile_id": "harbour.har-ag-009.v1.L1",
+        "stage": "issued",
+        "headline": 1,
+        "valid_until": "2026-09-02",
+        "sha256": "sha256:e6b0c3035ce053bc536f2727dce2e3ee6e505970a1d55e00cae4af44da6bfadd"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Harbour & Vale Building Society (fictional)",
+        "inventory_ref": "HAR-AG-010",
+        "agent_name": "Employee services (UK)",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.52",
+        "use_case": "Employee services",
+        "customer_facing": "no",
+        "autonomy_tier": "T0",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "not_applicable",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor Q core-banking assistant",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2026-03-07"
+      }
+    }
+  ],
+  "attestation": {
+    "name": "Sample Signer (fictional)",
+    "role": "Chief Operating Officer",
+    "statement": "This snapshot lists every agent deployment of the institution in development, pilot or production at the as-of date, and any retired since the previous snapshot, as recorded in its inventory."
+  },
+  "signatures": [
+    {
+      "role": "institution",
+      "name": "Sample Signer (fictional)",
+      "alg": "ed25519",
+      "public_key": "e6dT3y2MEPUhD/SJv1RFNHia8Fd01Bq7b3WJCZb6dGg=",
+      "signed_hash": "sha256:bd9d04fcd06852762e9d212ed642e851738316b9af43e535a38f77f7c3deeba4",
+      "value": "juW8T/xjI9weBMbMawHdQaQBCaVzI6VZtEnVdPcK3PohZtnBIlAqW2zGWzwGSAiW2TvIHLZ3R1KP0fUa9p7pBw=="
+    }
+  ]
+}

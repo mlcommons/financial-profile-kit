@@ -1,0 +1,28 @@
+{
+  "vocabulary": "arp/1.0-rc2/business-lines",
+  "version": "1.0-rc2",
+  "note": "The ODD is an open set; only its schema and top-level business lines are standardised.",
+  "terms": [
+    "retail_consumer_banking",
+    "lending_credit",
+    "payments",
+    "financial_crime_compliance",
+    "markets",
+    "wealth_asset_management",
+    "treasury_finance",
+    "insurance",
+    "internal_corporate"
+  ],
+  "labels": {
+    "retail_consumer_banking": "Retail and consumer banking",
+    "lending_credit": "Lending and credit",
+    "payments": "Payments",
+    "financial_crime_compliance": "Financial crime and compliance",
+    "markets": "Markets",
+    "wealth_asset_management": "Wealth and asset management",
+    "treasury_finance": "Treasury and finance",
+    "insurance": "Insurance",
+    "internal_corporate": "Internal functions"
+  },
+  "reconciliation_note": "Nine business lines, as in preprint §4.2. Appendix B.2 groups 'Insurance and treasury' together (ODD.41-45); here ODD.41-42 are insurance and ODD.43-45 treasury_finance."
+}

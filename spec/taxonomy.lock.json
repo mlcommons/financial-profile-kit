@@ -1,0 +1,27 @@
+{
+  "description": "Pins the taxonomy release this Kit release draws its shared vocabulary from. The taxonomy repository is the single official source of the terms listed under taxonomy_owned; tools/check_taxonomy_vocab.py checks that spec/vocab/ matches the pinned release. The specification owns every other file in spec/vocab/.",
+  "taxonomy_repository": "https://github.com/mlcommons/agent-reliability-profile-taxonomy",
+  "taxonomy_release": "0.1.0",
+  "taxonomy_ref": "v0.1.0",
+  "taxonomy_vocab_dir": "vocab",
+  "taxonomy_owned": {
+    "autonomy-tiers.json": {"terms": ["id", "label", "agent", "fallback"], "modifiers": ["id", "label", "definition", "values"]},
+    "business-lines.json": {"terms": ["id"], "labels": ["label"]},
+    "use-cases.json": {"terms": ["id", "business_line", "label"]},
+    "action-classes.json": {"terms": ["id", "label", "reversibility"]},
+    "control-catalogue.json": {"terms": ["id", "layer", "ordinal", "label"]}
+  },
+  "specification_owned_fields": {
+    "autonomy-tiers.json": ["terms[].evidence_requirement", "modifiers_note"],
+    "business-lines.json": ["reconciliation_note"],
+    "control-catalogue.json": ["candidates_v1_1", "candidates_note"]
+  },
+  "specification_owned_files": [
+    "conflict-kinds.json",
+    "dispositions.json",
+    "invalidation-triggers.json",
+    "peer-control-set.json",
+    "peer-control-status.json",
+    "provenance-classes.json"
+  ]
+}

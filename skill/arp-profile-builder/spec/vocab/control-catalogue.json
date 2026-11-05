@@ -1,0 +1,360 @@
+{
+  "vocabulary": "arp/1.0-rc2/control-catalogue",
+  "version": "1.0-rc2",
+  "note": "55 controls across six layers, from preprint Appendix B.4. IDs are provisional slugs; the catalogue carries its own version, recorded in a Profile's vocab_versions.",
+  "layers": [
+    "model",
+    "tool",
+    "harness",
+    "environment",
+    "inter_agent",
+    "control_plane"
+  ],
+  "terms": [
+    {
+      "id": "model.structured_plan_review",
+      "layer": "model",
+      "ordinal": 1,
+      "label": "Structured plan review before execution"
+    },
+    {
+      "id": "model.uncertainty_surfacing",
+      "layer": "model",
+      "ordinal": 2,
+      "label": "Uncertainty surfacing and confidence thresholds"
+    },
+    {
+      "id": "model.irreversible_action_flagging",
+      "layer": "model",
+      "ordinal": 3,
+      "label": "Irreversible-action flagging"
+    },
+    {
+      "id": "model.evidence_grounding",
+      "layer": "model",
+      "ordinal": 4,
+      "label": "Evidence grounding (cite or refuse)"
+    },
+    {
+      "id": "model.out_of_scope_flagging",
+      "layer": "model",
+      "ordinal": 5,
+      "label": "Out-of-scope flagging"
+    },
+    {
+      "id": "model.refusal_policies",
+      "layer": "model",
+      "ordinal": 6,
+      "label": "Refusal policies for prohibited requests"
+    },
+    {
+      "id": "model.self_verification",
+      "layer": "model",
+      "ordinal": 7,
+      "label": "Self-verification pass before output"
+    },
+    {
+      "id": "model.system_prompt_hardening",
+      "layer": "model",
+      "ordinal": 8,
+      "label": "System-prompt hardening"
+    },
+    {
+      "id": "model.customer_facing_constraints",
+      "layer": "model",
+      "ordinal": 9,
+      "label": "Constraints on customer-facing tone and claims"
+    },
+    {
+      "id": "tool.least_privilege_credentials",
+      "layer": "tool",
+      "ordinal": 1,
+      "label": "Least-privilege credentials"
+    },
+    {
+      "id": "tool.action_allowlists",
+      "layer": "tool",
+      "ordinal": 2,
+      "label": "Permitted and prohibited action allowlists"
+    },
+    {
+      "id": "tool.read_only_data_scoping",
+      "layer": "tool",
+      "ordinal": 3,
+      "label": "Read-only scoping of data access"
+    },
+    {
+      "id": "tool.per_case_data_scoping",
+      "layer": "tool",
+      "ordinal": 4,
+      "label": "Per-case or per-session data scoping"
+    },
+    {
+      "id": "tool.transaction_caps",
+      "layer": "tool",
+      "ordinal": 5,
+      "label": "Transaction caps by value, volume, and velocity"
+    },
+    {
+      "id": "tool.time_boxed_credentials",
+      "layer": "tool",
+      "ordinal": 6,
+      "label": "Time-boxed credentials"
+    },
+    {
+      "id": "tool.dual_control",
+      "layer": "tool",
+      "ordinal": 7,
+      "label": "Dual control enforced at the tool"
+    },
+    {
+      "id": "tool.redaction_tokenisation",
+      "layer": "tool",
+      "ordinal": 8,
+      "label": "Redaction or tokenisation at the boundary"
+    },
+    {
+      "id": "tool.no_tool_available",
+      "layer": "tool",
+      "ordinal": 9,
+      "label": "No-tool-available design"
+    },
+    {
+      "id": "tool.structured_argument_schemas",
+      "layer": "tool",
+      "ordinal": 10,
+      "label": "Structured schemas constraining free-text arguments"
+    },
+    {
+      "id": "harness.human_approval_gates",
+      "layer": "harness",
+      "ordinal": 1,
+      "label": "Human approval gates by action, checkpoint, or batch"
+    },
+    {
+      "id": "harness.immutable_tool_call_logging",
+      "layer": "harness",
+      "ordinal": 2,
+      "label": "Immutable logging of every tool call"
+    },
+    {
+      "id": "harness.provenance_capture",
+      "layer": "harness",
+      "ordinal": 3,
+      "label": "Evidence-preserving provenance capture"
+    },
+    {
+      "id": "harness.interruption_hooks",
+      "layer": "harness",
+      "ordinal": 4,
+      "label": "Mid-task interruption hooks"
+    },
+    {
+      "id": "harness.high_risk_routing",
+      "layer": "harness",
+      "ordinal": 5,
+      "label": "Automatic routing of high-risk cases to senior review"
+    },
+    {
+      "id": "harness.session_budgets",
+      "layer": "harness",
+      "ordinal": 6,
+      "label": "Session budgets in steps, time, and spend"
+    },
+    {
+      "id": "harness.anomaly_detection",
+      "layer": "harness",
+      "ordinal": 7,
+      "label": "Real-time anomaly detection on agent behaviour"
+    },
+    {
+      "id": "harness.sampled_quality_review",
+      "layer": "harness",
+      "ordinal": 8,
+      "label": "Sampling-based quality review of outputs"
+    },
+    {
+      "id": "harness.kill_switch",
+      "layer": "harness",
+      "ordinal": 9,
+      "label": "A tested kill switch"
+    },
+    {
+      "id": "harness.rate_limiting",
+      "layer": "harness",
+      "ordinal": 10,
+      "label": "Rate limiting across sessions"
+    },
+    {
+      "id": "harness.second_model_verification",
+      "layer": "harness",
+      "ordinal": 11,
+      "label": "Independent second-model verification"
+    },
+    {
+      "id": "environment.sandboxing",
+      "layer": "environment",
+      "ordinal": 1,
+      "label": "Sandboxing and segregation from production"
+    },
+    {
+      "id": "environment.network_egress_policy",
+      "layer": "environment",
+      "ordinal": 2,
+      "label": "Network egress policy"
+    },
+    {
+      "id": "environment.hard_execution_boundaries",
+      "layer": "environment",
+      "ordinal": 3,
+      "label": "Hard execution boundaries"
+    },
+    {
+      "id": "environment.rollback_snapshot",
+      "layer": "environment",
+      "ordinal": 4,
+      "label": "Rollback or snapshot on any committed change"
+    },
+    {
+      "id": "environment.shadow_canary",
+      "layer": "environment",
+      "ordinal": 5,
+      "label": "Shadow-mode or canary deployment"
+    },
+    {
+      "id": "environment.encryption_retention",
+      "layer": "environment",
+      "ordinal": 6,
+      "label": "Encryption at rest and in transit with retention controls"
+    },
+    {
+      "id": "environment.access_logging_dlp",
+      "layer": "environment",
+      "ordinal": 7,
+      "label": "Access logging and data-loss prevention"
+    },
+    {
+      "id": "environment.immutable_run_records",
+      "layer": "environment",
+      "ordinal": 8,
+      "label": "Immutable run records"
+    },
+    {
+      "id": "environment.credential_separation",
+      "layer": "environment",
+      "ordinal": 9,
+      "label": "Separation of test and live credentials"
+    },
+    {
+      "id": "inter_agent.trust_boundaries",
+      "layer": "inter_agent",
+      "ordinal": 1,
+      "label": "Trust boundaries between agents"
+    },
+    {
+      "id": "inter_agent.message_validation",
+      "layer": "inter_agent",
+      "ordinal": 2,
+      "label": "Message validation and signing"
+    },
+    {
+      "id": "inter_agent.delegation_schema",
+      "layer": "inter_agent",
+      "ordinal": 3,
+      "label": "A delegation permission schema"
+    },
+    {
+      "id": "inter_agent.credential_isolation",
+      "layer": "inter_agent",
+      "ordinal": 4,
+      "label": "Credential isolation and non-propagation"
+    },
+    {
+      "id": "inter_agent.cascade_limits",
+      "layer": "inter_agent",
+      "ordinal": 5,
+      "label": "Cascade limits"
+    },
+    {
+      "id": "inter_agent.blast_radius_caps",
+      "layer": "inter_agent",
+      "ordinal": 6,
+      "label": "Blast-radius caps"
+    },
+    {
+      "id": "inter_agent.topology_declaration",
+      "layer": "inter_agent",
+      "ordinal": 7,
+      "label": "Topology declaration"
+    },
+    {
+      "id": "inter_agent.spawning_rules",
+      "layer": "inter_agent",
+      "ordinal": 8,
+      "label": "Sub-agent spawning rules"
+    },
+    {
+      "id": "control_plane.registration_ownership",
+      "layer": "control_plane",
+      "ordinal": 1,
+      "label": "Registration and ownership of agents, skills, and tools"
+    },
+    {
+      "id": "control_plane.change_records",
+      "layer": "control_plane",
+      "ordinal": 2,
+      "label": "Versioned change records"
+    },
+    {
+      "id": "control_plane.pre_publication_evaluation",
+      "layer": "control_plane",
+      "ordinal": 3,
+      "label": "Required evaluation before publication"
+    },
+    {
+      "id": "control_plane.human_review_of_agent_changes",
+      "layer": "control_plane",
+      "ordinal": 4,
+      "label": "Human review of agent-proposed changes"
+    },
+    {
+      "id": "control_plane.staged_rollout",
+      "layer": "control_plane",
+      "ordinal": 5,
+      "label": "Staged rollout and rollback"
+    },
+    {
+      "id": "control_plane.deprecation_retirement",
+      "layer": "control_plane",
+      "ordinal": 6,
+      "label": "Deprecation and retirement"
+    },
+    {
+      "id": "control_plane.change_propagation",
+      "layer": "control_plane",
+      "ordinal": 7,
+      "label": "Change propagation and downstream Profile invalidation"
+    },
+    {
+      "id": "control_plane.tool_admission_standards",
+      "layer": "control_plane",
+      "ordinal": 8,
+      "label": "Catalogue admission standards for tools"
+    }
+  ],
+  "candidates_v1_1": [
+    {
+      "id": "tool.x_purpose_limitation",
+      "label": "Purpose limitation enforced at the control point"
+    },
+    {
+      "id": "tool.x_consent_validity",
+      "label": "Consent validity checked before each data access"
+    },
+    {
+      "id": "tool.x_recipient_binding",
+      "label": "Recipient bound to the consent or mandate"
+    }
+  ],
+  "candidates_note": "Use these ids (with the x_ prefix) until adopted into the catalogue. Logging whose immutability is not established is recorded as harness.immutable_tool_call_logging with present: null, or as a conflict, not as a separate control."
+}

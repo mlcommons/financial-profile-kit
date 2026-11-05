@@ -1,0 +1,1511 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:arp:1.0-rc2:profile",
+  "title": "Agent Reliability Profile, arp/1.0-rc2",
+  "description": "One Profile per agentic deployment. The shape is constant across Levels 1-3; only the assurance vector, provenance classes and results change. Structural rules live here; cross-field rules (ARP-0xx) live in SPEC.md and are enforced by the conformance suite.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "spec",
+    "profile_id",
+    "stage",
+    "subject",
+    "issuance",
+    "claim",
+    "assurance",
+    "provenance",
+    "floors",
+    "out_of_scope",
+    "invalidation",
+    "evidence",
+    "status"
+  ],
+  "properties": {
+    "spec": {
+      "const": "arp/1.0-rc2"
+    },
+    "profile_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,127}$"
+    },
+    "stage": {
+      "enum": [
+        "draft",
+        "issued"
+      ],
+      "description": "draft = compiled, awaiting the owner; issued = signed by the owner (and assessor where required)."
+    },
+    "vocab_versions": {
+      "type": "object",
+      "description": "Version of each vocabulary the Profile was written against (ARP-003). Keys are vocabulary file names without .json.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9-]*$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "institution",
+        "deployment_id"
+      ],
+      "properties": {
+        "institution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deployment_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deployment_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "vendor_products": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "platform_baseline": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "profile_id",
+            "version",
+            "content_hash"
+          ],
+          "properties": {
+            "profile_id": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "content_hash": {
+              "$ref": "#/definitions/sha256"
+            }
+          }
+        },
+        "models": {
+          "type": "array",
+          "description": "Model identity: every model the deployment calls, pinned. Required on an issued Profile (ARP-081).",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "provider",
+              "model",
+              "version"
+            ],
+            "properties": {
+              "provider": {
+                "type": "string",
+                "minLength": 1
+              },
+              "model": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "issuance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner"
+      ],
+      "properties": {
+        "owner": {
+          "$ref": "#/definitions/person"
+        },
+        "issuer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "organisation",
+            "independent"
+          ],
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "role": {
+              "type": "string"
+            },
+            "organisation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "independent": {
+              "type": "boolean"
+            }
+          },
+          "description": "Who issues the Profile: normally the owner's institution (a named owner issues and signs, preprint §6.1). If the issuer's name differs from the owner's, the issuer signs too (ARP-090). 'independent' records whether the issuing organisation is independent of the deployment; it does not make any axis Level 3 (ARP-014)."
+        },
+        "issued_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "valid_from": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "valid_until": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "evidence_as_of": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the most recent evidence relied on; required on an issued Profile and not later than the issue date (ARP-080)."
+        }
+      },
+      "description": "Owner, issuer and validity. On an issued Profile the issuer, issued_at, valid_from, valid_until and evidence_as_of are required (ARP-080, ARP-090)."
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement",
+        "autonomy",
+        "odd",
+        "actions",
+        "controls"
+      ],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 20,
+          "description": "The bounded claim, in one paragraph."
+        },
+        "autonomy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tier",
+            "tier_basis",
+            "modifiers"
+          ],
+          "properties": {
+            "tier": {
+              "enum": [
+                "T0",
+                "T1",
+                "T2",
+                "T3",
+                "T4",
+                "U"
+              ]
+            },
+            "modifiers": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "data_authority",
+                "reversibility_profile",
+                "customer_market_impact",
+                "stack_composability",
+                "accountability",
+                "population_scope"
+              ],
+              "properties": {
+                "data_authority": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reversibility_profile": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "customer_market_impact": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "stack_composability": {
+                  "enum": [
+                    "predefined",
+                    "dynamic",
+                    "not_assessed"
+                  ]
+                },
+                "accountability": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "population_scope": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "description": "The six cross-cutting modifiers of preprint §4.1; definitions in vocab/autonomy-tiers.json (modifiers)."
+            },
+            "approval_quality": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "assessment"
+              ],
+              "properties": {
+                "assessment": {
+                  "enum": [
+                    "substantive",
+                    "reflexive",
+                    "not_assessed"
+                  ]
+                },
+                "sample_size": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "median_seconds_to_approve": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "edit_rate": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "rejection_rate": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "resource_displayed": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "consequence_displayed": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ],
+                  "description": "Whether the approver is shown the consequence of the action (preprint §7.4)."
+                },
+                "sampled_review_quality": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 1,
+                  "description": "Share of sampled approvals judged substantive on review (preprint §7.4)."
+                },
+                "habituation_catch_rate": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            },
+            "tier_basis": {
+              "enum": [
+                "asserted",
+                "substantiated"
+              ],
+              "description": "asserted = the tier as configured or documented; substantiated = approval-quality evidence supports it (ARP-041)."
+            }
+          }
+        },
+        "odd": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "business_line",
+            "use_case"
+          ],
+          "properties": {
+            "business_line": {
+              "enum": [
+                "retail_consumer_banking",
+                "lending_credit",
+                "payments",
+                "financial_crime_compliance",
+                "markets",
+                "wealth_asset_management",
+                "treasury_finance",
+                "insurance",
+                "internal_corporate"
+              ]
+            },
+            "use_case": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "type": "string"
+            },
+            "operational_scope": {
+              "type": "string",
+              "description": "The operational scope within the use case (channels, volumes, hours, systems)."
+            },
+            "jurisdictions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "population": {
+              "type": "string"
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "cost_of_failure": {
+              "type": "string"
+            },
+            "use_case_id": {
+              "type": "string",
+              "pattern": "^ODD\\.([1-9][0-9]{0,2}|x_[a-z0-9_]+)$",
+              "description": "Use case from vocab/use-cases.json (ODD.1-ODD.52), or ODD.x_<name> for an extension (ARP-053). Required to contribute a Profile Summary."
+            }
+          }
+        },
+        "actions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "permitted",
+            "prohibited"
+          ],
+          "properties": {
+            "permitted": {
+              "$ref": "#/definitions/action_set"
+            },
+            "prohibited": {
+              "$ref": "#/definitions/action_set"
+            }
+          }
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "control_id",
+              "layer",
+              "present"
+            ],
+            "properties": {
+              "control_id": {
+                "type": "string",
+                "pattern": "^(model|tool|harness|environment|inter_agent|control_plane)\\.[a-z0-9_]+$"
+              },
+              "layer": {
+                "enum": [
+                  "model",
+                  "tool",
+                  "harness",
+                  "environment",
+                  "inter_agent",
+                  "control_plane"
+                ]
+              },
+              "present": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "null = not established"
+              },
+              "configuration": {},
+              "applicable": {
+                "type": "boolean",
+                "description": "False if the control does not apply to this deployment (default true)."
+              }
+            }
+          }
+        }
+      }
+    },
+    "assurance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "axes",
+        "headline",
+        "assessors",
+        "comparability",
+        "disclosures"
+      ],
+      "properties": {
+        "axes": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "autonomy",
+            "odd",
+            "actions",
+            "controls"
+          ],
+          "properties": {
+            "autonomy": {
+              "$ref": "#/definitions/level"
+            },
+            "odd": {
+              "$ref": "#/definitions/level"
+            },
+            "actions": {
+              "$ref": "#/definitions/level"
+            },
+            "controls": {
+              "$ref": "#/definitions/level"
+            }
+          }
+        },
+        "headline": {
+          "$ref": "#/definitions/level"
+        },
+        "assessors": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "autonomy",
+            "odd",
+            "actions",
+            "controls"
+          ],
+          "description": "Who stands behind each axis's level (ARP-014): institution at Levels 1-2, a named independent assessor with its report at Level 3.",
+          "properties": {
+            "autonomy": {
+              "$ref": "#/definitions/assessor"
+            },
+            "odd": {
+              "$ref": "#/definitions/assessor"
+            },
+            "actions": {
+              "$ref": "#/definitions/assessor"
+            },
+            "controls": {
+              "$ref": "#/definitions/assessor"
+            }
+          }
+        },
+        "test_environment": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fidelity": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "tools",
+            "data",
+            "policies",
+            "permissions",
+            "response_times",
+            "failure_conditions",
+            "population",
+            "known_differences"
+          ],
+          "description": "How closely the test setting matched the real deployment (preprint §7.5); required when any axis is at Level 2 or 3 (ARP-018).",
+          "properties": {
+            "tools": {
+              "type": "string",
+              "minLength": 1
+            },
+            "data": {
+              "type": "string",
+              "minLength": 1
+            },
+            "policies": {
+              "type": "string",
+              "minLength": 1
+            },
+            "permissions": {
+              "type": "string",
+              "minLength": 1
+            },
+            "response_times": {
+              "type": "string",
+              "minLength": 1
+            },
+            "failure_conditions": {
+              "type": "string",
+              "minLength": 1
+            },
+            "population": {
+              "type": "string",
+              "minLength": 1
+            },
+            "known_differences": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "method": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Tool name and version that generated the evidence, e.g. a Validator implementation."
+        },
+        "comparability": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "flag"
+          ],
+          "properties": {
+            "flag": {
+              "type": "boolean"
+            },
+            "environment_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "hidden_set_version": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "fidelity_statement": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "disclosures": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "level1_untested",
+              "self_tested",
+              "independently_verified",
+              "not_comparable",
+              "benchmark_not_production"
+            ]
+          },
+          "description": "Standard disclosures a renderer MUST display with their standard wording (SPEC §6). Required per ARP-015."
+        },
+        "coverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Per-axis test coverage; required for every axis at Level 2 or 3 (ARP-012).",
+          "properties": {
+            "autonomy": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "claim_fields",
+                "tested",
+                "judged"
+              ],
+              "properties": {
+                "claim_fields": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "tested": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "judged": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "odd": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "claim_fields",
+                "tested",
+                "judged"
+              ],
+              "properties": {
+                "claim_fields": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "tested": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "judged": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "actions": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "claim_fields",
+                "tested",
+                "judged"
+              ],
+              "properties": {
+                "claim_fields": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "tested": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "judged": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "controls": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "claim_fields",
+                "tested",
+                "judged"
+              ],
+              "properties": {
+                "claim_fields": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "tested": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "judged": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            }
+          }
+        },
+        "reproduction": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "What a third party needs to rerun the tests; each value is an evidence id (ARP-017). Hashes give integrity; this gives reproducibility.",
+          "required": [
+            "test_cases",
+            "initial_state",
+            "deployment_config",
+            "evaluator_config",
+            "rerun_instructions"
+          ],
+          "properties": {
+            "test_cases": {
+              "type": "string"
+            },
+            "initial_state": {
+              "type": "string"
+            },
+            "deployment_config": {
+              "type": "string"
+            },
+            "evaluator_config": {
+              "type": "string"
+            },
+            "rerun_instructions": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Field-level provenance map. Keys are field ids: autonomy.tier, odd.use_case, actions.A9, controls.tool.least_privilege_credentials ...",
+      "propertyNames": {
+        "pattern": "^(autonomy|odd|actions|controls)\\.[A-Za-z0-9_.]+$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "class"
+        ],
+        "properties": {
+          "class": {
+            "enum": [
+              "absent",
+              "owner_attested",
+              "document_derived",
+              "configuration_derived",
+              "measured"
+            ]
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/citation"
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "field_id",
+          "kind",
+          "state"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "description": "An id from vocab/conflict-kinds.json (e.g. document_vs_configuration, simulated_evidence), or 'other' with a description."
+          },
+          "citations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/citation"
+            }
+          },
+          "state": {
+            "enum": [
+              "open",
+              "resolved",
+              "accepted"
+            ]
+          },
+          "resolution_note": {
+            "type": "string"
+          },
+          "resolved_by": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "description": "One line: what the two sources say."
+          }
+        }
+      }
+    },
+    "floors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "condition",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "condition": {
+            "type": "string"
+          },
+          "axis": {
+            "enum": [
+              "autonomy",
+              "odd",
+              "actions",
+              "controls"
+            ],
+            "description": "The axis whose tests decide the floor; omit for a Profile-wide floor (ARP-062)."
+          },
+          "status": {
+            "enum": [
+              "passed",
+              "failed",
+              "untested"
+            ]
+          },
+          "finding_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "Pass-or-fail conditions set before any run (ARP-060..062). A failed floor blocks issuance."
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "field_id",
+          "disposition",
+          "evidence_refs",
+          "evaluation"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string"
+          },
+          "field_id": {
+            "type": "string",
+            "pattern": "^(autonomy|odd|actions|controls)\\.[A-Za-z0-9_.]+$"
+          },
+          "disposition": {
+            "enum": [
+              "held",
+              "contradicted",
+              "held_by_agent_only",
+              "not_established"
+            ]
+          },
+          "scenario": {
+            "type": "string"
+          },
+          "runs": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "note": {
+            "type": "string"
+          },
+          "evaluation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "method",
+              "tool",
+              "version",
+              "evidence_basis",
+              "review_status"
+            ],
+            "description": "How the disposition was decided (ARP-016).",
+            "properties": {
+              "method": {
+                "enum": [
+                  "deterministic",
+                  "model_judged",
+                  "expert_review",
+                  "hybrid"
+                ]
+              },
+              "tool": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "judge_model": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "$ref": "#/definitions/model_identity"
+                  }
+                ],
+                "description": "Provider, model and pinned version when a model judged (ARP-016)."
+              },
+              "evidence_basis": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "control_decisions",
+                    "state",
+                    "traces",
+                    "agent_output"
+                  ]
+                }
+              },
+              "review_status": {
+                "enum": [
+                  "unreviewed",
+                  "expert_reviewed"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "benchmark": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Only on a Benchmarked Profile (comparability.flag = true). Comparative grades appear nowhere else (ARP-020).",
+      "properties": {
+        "assessor": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "organisation",
+            "accreditation_ref",
+            "independent"
+          ],
+          "properties": {
+            "organisation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "accreditation_ref": {
+              "type": "string",
+              "minLength": 1
+            },
+            "independent": {
+              "type": "boolean"
+            }
+          }
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "metric",
+              "value"
+            ],
+            "properties": {
+              "metric": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "type": [
+                  "number",
+                  "string"
+                ]
+              },
+              "grade": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "out_of_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement"
+      ],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "odd": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "actions": {
+          "$ref": "#/definitions/action_set"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "invalidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "voids"
+      ],
+      "description": "Machine-readable invalidation list (preprint §5.3): changes that void the Profile, require partial retest, or are cosmetic.",
+      "properties": {
+        "voids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/invalidation_item"
+          }
+        },
+        "partial_retest": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/invalidation_item"
+          }
+        },
+        "cosmetic": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/invalidation_item"
+          }
+        },
+        "monitoring": {
+          "type": "string",
+          "description": "How the institution detects the changes listed (free text)."
+        }
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "path",
+          "content_hash"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "content_hash": {
+            "$ref": "#/definitions/sha256"
+          },
+          "artifact_class": {
+            "enum": [
+              "product_documentation",
+              "technical_design",
+              "operational_documentation",
+              "configuration_export",
+              "identity_entitlements",
+              "approval_workflow",
+              "run_log",
+              "attestation_governance",
+              "console_rendering",
+              "test_output",
+              "assessor_report",
+              "unclassified"
+            ]
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "evidence_manifest": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "content_hash",
+        "signer",
+        "public_key",
+        "value"
+      ],
+      "description": "Signed source manifest (preprint Table 4, 'signed inputs'): content_hash is the canonical hash of the evidence array; required when any axis is at Level 2 or 3 (ARP-019).",
+      "properties": {
+        "content_hash": {
+          "$ref": "#/definitions/sha256"
+        },
+        "signer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "public_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]{43}=$"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]{86}==$"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "open_findings",
+        "limitations"
+      ],
+      "properties": {
+        "open_findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "kind",
+              "note"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "unprofiled",
+                  "floor_failure",
+                  "contradicted_claim",
+                  "open_conflict",
+                  "configuration_finding",
+                  "gap",
+                  "other"
+                ]
+              },
+              "field_id": {
+                "type": "string"
+              },
+              "floor_ref": {
+                "type": "string"
+              },
+              "claim_id": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              },
+              "response": {
+                "enum": [
+                  "remediation",
+                  "suspension",
+                  "risk_acceptance"
+                ],
+                "description": "The institution's response to the finding (required in effect for an issued tier U, ARP-040)."
+              }
+            }
+          }
+        },
+        "accepted_gaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim_id",
+              "disposition",
+              "reason",
+              "accepted_by"
+            ],
+            "properties": {
+              "claim_id": {
+                "type": "string"
+              },
+              "disposition": {
+                "enum": [
+                  "held_by_agent_only",
+                  "not_established"
+                ]
+              },
+              "reason": {
+                "type": "string"
+              },
+              "accepted_by": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Exceptions granted to the institution's own policy for this deployment (preprint Table 3)."
+        },
+        "risk_acceptances": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "signatures": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "role",
+          "name",
+          "alg",
+          "public_key",
+          "signed_hash",
+          "value"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "owner",
+              "issuer",
+              "assessor"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "organisation": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Required for role 'assessor': the assessor organisation named in assurance.assessors (ARP-014)."
+          },
+          "alg": {
+            "const": "ed25519"
+          },
+          "public_key": {
+            "type": "string",
+            "description": "base64 raw 32-byte Ed25519 public key",
+            "pattern": "^[A-Za-z0-9+/]{43}=$"
+          },
+          "signed_hash": {
+            "$ref": "#/definitions/sha256"
+          },
+          "value": {
+            "type": "string",
+            "description": "base64 Ed25519 signature over the UTF-8 canonical form of the signature statement (SPEC §7)",
+            "pattern": "^[A-Za-z0-9+/]{86}==$"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "level": {
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "action_set": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ]
+      }
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "role"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string"
+        },
+        "locator": {
+          "type": "string"
+        },
+        "verbatim": {
+          "type": "string"
+        }
+      }
+    },
+    "assessor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "institution",
+            "independent_assessor"
+          ]
+        },
+        "organisation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Required for independent_assessor."
+        },
+        "report": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Evidence id of the assessor's signed report (artifact_class assessor_report); required for independent_assessor."
+        }
+      }
+    },
+    "model_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model",
+        "version"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "invalidation_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trigger",
+        "description"
+      ],
+      "properties": {
+        "trigger": {
+          "type": "string",
+          "pattern": "^([a-z_]+|x_[a-z0-9_]+)$",
+          "description": "An id from vocab/invalidation-triggers.json, or x_<name>."
+        },
+        "ref": {
+          "type": "string",
+          "description": "Field id or subject path the trigger concerns, if any."
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "$comment": "Release candidate 2 of arp/1.0. SPEC.md is normative; this schema implements its structural part. Status: release candidate 2 of arp/1.0, prepared by the MLCommons Financial Services Working Group for pilot use and comment. Not a final MLCommons standard, certification scheme or endorsement. Field names and rules may change before 1.0."
+}

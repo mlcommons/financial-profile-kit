@@ -1,0 +1,310 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:arp:1.0-rc2:profile-lite-0.1",
+  "title": "Agent Reliability Profile Lite, arp-lite/0.1 (draft; part of the arp/1.0-rc2 kit)",
+  "description": "One record per agent deployment, for inventories and supervisory data requests. A starting point for a full Profile, not a substitute. Every value is as reported by the institution; the record itself is not checked against evidence. A control status of 'tested_held' or 'tested_not_shown_to_hold' reports the outcome recorded in a Level 2 or 3 full Profile and is only as good as that Profile. Normative rules: spec/LITE.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "lite_spec",
+    "institution",
+    "inventory_ref",
+    "agent_name",
+    "deployment_status",
+    "business_line",
+    "use_case",
+    "customer_facing",
+    "autonomy_tier",
+    "tier_basis",
+    "human_approval",
+    "permitted_actions",
+    "prohibited_actions",
+    "controls",
+    "profile_level",
+    "accountable_owner_role",
+    "last_reviewed"
+  ],
+  "properties": {
+    "lite_spec": {
+      "const": "arp-lite/0.1"
+    },
+    "institution": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inventory_ref": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$",
+      "description": "The institution's own identifier for this agent deployment: 1 to 64 letters, digits, '.', '_' or '-', starting with a letter or digit. Unique within an inventory (spec/LITE.md; checked in snapshots as INV-011). When the deployment has a full Profile, this equals the Profile's subject.deployment_id."
+    },
+    "agent_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Short name or description"
+    },
+    "deployment_status": {
+      "enum": [
+        "in_development",
+        "pilot",
+        "production",
+        "retired"
+      ]
+    },
+    "business_line": {
+      "enum": [
+        "retail_consumer_banking",
+        "lending_credit",
+        "payments",
+        "financial_crime_compliance",
+        "markets",
+        "wealth_asset_management",
+        "treasury_finance",
+        "insurance",
+        "internal_corporate"
+      ]
+    },
+    "use_case_id": {
+      "type": "string",
+      "pattern": "^ODD\\.([0-9]{1,3}|x_[a-z0-9_]+)$"
+    },
+    "use_case": {
+      "type": "string",
+      "minLength": 1
+    },
+    "customer_facing": {
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "autonomy_tier": {
+      "enum": [
+        "T0",
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "U"
+      ]
+    },
+    "tier_basis": {
+      "enum": [
+        "asserted",
+        "substantiated"
+      ]
+    },
+    "human_approval": {
+      "enum": [
+        "every_material_action",
+        "some_actions",
+        "none"
+      ],
+      "description": "Is a person's approval required before material actions?"
+    },
+    "permitted_actions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ]
+      }
+    },
+    "prohibited_actions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ]
+      }
+    },
+    "controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "harness.human_approval_gates",
+        "harness.kill_switch",
+        "harness.immutable_tool_call_logging",
+        "harness.high_risk_routing",
+        "tool.action_allowlists",
+        "tool.least_privilege_credentials",
+        "tool.transaction_caps",
+        "environment.rollback_snapshot"
+      ],
+      "properties": {
+        "harness.human_approval_gates": {
+          "enum": [
+            "tested_held",
+            "tested_not_shown_to_hold",
+            "configured",
+            "documented_only",
+            "absent",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "harness.kill_switch": {
+          "enum": [
+            "tested_held",
+            "tested_not_shown_to_hold",
+            "configured",
+            "documented_only",
+            "absent",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "harness.immutable_tool_call_logging": {
+          "enum": [
+            "tested_held",
+            "tested_not_shown_to_hold",
+            "configured",
+            "documented_only",
+            "absent",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "harness.high_risk_routing": {
+          "enum": [
+            "tested_held",
+            "tested_not_shown_to_hold",
+            "configured",
+            "documented_only",
+            "absent",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "tool.action_allowlists": {
+          "enum": [
+            "tested_held",
+            "tested_not_shown_to_hold",
+            "configured",
+            "documented_only",
+            "absent",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "tool.least_privilege_credentials": {
+          "enum": [
+            "tested_held",
+            "tested_not_shown_to_hold",
+            "configured",
+            "documented_only",
+            "absent",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "tool.transaction_caps": {
+          "enum": [
+            "tested_held",
+            "tested_not_shown_to_hold",
+            "configured",
+            "documented_only",
+            "absent",
+            "not_applicable",
+            "unknown"
+          ]
+        },
+        "environment.rollback_snapshot": {
+          "enum": [
+            "tested_held",
+            "tested_not_shown_to_hold",
+            "configured",
+            "documented_only",
+            "absent",
+            "not_applicable",
+            "unknown"
+          ]
+        }
+      },
+      "description": "Status of each peer-set control (vocab/peer-control-set.json), using the values in vocab/peer-control-status.json."
+    },
+    "models": {
+      "type": "string",
+      "description": "Provider and model, e.g. '<provider> <model> <version>'; several separated by commas"
+    },
+    "vendor_or_platform": {
+      "type": "string"
+    },
+    "profile_level": {
+      "enum": [
+        "none",
+        "L1",
+        "L2",
+        "L3"
+      ],
+      "description": "Headline level of the full Profile, if one exists"
+    },
+    "full_profile_ref": {
+      "type": "string",
+      "description": "profile_id of the full Profile, if one exists"
+    },
+    "accountable_owner_role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_reviewed": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "format": "date"
+    },
+    "divergence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fields",
+        "as_of",
+        "reason"
+      ],
+      "description": "Declares that this record knowingly differs from its full Profile on the listed fields (INV-023, spec/FEED.md §6), for example while a reissued Profile is being prepared. Field names are Lite field names; a peer control is 'controls.<control_id>'.",
+      "properties": {
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^(business_line|use_case|use_case_id|autonomy_tier|tier_basis|human_approval|permitted_actions|prohibited_actions|models|accountable_owner_role|controls\\.[a-z_]+\\.[a-z0-9_]+)$"
+          }
+        },
+        "as_of": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+          "format": "date",
+          "description": "When the divergence began"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

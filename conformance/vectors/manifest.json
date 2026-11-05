@@ -1,0 +1,1022 @@
+{
+  "suite": "arp/1.0-rc2 conformance vectors",
+  "spec": "arp/1.0-rc2",
+  "note": "expect: pass = conformant (warnings allowed); fail = not conformant with exactly error_rules. canonical_hash is the RFC 8785 hash of the parsed file without signatures (null if the file cannot be parsed). Vectors are signed with the published DEMO-ONLY keys, so ARP-092 warnings are expected.",
+  "vectors": [
+    {
+      "file": "valid/v01-l1-draft.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:9af783381178134310e6695d0c165f4147a764bd9762392993b10848af6bc753",
+      "note": "Builder output awaiting the owner"
+    },
+    {
+      "file": "valid/v02-l1-issued.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+      "note": "Level 1, owner-signed, open conflict carried as a finding (DEMO-ONLY key: ARP-092 warning)"
+    },
+    {
+      "file": "valid/v03-l2-issued.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:25d4cdf25fb200fc2ead78b4bed46074054e52f83d286085ed1b6392a5060aa0",
+      "note": "Level 2, one contradicted control, one accepted gap, signed evidence manifest"
+    },
+    {
+      "file": "valid/v04-tier-u.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:0d7e90408106a6438ecaef242898e102b6794fe670b90a79fb272e8a64c2537b",
+      "note": "U is recorded as a finding, with no reliability claim"
+    },
+    {
+      "file": "valid/v05-mixed-axis.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:0dfca8aa6e475ef1d2acf2a0d82857d4d03f06125b87b05d1ac27c9ed6acb19b",
+      "note": "Level 2 on three axes, Level 1 on autonomy: headline is the minimum"
+    },
+    {
+      "file": "valid/v06-warning-unstated-class.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:2d19685d0a8930176023bd7aa19baf802de7bb3440928375a2d7c5375796085a",
+      "note": "Draft, conformant with warning ARP-031"
+    },
+    {
+      "file": "valid/v07-l3-controls-axis.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:7756926994a849ce5b51c4380f1e57a75c128d956acedbc2d9da25cafed1c82a",
+      "note": "Level 3 on the controls axis only: owner and assessor signatures, assessor report"
+    },
+    {
+      "file": "valid/v08-canonical-form.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:eb90c332f803ac196869b1e17a54fa17c4bb6b5a0acb458933af568dbb84866e",
+      "note": "Signed over RFC 8785 canonical form: 212.0, 1e-6, non-ASCII and astral member names, 2^53-1"
+    },
+    {
+      "file": "valid/v09-anchored-to-platform.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:740e8bd56bb168c2e2f4ae0b6d2a6728e63ffb6877e5ba4a3e3e23ab89b2f2cb",
+      "note": "Anchored to a platform baseline; void if the parent is void"
+    },
+    {
+      "file": "valid/v10-owner-name-whitespace.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+      "note": "Signer names compare after NFC and whitespace normalisation"
+    },
+    {
+      "file": "invalid/i01-schema-missing-statement.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": "sha256:ebe53f43265b1d7a3336b1eab0dcbed118aaff93318562004dbe176a745dcf91",
+      "note": "structure"
+    },
+    {
+      "file": "invalid/i02-headline-not-minimum.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-010"
+      ],
+      "canonical_hash": "sha256:7434ba0b272fe8ba9280b510a217bffd067bb3931a6dae273b7e8e68b1f18a61",
+      "note": "headline must equal min of axes"
+    },
+    {
+      "file": "invalid/i03-measured-at-level-1.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-011"
+      ],
+      "canonical_hash": "sha256:9c955059627e5435db165c5cfd1aa1dba94e5a0376ea9275a4f6764eef81f81d",
+      "note": "Level 1 executes nothing"
+    },
+    {
+      "file": "invalid/i04-level-2-judged-nothing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-012"
+      ],
+      "canonical_hash": "sha256:56829fe0e30981b1950923d23836fd83de97910767cff0a22373f7356862820f",
+      "note": "odd axis claims Level 2 with no judged result"
+    },
+    {
+      "file": "invalid/i05-result-on-level-1-axis.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-013"
+      ],
+      "canonical_hash": "sha256:790a428036b723eef063fcbd6b68a48a247c0817202bdc54e470222e23bee9a8",
+      "note": "results need an axis at Level 2+"
+    },
+    {
+      "file": "invalid/i06-level-3-not-independent.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-014"
+      ],
+      "canonical_hash": "sha256:0c12d4cb4f87fe395a25fa2d52df2cc50d88837dc5b0218d09c70f48502d16ce",
+      "note": "Level 3 without an independent assessor"
+    },
+    {
+      "file": "invalid/i07-grades-without-flag.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-020"
+      ],
+      "canonical_hash": "sha256:3364f50ae30b24db0691c53cf06e44dfdf5db9a1e08e2795024ceba6c806abe9",
+      "note": "comparative results only on Benchmarked Profiles"
+    },
+    {
+      "file": "invalid/i08-flag-without-environment.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-020"
+      ],
+      "canonical_hash": "sha256:42ea87b8e982775f5cf38672a0acd896de2c1ff8ebefbe50f21973da916e8d39",
+      "note": "flag needs environment, hidden set, fidelity statement and a benchmark"
+    },
+    {
+      "file": "invalid/i09-permitted-and-prohibited.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-030"
+      ],
+      "canonical_hash": "sha256:9d8175018c6e7d82b6eebe9adc9dc55d411dc6738bae62b1d7479f0ee89a912c",
+      "note": "A1 in both sets"
+    },
+    {
+      "file": "invalid/i10-permitted-and-out-of-scope.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-032"
+      ],
+      "canonical_hash": "sha256:614d364af16b7e41ea3f57adeea6bbf812f837f9348e688acb29ff133f51fecd",
+      "note": "A2 permitted and out of scope"
+    },
+    {
+      "file": "invalid/i11-tier-u-without-finding.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-040"
+      ],
+      "canonical_hash": "sha256:0298adf0bc5ea7381e6b99d1530bea537b6719ae26abdcd49caa1f88cbe838e6",
+      "note": "U must be carried as a finding"
+    },
+    {
+      "file": "invalid/i12-t2-without-approval-quality.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-041"
+      ],
+      "canonical_hash": "sha256:449a32175417227275796ae70ad5b6f28ebccdc869311f41bb4408d67877621a",
+      "note": "T2 is earned by evidence"
+    },
+    {
+      "file": "invalid/i13-t2-reflexive-approval.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-041"
+      ],
+      "canonical_hash": "sha256:28b18c787bf08ea0c29204c885f28c792977d6689bf7b36c4717491891fc40d2",
+      "note": "reflexive approval means effective T3"
+    },
+    {
+      "file": "invalid/i14-missing-provenance.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-050"
+      ],
+      "canonical_hash": "sha256:adcdc28511e1aa30ff082352c93aa775fd4ce854428452b004daa1ae9251b70f",
+      "note": "every claim field carries provenance"
+    },
+    {
+      "file": "invalid/i15-derived-without-citation.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-051"
+      ],
+      "canonical_hash": "sha256:28b4fe19bfd1b381c3eb3028e6767b8410951c0c1de99561f3b84fb829988814",
+      "note": "derived classes must cite"
+    },
+    {
+      "file": "invalid/i16-citation-not-in-manifest.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-051"
+      ],
+      "canonical_hash": "sha256:ff24f475f741f8429918a5372a59e881cbaa59f8702809ca9565b65d0589f075",
+      "note": "citations resolve to the manifest"
+    },
+    {
+      "file": "invalid/i17-control-not-in-catalogue.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-052"
+      ],
+      "canonical_hash": "sha256:452a4ecaf05fe9632b2033e3df156b996887c6745ead547cd730cce01a62c1d3",
+      "note": "unknown control without x_ prefix"
+    },
+    {
+      "file": "invalid/i18-failed-floor-not-disclosed.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-060"
+      ],
+      "canonical_hash": "sha256:2f15379735e95ecb7faa47bc811db21bcbdd628025a9811f8b2098e640a09643",
+      "note": "a failed floor is never averaged away"
+    },
+    {
+      "file": "invalid/i19-contradiction-not-disclosed.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-070"
+      ],
+      "canonical_hash": "sha256:2be9ce6f2e789b02bb7a1758102ead19fb908e83993549d1b3ce81332d66f273",
+      "note": "contradicted claims are open findings"
+    },
+    {
+      "file": "invalid/i20-gap-not-accepted.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-070"
+      ],
+      "canonical_hash": "sha256:14f0f1f8c3b1189250becbda667c3dfdd0993fa410c74630399befcb85694eef",
+      "note": "held_by_agent_only must be accepted or open"
+    },
+    {
+      "file": "invalid/i21-validity-inverted.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-080"
+      ],
+      "canonical_hash": "sha256:74624ac8aaa55ffe260eb81df2ac401b31e6d244cbc2bc80a4045b58fcecc79b",
+      "note": "validity window"
+    },
+    {
+      "file": "invalid/i22-issued-unsigned.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-090"
+      ],
+      "canonical_hash": "sha256:59adcaf0ca87d97aa51caf7d8eb588203e7029f77633ba23bd45c519d5c8fcf7",
+      "note": "issued needs the owner's signature"
+    },
+    {
+      "file": "invalid/i23-edited-after-signing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-091"
+      ],
+      "canonical_hash": "sha256:e77b67fbbc7ceb010977e8f43f8ddbce6c1179216b3b84d6b5432b61e6ca0b89",
+      "note": "one changed byte breaks the signature"
+    },
+    {
+      "file": "invalid/i24-forged-signature.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-091"
+      ],
+      "canonical_hash": "sha256:25d4cdf25fb200fc2ead78b4bed46074054e52f83d286085ed1b6392a5060aa0",
+      "note": "signature value is not valid"
+    },
+    {
+      "file": "invalid/i25-open-conflict-hidden.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-090",
+        "ARP-100"
+      ],
+      "canonical_hash": "sha256:fafac0d3b85eb0b1f2ecc9da682366c9324749d2df68dee706dd1e5a31823f53",
+      "note": "open conflicts on an issued Profile are findings"
+    },
+    {
+      "file": "invalid/i26-placeholder-left.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-002"
+      ],
+      "canonical_hash": "sha256:2daae64225efbda777b311c795753449d880075fdb15edc615aa5dfa25214a6e",
+      "note": "no unfilled placeholders"
+    },
+    {
+      "file": "invalid/i27-result-evidence-missing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-013"
+      ],
+      "canonical_hash": "sha256:1409b6fd1451e7c51498a4e2c7fcf5c575a39460f8de7d0917857f7c55d3cbc5",
+      "note": "result evidence resolves to the manifest"
+    },
+    {
+      "file": "invalid/i28-result-not-a-claim-field.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-013"
+      ],
+      "canonical_hash": "sha256:bf766cd1759df3779fbb4eb5fd83e5c711f9e822a644d832e357c50dd79da403",
+      "note": "a result tests a field of the claim"
+    },
+    {
+      "file": "invalid/i29-disclosure-missing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-015"
+      ],
+      "canonical_hash": "sha256:7565573c82f7b98b0130c330a20b584da353c266d3f737da685d96eae603f210",
+      "note": "Level 1 carries the untested disclosure"
+    },
+    {
+      "file": "invalid/i30-t2-asserted-at-level-2.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-041"
+      ],
+      "canonical_hash": "sha256:9759a48ca7f35fdafbd64981eb06b7d71838537ea8ff2a217ebbeb6e183a632e",
+      "note": "a tested T2 must be substantiated"
+    },
+    {
+      "file": "invalid/i31-coverage-overstated.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-012"
+      ],
+      "canonical_hash": "sha256:72a828a35b87af2c42c4e7940a0b387baf7aba9b7547ad86ebe09e1e0aefe6df",
+      "note": "coverage must match the results"
+    },
+    {
+      "file": "invalid/i32-odd-field-without-provenance.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-050"
+      ],
+      "canonical_hash": "sha256:f2e58580b8d16eb97e386fbe805794c6dbe344eaab66251a4a7cabdda23a9d0e",
+      "note": "every populated claim field carries provenance"
+    },
+    {
+      "file": "invalid/i33-issued-without-model-identity.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-081",
+        "ARP-090"
+      ],
+      "canonical_hash": "sha256:4372b0c76ae17a4a8e858d03fa18f98b373a7f249185515ca41b22f9e89c6204",
+      "note": "an issued Profile names its models"
+    },
+    {
+      "file": "invalid/i34-t2-substantiated-without-evidence.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-041"
+      ],
+      "canonical_hash": "sha256:3251e8a77a6b668ebdc63e6bf7b0e24fc0b96adf687dd1cadf68f4ab9fa7f59a",
+      "note": "substantiated T2 needs substantive approval evidence"
+    },
+    {
+      "file": "invalid/i35-model-judge-decides-control.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-016"
+      ],
+      "canonical_hash": "sha256:b7df19068edd895c313137d7024f5fbea1aac103325ab94c71ae04130647e3f8",
+      "note": "a model judge may propose, not decide, a control claim"
+    },
+    {
+      "file": "invalid/i36-reproduction-missing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-017"
+      ],
+      "canonical_hash": "sha256:3bfef98e0c1ebb7d5e2c15a1f62a7951bef42cb7e9ddfd5d3399c0f11efbd29f",
+      "note": "Level 2 needs a rerun package"
+    },
+    {
+      "file": "invalid/i37-reproduction-not-in-manifest.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-017"
+      ],
+      "canonical_hash": "sha256:6fe739d7826d12ab5f7a9dc730b9f7688085e1971597117061190b2f227e7063",
+      "note": "rerun package resolves to the manifest"
+    },
+    {
+      "file": "invalid/i38-model-judge-unnamed.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-016"
+      ],
+      "canonical_hash": "sha256:15e3bee7f8ad75d52f710015b623f89c23c0e6c18731d4f77ca577aba9245acc",
+      "note": "a model judge must be named and pinned"
+    },
+    {
+      "file": "invalid/i39-duplicate-member-name.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": null,
+      "note": "duplicate names: readers disagree on which value counts"
+    },
+    {
+      "file": "invalid/i40-number-not-exact.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": null,
+      "note": "numbers of magnitude 2^53 or more cannot be represented exactly"
+    },
+    {
+      "file": "invalid/i41-date-not-padded.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": "sha256:3f4f24c3b290dcf78e7a2606cdea72324b21757918f5e74cd9c378f08037c712",
+      "note": "dates are YYYY-MM-DD"
+    },
+    {
+      "file": "invalid/i42-date-not-a-date.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": "sha256:1730fec9ed09d20981d650741edf02e61c33ab6ce3e681f6a88c38cbc57cd3a6",
+      "note": "dates must be real calendar dates"
+    },
+    {
+      "file": "invalid/i43-pattern-trailing-newline.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": "sha256:ebf1890b4df367db7c2ca7118e29bcefe635ad8eac34f54c78646d97ff55e0cb",
+      "note": "patterns match the whole string"
+    },
+    {
+      "file": "invalid/i44-inherited-property-name.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": "sha256:1e1a1df8be55177bc00c49b624a8e54904128a614b6472febb03f090ce375f66",
+      "note": "no additional properties, whatever their name"
+    },
+    {
+      "file": "invalid/i45-wrong-enum-value.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": "sha256:b5bad9f54965037f157b308c9de8eaefc3e198cfd8875a3a1b5c778c5d7b9777",
+      "note": "enumerated values only"
+    },
+    {
+      "file": "invalid/i46-wrong-spec-identifier.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": "sha256:d38feb97f22c6e06eedbfda8898eeae75e02966a6fab023a137eba46ce0300ab",
+      "note": "a release-candidate Profile says so"
+    },
+    {
+      "file": "invalid/i47-nan.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": null,
+      "note": "NaN is not JSON"
+    },
+    {
+      "file": "invalid/i48-unpaired-surrogate.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": null,
+      "note": "strings must be valid Unicode"
+    },
+    {
+      "file": "invalid/i49-not-an-object.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": null,
+      "note": "a Profile is a JSON object"
+    },
+    {
+      "file": "invalid/i50-not-utf8.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": null,
+      "note": "a Profile is UTF-8"
+    },
+    {
+      "file": "invalid/i51-signature-not-base64.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+      "note": "signature values are base64"
+    },
+    {
+      "file": "invalid/i52-judge-model-free-text.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-001"
+      ],
+      "canonical_hash": "sha256:0df83d1d06f096c050c031ec711588dbe321a8feea32d86db90b24c2d18934bf",
+      "note": "a model judge is named as provider, model and pinned version"
+    },
+    {
+      "file": "invalid/i53-placeholder-tbd.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-002"
+      ],
+      "canonical_hash": "sha256:b6e369a3cac3b1792ecb70019bebb7c5ba03106c34fd4c9aee81db99c3c7b2c8",
+      "note": "TBD is a placeholder in any case"
+    },
+    {
+      "file": "invalid/i54-placeholder-joined.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-002"
+      ],
+      "canonical_hash": "sha256:934d4beda7342183c917f8ae67105beb39a8488cd3b7c5bd8038de78cc884716",
+      "note": "TODO joined by an underscore is still a placeholder"
+    },
+    {
+      "file": "invalid/i55-angle-placeholder-issued.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-002"
+      ],
+      "canonical_hash": "sha256:f9c7d8d3393cec78fd58c866e99cf2d50f755cd358a7c04784a22ce32e827325",
+      "note": "angle-bracket placeholders cannot be issued"
+    },
+    {
+      "file": "invalid/i56-issued-without-vocab-versions.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-003"
+      ],
+      "canonical_hash": "sha256:f67de52bf937cdba37c72c1b4a9f7af2e45bec3fcfca67c21aaa007d4234d9fb",
+      "note": "an issued Profile records its vocabulary versions"
+    },
+    {
+      "file": "invalid/i57-measured-without-result.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-011"
+      ],
+      "canonical_hash": "sha256:ff60a9e71a6ab85be1fb3e1462fa9ebd7e526a79ec967e3087adffc9c7534cdc",
+      "note": "only an executed test confers 'measured'"
+    },
+    {
+      "file": "invalid/i58-coverage-entry-missing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-012"
+      ],
+      "canonical_hash": "sha256:4b0f558d696e950d64e2e935e6e8518df0abe5045043b336f005da45bb4fd66f",
+      "note": "a tested axis shows its coverage"
+    },
+    {
+      "file": "invalid/i59-judged-result-without-evidence.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-013"
+      ],
+      "canonical_hash": "sha256:1eec7ab8015c553a5530a609e1bed4b3f74ef105335cc5d7a7b7b86c452948eb",
+      "note": "a judged result cites evidence"
+    },
+    {
+      "file": "invalid/i60-l3-issued-without-assessor-signature.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-014"
+      ],
+      "canonical_hash": "sha256:7756926994a849ce5b51c4380f1e57a75c128d956acedbc2d9da25cafed1c82a",
+      "note": "an issued Level 3 Profile is signed by its assessor"
+    },
+    {
+      "file": "invalid/i61-level-2-axis-with-independent-assessor.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-014"
+      ],
+      "canonical_hash": "sha256:c908e00952f87c4c813051706a6a183a8375eb8e51f94147523187086161d8df",
+      "note": "independent testing is Level 3"
+    },
+    {
+      "file": "invalid/i62-l3-assessor-without-report.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-014"
+      ],
+      "canonical_hash": "sha256:fbb3bb360949979636a4dc7471cee56c7465c6d65aa8064a46a40bd983eda083",
+      "note": "a Level 3 assessor cites its signed report"
+    },
+    {
+      "file": "invalid/i63-assessor-signed-with-owner-key.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-014"
+      ],
+      "canonical_hash": "sha256:7756926994a849ce5b51c4380f1e57a75c128d956acedbc2d9da25cafed1c82a",
+      "note": "the assessor signs with its own key"
+    },
+    {
+      "file": "invalid/i64-unsupported-disclosure.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-015"
+      ],
+      "canonical_hash": "sha256:fb00bcdba96145b61c8b847cc02a97670a5931236fde2007845da81093ee063f",
+      "note": "disclosures match the levels exactly"
+    },
+    {
+      "file": "invalid/i65-control-claim-without-state-evidence.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-016"
+      ],
+      "canonical_hash": "sha256:dbb1d7467b4e5e892045bc20b4cb3ee5fbcb8b628d86a327a6c7c72e056fb929",
+      "note": "boundaries rest on control decisions or state"
+    },
+    {
+      "file": "invalid/i66-test-environment-missing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-018"
+      ],
+      "canonical_hash": "sha256:b968a073c42f0ffb65e0894ca5d4dacf83d1891255ad4303975c8a665d5e0390",
+      "note": "a tested Profile states its test environment"
+    },
+    {
+      "file": "invalid/i67-fidelity-missing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-018"
+      ],
+      "canonical_hash": "sha256:480c5de2eb6c2bb4bd9190aa78f9d4a684355847d4b8c83877aff454ab3eba65",
+      "note": "a tested Profile states environment fidelity"
+    },
+    {
+      "file": "invalid/i68-evidence-manifest-missing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-019"
+      ],
+      "canonical_hash": "sha256:abb06f8b6e08ee8ea1cb0d136ac8f5c427d5e5549c0b1ef1aeeeedeba48888d0",
+      "note": "Level 2 needs signed inputs"
+    },
+    {
+      "file": "invalid/i69-evidence-manifest-stale.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-019"
+      ],
+      "canonical_hash": "sha256:ee9fb455f8df2de43b829097316fbc778eda7da34437833493070e81a9973430",
+      "note": "the manifest covers the evidence as listed"
+    },
+    {
+      "file": "invalid/i70-benchmark-not-independent.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-020"
+      ],
+      "canonical_hash": "sha256:98f6baad8dd84a6b292e3b53ffb1dc5026cc78f2dc178605382f111d0b6af07a",
+      "note": "a benchmark is run by an independent, accredited assessor"
+    },
+    {
+      "file": "invalid/i71-issued-class-unstated.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-031"
+      ],
+      "canonical_hash": "sha256:4fdc360cde52de890c3e07ad298e6e3eb457714a59105a3d3a94ed88adb79db1",
+      "note": "an issued Profile states all twelve classes"
+    },
+    {
+      "file": "invalid/i72-prohibited-and-out-of-scope.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-032"
+      ],
+      "canonical_hash": "sha256:272d05056cec842dd45c203fbe08022cc9a498964baa3a7f526a5e70d751dd41",
+      "note": "A12 prohibited and out of scope"
+    },
+    {
+      "file": "invalid/i73-tier-u-with-approval-quality.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-040"
+      ],
+      "canonical_hash": "sha256:9b47138833c9cce9aa87e58b3e4c00509238d98910e0807118e07dd9de56642d",
+      "note": "U has no evidenced tier"
+    },
+    {
+      "file": "invalid/i74-tier-u-claims-reliability.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-040"
+      ],
+      "canonical_hash": "sha256:b4c0039a9185cc47758c40618c6ad2a760bf405b57d1171c395d80da9e1bb5bd",
+      "note": "a U statement makes no reliability claim"
+    },
+    {
+      "file": "invalid/i75-tier-u-issued-without-response.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-040"
+      ],
+      "canonical_hash": "sha256:e4b2f86949b9f9b90eb214e48dca5a5e75ef92e265c193195e4bd4d085a0dd55",
+      "note": "an issued U records remediation, suspension or a risk acceptance"
+    },
+    {
+      "file": "invalid/i76-substantiated-non-t2.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-041"
+      ],
+      "canonical_hash": "sha256:7d7ce9a1cdba6f17eefbb872065009d2b0a507770aa244a5417caf24c75fe411",
+      "note": "substantiated is defined for T2 only"
+    },
+    {
+      "file": "invalid/i77-t2-resource-not-displayed.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-041"
+      ],
+      "canonical_hash": "sha256:9acc2b5c2ab0bcab0503865e06b41650ad4be23c55bb2f0db90cd99a7263562b",
+      "note": "T2: the approver sees the affected resource"
+    },
+    {
+      "file": "invalid/i78-t2-simulated-evidence.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-041"
+      ],
+      "canonical_hash": "sha256:e232badbb5c39f4224e5994d009f422d4367115c35eee3f755279028bf278788",
+      "note": "simulated records cannot substantiate, even once resolved"
+    },
+    {
+      "file": "invalid/i79-control-wrong-layer.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-052"
+      ],
+      "canonical_hash": "sha256:e0792d40fba60859d44b819ce5e1d476c9f5bb49517be6bea933dbdb6308927d",
+      "note": "a control sits under its own layer"
+    },
+    {
+      "file": "invalid/i80-use-case-unknown.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-053"
+      ],
+      "canonical_hash": "sha256:b3d92058e31b6978b0d4e202b0124b754f13296afce048759a03581de335e00f",
+      "note": "use cases come from the vocabulary"
+    },
+    {
+      "file": "invalid/i81-use-case-wrong-business-line.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-053"
+      ],
+      "canonical_hash": "sha256:0733f41a9736b5644e73b4dc06e67a6fcc2dae3143d13f078f70e0422b98d83d",
+      "note": "a catalogued use case fixes its business line"
+    },
+    {
+      "file": "invalid/i82-issued-odd-population-missing.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-054"
+      ],
+      "canonical_hash": "sha256:f15a68e811cbace10b7681cbddd571a80fc665777d4d3e530cf7d1f61a9d7bde",
+      "note": "an issued Profile states the population, or records it as absent"
+    },
+    {
+      "file": "invalid/i83-floor-refers-to-missing-finding.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-060"
+      ],
+      "canonical_hash": "sha256:4c87b5f02fafff9694f6801f8671e5d5a0034172ad0de87a0d153fbba2269345",
+      "note": "floor and finding links resolve"
+    },
+    {
+      "file": "invalid/i84-issued-with-failed-floor.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-061"
+      ],
+      "canonical_hash": "sha256:e919d63345f296e8cf1deccf34894496412b8ab32175094eb9055aa5228f23d9",
+      "note": "a failed floor blocks issuance"
+    },
+    {
+      "file": "invalid/i85-tested-profile-without-floors.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-062"
+      ],
+      "canonical_hash": "sha256:af924d5543f74cce19e48c3b792798222d4d1a1380d36136c22060caa9b26c3f",
+      "note": "a tested Profile states its floors"
+    },
+    {
+      "file": "invalid/i86-untested-floor-on-tested-axis.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-062"
+      ],
+      "canonical_hash": "sha256:2ddb8185f9949b2a5b85f105bf4967c44fd7ea01a58c53518bb6e5cf05aca143",
+      "note": "floors on tested axes are tested"
+    },
+    {
+      "file": "invalid/i87-accepted-gap-without-result.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-070"
+      ],
+      "canonical_hash": "sha256:77d6fa23a840169f83c841a4cdfa5c7fe0cfdac26a471548ee03c28962ea75df",
+      "note": "every accepted gap matches a result"
+    },
+    {
+      "file": "invalid/i88-issued-without-expiry.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-080"
+      ],
+      "canonical_hash": "sha256:b9f7e6143e6f4df71877b139c09649aac7ceb39a5e99f42c88cceabb5df8eb3f",
+      "note": "an issued Profile expires"
+    },
+    {
+      "file": "invalid/i89-evidence-after-issue.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-080"
+      ],
+      "canonical_hash": "sha256:844904d67dd14759be2996297690f187c663ee21ea100be9cc5dc01e5fa5df37",
+      "note": "evidence cannot post-date issue"
+    },
+    {
+      "file": "invalid/i90-sentinel-date.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-080"
+      ],
+      "canonical_hash": "sha256:793c15a5f2f231245af334cb60e93c35404f4e901afb4ec9fd6685a08035e2bf",
+      "note": "fill in the real date"
+    },
+    {
+      "file": "invalid/i91-backdated-validity.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-080"
+      ],
+      "canonical_hash": "sha256:9a79cfcf41900c7785294e7cd5aa1b82c0450f2f792afe5d7c90499b0f724b45",
+      "note": "validity starts on or after the issue date"
+    },
+    {
+      "file": "invalid/i92-issued-without-deployment-version.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-081"
+      ],
+      "canonical_hash": "sha256:7bc238c12c8e16da459a554dbbbd443407d971a965a555bb3691d067a17be2ce",
+      "note": "an issued Profile names its deployment version"
+    },
+    {
+      "file": "invalid/i93-anchored-without-baseline-trigger.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-083"
+      ],
+      "canonical_hash": "sha256:c407471eee189bb20733e617e759357d90c122383a64c9ea37ddbfcd875775ec",
+      "note": "an anchored Profile is void if its parent is void"
+    },
+    {
+      "file": "invalid/i94-owner-signed-under-another-name.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-090"
+      ],
+      "canonical_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+      "note": "the owner signs as the named owner"
+    },
+    {
+      "file": "invalid/i95-issued-without-issuer.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-090"
+      ],
+      "canonical_hash": "sha256:7e744eaf4f20fd27d107b74e27f0aa6d0f7fe4909897cb7ea82cf05ac7d45780",
+      "note": "an issued Profile names its issuer"
+    },
+    {
+      "file": "invalid/i96-issuer-not-signed.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-090"
+      ],
+      "canonical_hash": "sha256:c3885049646eb239d91243561d9defe7cdc0fda01298a9d2f7d1e3853a3da556",
+      "note": "an issuer other than the owner signs too"
+    },
+    {
+      "file": "invalid/i97-duplicate-signature.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-091"
+      ],
+      "canonical_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+      "note": "no signature twice"
+    },
+    {
+      "file": "invalid/i98-signer-organisation-edited.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-091"
+      ],
+      "canonical_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+      "note": "the signature covers its own role, name and organisation"
+    },
+    {
+      "file": "invalid/i99-signature-wrong-key.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-091"
+      ],
+      "canonical_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+      "note": "the signature is valid only for its own key"
+    },
+    {
+      "file": "invalid/i100-flag-on-level-1-only.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-020"
+      ],
+      "canonical_hash": "sha256:b4769bd3dd561f789ced078590ace7b88002d7a5cf9d409b5a30873ea07d2c58",
+      "note": "a Level 1 Profile executes nothing, so it cannot be benchmarked"
+    },
+    {
+      "file": "invalid/i101-blank-accreditation-ref.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-020"
+      ],
+      "canonical_hash": "sha256:bbece3b2435af18703a8f40b4a6777f92ee56a54f0bffb1b40a85f342e04404d",
+      "note": "the benchmark assessor's accreditation is named"
+    },
+    {
+      "file": "invalid/i102-second-owner-signature-same-key.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-091"
+      ],
+      "canonical_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+      "note": "one key signs once per role"
+    },
+    {
+      "file": "invalid/i103-second-owner-signature-name-variant.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-091"
+      ],
+      "canonical_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+      "note": "one signer name signs once per role, after normalisation"
+    },
+    {
+      "file": "valid/v11-failed-then-held-result.json",
+      "expect": "pass",
+      "error_rules": [],
+      "canonical_hash": "sha256:3f40b05b25c43ca80eaae856f0243f4a8ef6fea27c5b5d528148a6ea6c995fe9",
+      "note": "A contradicted result followed by a passing one: the field stays 'contradicted' (SPEC §4); ARP-071 warning"
+    },
+    {
+      "file": "invalid/i104-duplicate-evidence-id.json",
+      "expect": "fail",
+      "error_rules": [
+        "ARP-055"
+      ],
+      "canonical_hash": "sha256:baf341a7b06e69f8481317a47938d839722925c8f680223a7351a493bcff3f31",
+      "note": "one evidence item per id, so a citation resolves to exactly one file"
+    }
+  ]
+}

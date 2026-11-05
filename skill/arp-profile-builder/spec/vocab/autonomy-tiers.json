@@ -1,0 +1,81 @@
+{
+  "vocabulary": "arp/1.0-rc2/autonomy-tiers",
+  "version": "1.0-rc2",
+  "terms": [
+    {
+      "id": "T0",
+      "label": "No action capability",
+      "agent": "Read-only or suggestion-only. A person performs the operative task.",
+      "fallback": "Inapplicable: the person is the operator."
+    },
+    {
+      "id": "T1",
+      "label": "Assists individual actions",
+      "agent": "A person invokes each action explicitly. No chaining across a multi-step task.",
+      "fallback": "The person, continuously and by construction."
+    },
+    {
+      "id": "T2",
+      "label": "Bounded multi-step execution with approval",
+      "agent": "Executes a multi-step task inside a strictly bounded envelope. A person approves every material action and is shown the specific resource affected.",
+      "fallback": "The person, continuously.",
+      "evidence_requirement": "Substantive approval shown in approval logs, with the affected resource displayed (approval_quality block required; ARP-041)."
+    },
+    {
+      "id": "T3",
+      "label": "Whole task with escalation",
+      "agent": "Handles the whole task inside its envelope. Requests help on uncertainty or defined hazard triggers.",
+      "fallback": "The person, on the system's request, after a handoff. The handoff is where the risk resides."
+    },
+    {
+      "id": "T4",
+      "label": "No contemporaneous approval",
+      "agent": "Operates inside a bounded envelope with no contemporaneous approval. Out-of-envelope actions are blocked in software.",
+      "fallback": "The system, into a defined and tested safe state, to the extent possible. A person is notified afterwards."
+    },
+    {
+      "id": "U",
+      "label": "Unprofiled (status, not a tier)",
+      "agent": "No reliability claim is available: envelope, fallback or action boundaries are unspecified.",
+      "fallback": "Undefined. U is a finding requiring remediation, suspension of agent workflows, or documented high risk acceptance."
+    }
+  ],
+  "modifiers": [
+    {
+      "id": "data_authority",
+      "label": "Data authority",
+      "definition": "The sensitivity of what the agent may access, independent of its action capability."
+    },
+    {
+      "id": "reversibility_profile",
+      "label": "Reversibility profile",
+      "definition": "Whether the agent's actions can be undone without a heavy penalty."
+    },
+    {
+      "id": "customer_market_impact",
+      "label": "Customer and market impact",
+      "definition": "Who is affected (internal, customer, market, regulator, counterparty) and how badly."
+    },
+    {
+      "id": "stack_composability",
+      "label": "Stack composability",
+      "definition": "Whether the tool surface is predefined in advance or dynamically assembled at runtime.",
+      "values": [
+        "predefined",
+        "dynamic",
+        "not_assessed"
+      ]
+    },
+    {
+      "id": "accountability",
+      "label": "Integrated-stack accountability",
+      "definition": "Who stands behind the model, harness and infrastructure as a whole."
+    },
+    {
+      "id": "population_scope",
+      "label": "Population scope",
+      "definition": "The range of parties the agentic system can affect."
+    }
+  ],
+  "modifiers_note": "Definitions from preprint §4.1 and Appendix B.1 (which names 'accountability' integrated-stack accountability). Values other than stack_composability are free text in this candidate; value scales are deferred."
+}

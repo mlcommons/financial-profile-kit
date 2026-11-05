@@ -1,0 +1,644 @@
+{
+  "inventory_spec": "arp-inventory/0.1",
+  "institution": {
+    "name": "Example Bank plc (fictional)",
+    "firm_id": "DEMO-FIRM-02",
+    "jurisdictions": [
+      "GB"
+    ]
+  },
+  "snapshot": {
+    "sequence": 1,
+    "as_of": "2025-12-31",
+    "produced_at": "2026-01-03T09:11:00Z",
+    "trigger": "scheduled",
+    "previous_hash": null
+  },
+  "records": [
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-002",
+        "agent_name": "Payment-operations exceptions and wire repair (back office)",
+        "deployment_status": "pilot",
+        "business_line": "payments",
+        "use_case_id": "ODD.16",
+        "use_case": "Payment-operations exceptions and wire repair",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6",
+          "A9"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "configured",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider C open-weights 70b",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Payments Operations",
+        "last_reviewed": "2025-04-23"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-003",
+        "agent_name": "Consumer underwriting (back office)",
+        "deployment_status": "production",
+        "business_line": "lending_credit",
+        "use_case_id": "ODD.9",
+        "use_case": "Consumer underwriting",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Credit Officer",
+        "last_reviewed": "2025-12-16"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-004",
+        "agent_name": "Fraud alert triage",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.5",
+        "use_case": "Fraud alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "unknown",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2024-12-09"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-011",
+        "agent_name": "Fraud alert triage",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.5",
+        "use_case": "Fraud alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider C open-weights 70b",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-06-18"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-012",
+        "agent_name": "Software development",
+        "deployment_status": "pilot",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.46",
+        "use_case": "Software development",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A11",
+          "A12"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "unknown",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider C open-weights 70b",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2025-11-17"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-013",
+        "agent_name": "Fraud alert triage (back office)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.5",
+        "use_case": "Fraud alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-10-09"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-017",
+        "agent_name": "Servicing chat (back office)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.1",
+        "use_case": "Servicing chat",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-12-26"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-018",
+        "agent_name": "Servicing chat v2",
+        "deployment_status": "in_development",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.1",
+        "use_case": "Servicing chat",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-12-08"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-019",
+        "agent_name": "Financial close and reconciliation",
+        "deployment_status": "pilot",
+        "business_line": "treasury_finance",
+        "use_case_id": "ODD.44",
+        "use_case": "Financial close and reconciliation",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Group Financial Controller",
+        "last_reviewed": "2025-07-26"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-020",
+        "agent_name": "Screening alert triage",
+        "deployment_status": "in_development",
+        "business_line": "payments",
+        "use_case_id": "ODD.17",
+        "use_case": "Screening alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Payments Operations",
+        "last_reviewed": "2025-05-24"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "EXA-AG-022",
+        "agent_name": "Narrative drafting and quality assurance",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.23",
+        "use_case": "Narrative drafting and quality assurance",
+        "customer_facing": "no",
+        "autonomy_tier": "T1",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2025-11-30"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "fc-alert-triage-prod",
+        "agent_name": "Agent that works a retail transaction-monitoring alert end to end and drafts a disposition recommendation for an analyst.",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case": "Alert triage for structuring and rapid movement of funds",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "unknown",
+          "environment.rollback_snapshot": "unknown"
+        },
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Financial Crime Operations",
+        "last_reviewed": "2025-12-31",
+        "use_case_id": "ODD.20",
+        "models": "ExampleAI (fictional) example-model 2026-06-01",
+        "vendor_or_platform": "ExampleFlow agent framework 2.1 (fictional)"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Example Bank plc (fictional)",
+        "inventory_ref": "ob-data-sharing-prod",
+        "agent_name": "Agent that assembles consented account data for a third-party provider under an open-banking consent.",
+        "deployment_status": "in_development",
+        "business_line": "retail_consumer_banking",
+        "use_case": "Consented account-data sharing with third-party providers",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "tested_not_shown_to_hold",
+          "harness.kill_switch": "unknown",
+          "harness.immutable_tool_call_logging": "unknown",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "unknown",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "unknown",
+          "environment.rollback_snapshot": "unknown"
+        },
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Open Banking",
+        "last_reviewed": "2025-12-31",
+        "use_case_id": "ODD.x_consented_data_sharing",
+        "models": "ExampleAI (fictional) example-model 2026-06-01"
+      }
+    }
+  ],
+  "attestation": {
+    "name": "Sample Signer (fictional)",
+    "role": "Chief Operating Officer",
+    "statement": "This snapshot lists every agent deployment of the institution in development, pilot or production at the as-of date, and any retired since the previous snapshot, as recorded in its inventory."
+  },
+  "signatures": [
+    {
+      "role": "institution",
+      "name": "Sample Signer (fictional)",
+      "alg": "ed25519",
+      "public_key": "C6mI9HQPh074q2FsJfegEU5U3G/kuyJaiOUrem+JBfM=",
+      "signed_hash": "sha256:73ef06b75dcb986a136fec69293e19a7d56264b70f3f4b1c590ecbbe22b6c787",
+      "value": "YMgh/qLWyngUX6W22jq0lmw6aqU3QSrGkj/LMwsh+R3lCV3JBvqC+piFLoWk4aOLPOj8QuUZrjhBF7hUsk/iBw=="
+    }
+  ]
+}

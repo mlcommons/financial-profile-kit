@@ -1,0 +1,39 @@
+{
+  "vocabulary": "arp/1.0-rc2/conflict-kinds",
+  "version": "1.0-rc2",
+  "note": "Recommended values for conflicts[].kind; 'other' plus a description is allowed.",
+  "terms": [
+    {
+      "id": "document_vs_configuration",
+      "meaning": "A document states one thing; exported configuration shows another."
+    },
+    {
+      "id": "document_vs_run_log",
+      "meaning": "A document states one thing; run or audit logs show another."
+    },
+    {
+      "id": "configuration_stricter_than_mandate",
+      "meaning": "Configuration is stricter than any document requires, or documents are silent on a configured limit."
+    },
+    {
+      "id": "simulated_evidence",
+      "meaning": "Records are marked simulated or sample."
+    },
+    {
+      "id": "suspected_simulated_evidence",
+      "meaning": "Records are not marked but show signs of being synthetic (identical timestamps, repeated identifiers)."
+    },
+    {
+      "id": "rendering_vs_source",
+      "meaning": "A rendering says more or less than its machine-readable source."
+    },
+    {
+      "id": "identity",
+      "meaning": "It is unclear that an artifact describes this deployment."
+    },
+    {
+      "id": "other",
+      "meaning": "Anything else; describe it."
+    }
+  ]
+}

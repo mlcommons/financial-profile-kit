@@ -1,0 +1,1116 @@
+{
+  "inventory_spec": "arp-inventory/0.1",
+  "institution": {
+    "name": "Meridian Capital Markets LLP (fictional)",
+    "firm_id": "DEMO-FIRM-05",
+    "jurisdictions": [
+      "GB"
+    ]
+  },
+  "snapshot": {
+    "sequence": 4,
+    "as_of": "2026-09-30",
+    "produced_at": "2026-10-06T09:14:00Z",
+    "trigger": "scheduled",
+    "previous_hash": "sha256:a8460b181fba4c7a22b29363f1945b7229bed5d2d1bff584bf4892a60d53df0f"
+  },
+  "records": [
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-001",
+        "agent_name": "Corporate actions",
+        "deployment_status": "production",
+        "business_line": "markets",
+        "use_case_id": "ODD.33",
+        "use_case": "Corporate actions",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Markets Technology",
+        "last_reviewed": "2026-06-02"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-003",
+        "agent_name": "Corporate actions",
+        "deployment_status": "production",
+        "business_line": "markets",
+        "use_case_id": "ODD.33",
+        "use_case": "Corporate actions",
+        "customer_facing": "no",
+        "autonomy_tier": "T4",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Markets Technology",
+        "last_reviewed": "2026-08-14"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-004",
+        "agent_name": "IT operations and incident response (group)",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.47",
+        "use_case": "IT operations and incident response",
+        "customer_facing": "no",
+        "autonomy_tier": "T4",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A11"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2026-04-18"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-005",
+        "agent_name": "Research generation (back office)",
+        "deployment_status": "production",
+        "business_line": "markets",
+        "use_case_id": "ODD.30",
+        "use_case": "Research generation",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "tested_held",
+          "harness.kill_switch": "tested_not_shown_to_hold",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "tested_held",
+          "tool.action_allowlists": "tested_held",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "tested_not_shown_to_hold"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "L2",
+        "accountable_owner_role": "Head of Markets Technology",
+        "last_reviewed": "2026-08-05",
+        "full_profile_ref": "meridian.mer-ag-005.v1.L2"
+      },
+      "profile": {
+        "profile_id": "meridian.mer-ag-005.v1.L2",
+        "stage": "issued",
+        "headline": 2,
+        "valid_until": "2027-09-30",
+        "sha256": "sha256:c7e2c813fbde9c7c2be25dd1117ec02bdc083fd0cf714ec20c7bedc48f1a2e86"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-006",
+        "agent_name": "Proposal generation (back office)",
+        "deployment_status": "pilot",
+        "business_line": "wealth_asset_management",
+        "use_case_id": "ODD.37",
+        "use_case": "Proposal generation",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Wealth",
+        "last_reviewed": "2025-10-15"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-007",
+        "agent_name": "Margin calls (premier)",
+        "deployment_status": "in_development",
+        "business_line": "markets",
+        "use_case_id": "ODD.34",
+        "use_case": "Margin calls",
+        "customer_facing": "yes",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A6",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A5",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "absent",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Markets Technology",
+        "last_reviewed": "2026-07-19"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-008",
+        "agent_name": "Security operations triage (back office)",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.48",
+        "use_case": "Security operations triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2026-05-08"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-009",
+        "agent_name": "Trade surveillance",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.25",
+        "use_case": "Trade surveillance",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor R surveillance suite",
+        "profile_level": "none",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2026-06-21"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-010",
+        "agent_name": "Software development (back office)",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.46",
+        "use_case": "Software development",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A11",
+          "A12"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "absent",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2026-07-13"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-011",
+        "agent_name": "Trade surveillance (UK)",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.25",
+        "use_case": "Trade surveillance",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor R surveillance suite",
+        "profile_level": "none",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2026-01-30"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-012",
+        "agent_name": "Corporate actions v2",
+        "deployment_status": "production",
+        "business_line": "markets",
+        "use_case_id": "ODD.33",
+        "use_case": "Corporate actions",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "L1",
+        "accountable_owner_role": "Head of Markets Technology",
+        "last_reviewed": "2026-09-04",
+        "full_profile_ref": "meridian.mer-ag-012.v1.L1"
+      },
+      "profile": {
+        "profile_id": "meridian.mer-ag-012.v1.L1",
+        "stage": "issued",
+        "headline": 1,
+        "valid_until": "2027-06-30",
+        "sha256": "sha256:24ae96c1fdf6351d7269a27dd696dc59008a5f201ed170c13784cfd7bd695d13"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-013",
+        "agent_name": "Communications surveillance",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.26",
+        "use_case": "Communications surveillance",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "absent",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor R surveillance suite",
+        "profile_level": "L1",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2026-04-28",
+        "full_profile_ref": "meridian.mer-ag-013.v1.L1"
+      },
+      "profile": {
+        "profile_id": "meridian.mer-ag-013.v1.L1",
+        "stage": "issued",
+        "headline": 1,
+        "valid_until": "2026-12-31",
+        "sha256": "sha256:5ec2f3c412c4d5b3620e483130384dca038b2fee9fa6d98d7859ecf38fc01b59"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-014",
+        "agent_name": "Communications surveillance",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.26",
+        "use_case": "Communications surveillance",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider C open-weights 70b",
+        "vendor_or_platform": "Vendor R surveillance suite",
+        "profile_level": "none",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2026-08-24"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-015",
+        "agent_name": "Trade surveillance (group)",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.25",
+        "use_case": "Trade surveillance",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "unknown",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "unknown",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor R surveillance suite",
+        "profile_level": "none",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2026-08-18"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-016",
+        "agent_name": "Communications surveillance (UK)",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.26",
+        "use_case": "Communications surveillance",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor R surveillance suite",
+        "profile_level": "none",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2026-09-05"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-017",
+        "agent_name": "Institutional onboarding (contact centre)",
+        "deployment_status": "production",
+        "business_line": "markets",
+        "use_case_id": "ODD.35",
+        "use_case": "Institutional onboarding",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Markets Technology",
+        "last_reviewed": "2026-06-17"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-018",
+        "agent_name": "Post-trade reconciliation and settlement exceptions (back office)",
+        "deployment_status": "production",
+        "business_line": "markets",
+        "use_case_id": "ODD.32",
+        "use_case": "Post-trade reconciliation and settlement exceptions",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "unknown",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider C open-weights 70b",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Markets Technology",
+        "last_reviewed": "2026-09-16"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-019",
+        "agent_name": "Portfolio rebalancing (premier)",
+        "deployment_status": "production",
+        "business_line": "wealth_asset_management",
+        "use_case_id": "ODD.36",
+        "use_case": "Portfolio rebalancing",
+        "customer_facing": "yes",
+        "autonomy_tier": "T4",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A8"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "configured",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Wealth",
+        "last_reviewed": "2026-07-14"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-020",
+        "agent_name": "Trade surveillance (back office)",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.25",
+        "use_case": "Trade surveillance",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor R surveillance suite",
+        "profile_level": "L1",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2026-08-10",
+        "full_profile_ref": "meridian.mer-ag-020.v1.L1"
+      },
+      "profile": {
+        "profile_id": "meridian.mer-ag-020.v1.L1",
+        "stage": "issued",
+        "headline": 1,
+        "valid_until": "2027-03-31",
+        "sha256": "sha256:08fe04e15f5322dded3fb705dc63c4f3c2ca1032ee8da53e3f3a12cb920c3588"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-021",
+        "agent_name": "Security operations triage",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.48",
+        "use_case": "Security operations triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "substantiated",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "tested_held",
+          "harness.immutable_tool_call_logging": "tested_held",
+          "harness.high_risk_routing": "tested_held",
+          "tool.action_allowlists": "tested_held",
+          "tool.least_privilege_credentials": "tested_held",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "L2",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2025-11-14",
+        "full_profile_ref": "meridian.mer-ag-021.v1.L2"
+      },
+      "profile": {
+        "profile_id": "meridian.mer-ag-021.v1.L2",
+        "stage": "issued",
+        "headline": 2,
+        "valid_until": "2027-03-31",
+        "sha256": "sha256:dba62bddc15dee23e4d99c530aef29e62925ce8d79042358e75ce10acf7ded91"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-022",
+        "agent_name": "Corporate actions (group)",
+        "deployment_status": "production",
+        "business_line": "markets",
+        "use_case_id": "ODD.33",
+        "use_case": "Corporate actions",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "absent",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Markets Technology",
+        "last_reviewed": "2026-02-26"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Meridian Capital Markets LLP (fictional)",
+        "inventory_ref": "MER-AG-023",
+        "agent_name": "Execution and algorithm selection",
+        "deployment_status": "production",
+        "business_line": "markets",
+        "use_case_id": "ODD.31",
+        "use_case": "Execution and algorithm selection",
+        "customer_facing": "no",
+        "autonomy_tier": "T4",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A8"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "tested_held",
+          "harness.immutable_tool_call_logging": "tested_held",
+          "harness.high_risk_routing": "tested_held",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "tested_held",
+          "tool.transaction_caps": "tested_held",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "L2",
+        "accountable_owner_role": "Head of Markets Technology",
+        "last_reviewed": "2026-04-21",
+        "full_profile_ref": "meridian.mer-ag-023.v1.L2"
+      },
+      "profile": {
+        "profile_id": "meridian.mer-ag-023.v1.L2",
+        "stage": "issued",
+        "headline": 2,
+        "valid_until": "2026-12-31",
+        "sha256": "sha256:f7a05d2034bbdc9636c4cbebf62d94af33b511ac4f75918afbc744f632c27553"
+      }
+    }
+  ],
+  "attestation": {
+    "name": "Sample Signer (fictional)",
+    "role": "Chief Operating Officer",
+    "statement": "This snapshot lists every agent deployment of the institution in development, pilot or production at the as-of date, and any retired since the previous snapshot, as recorded in its inventory."
+  },
+  "signatures": [
+    {
+      "role": "institution",
+      "name": "Sample Signer (fictional)",
+      "alg": "ed25519",
+      "public_key": "752iMD2ru7ffweeiXDQS0FefukbPPMpZXq961dasLcc=",
+      "signed_hash": "sha256:3c7d8153b99f0b3e603c983efd5b3f9967edf715da0c5c64248f2d2a41581e2e",
+      "value": "GoP8iGUwSUCd9c1smbSPg20Gx2PZ0f+pQSL+y7T740uHFTEwyLySBG4lXXq8GTCLawaJiv9lrE+/LKk/2PbuCA=="
+    }
+  ]
+}

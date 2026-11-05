@@ -1,0 +1,1296 @@
+{
+  "inventory_spec": "arp-inventory/0.1",
+  "institution": {
+    "name": "Northbridge Bank plc (fictional)",
+    "firm_id": "DEMO-FIRM-01",
+    "jurisdictions": [
+      "GB"
+    ]
+  },
+  "snapshot": {
+    "sequence": 1,
+    "as_of": "2025-12-31",
+    "produced_at": "2026-01-02T09:10:00Z",
+    "trigger": "scheduled",
+    "previous_hash": null
+  },
+  "records": [
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-003",
+        "agent_name": "Monitoring-rule tuning",
+        "deployment_status": "in_development",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.24",
+        "use_case": "Monitoring-rule tuning",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "unknown",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2025-07-08"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-005",
+        "agent_name": "Payment-operations exceptions and wire repair (back office)",
+        "deployment_status": "production",
+        "business_line": "payments",
+        "use_case_id": "ODD.16",
+        "use_case": "Payment-operations exceptions and wire repair",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6",
+          "A9"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "configured",
+          "environment.rollback_snapshot": "absent"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Payments Operations",
+        "last_reviewed": "2025-11-18"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-006",
+        "agent_name": "Fraud alert triage (UK)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.5",
+        "use_case": "Fraud alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "In-house model nb-lm-2",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-12-01"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-007",
+        "agent_name": "Narrative drafting and quality assurance (UK)",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.23",
+        "use_case": "Narrative drafting and quality assurance",
+        "customer_facing": "no",
+        "autonomy_tier": "T1",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2025-06-24"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-010",
+        "agent_name": "Fraud alert triage v2",
+        "deployment_status": "pilot",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.5",
+        "use_case": "Fraud alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "In-house model nb-lm-2",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-12-18"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-011",
+        "agent_name": "Internal audit support",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.50",
+        "use_case": "Internal audit support",
+        "customer_facing": "no",
+        "autonomy_tier": "T1",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "tested_held",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "tested_held",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "L2",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2025-10-21",
+        "full_profile_ref": "northbridge.nor-ag-011.v1.L2"
+      },
+      "profile": {
+        "profile_id": "northbridge.nor-ag-011.v1.L2",
+        "stage": "issued",
+        "headline": 2,
+        "valid_until": "2026-12-31",
+        "sha256": "sha256:259517dd8cc540fe5c5d5fdcfcdc2b21b24831c833b9cf2c54b62e22b752c8d8"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-013",
+        "agent_name": "Regulatory reporting preparation",
+        "deployment_status": "production",
+        "business_line": "treasury_finance",
+        "use_case_id": "ODD.45",
+        "use_case": "Regulatory reporting preparation",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Group Financial Controller",
+        "last_reviewed": "2025-10-03"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-014",
+        "agent_name": "Credit-line management (group)",
+        "deployment_status": "production",
+        "business_line": "lending_credit",
+        "use_case_id": "ODD.12",
+        "use_case": "Credit-line management",
+        "customer_facing": "no",
+        "autonomy_tier": "T4",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A6",
+          "A8"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A5",
+          "A7",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "configured",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Credit Officer",
+        "last_reviewed": "2025-09-19"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-016",
+        "agent_name": "Fraud alert triage",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.5",
+        "use_case": "Fraud alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "unknown"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-12-14"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-018",
+        "agent_name": "Suitability review (UK)",
+        "deployment_status": "production",
+        "business_line": "wealth_asset_management",
+        "use_case_id": "ODD.38",
+        "use_case": "Suitability review",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Wealth",
+        "last_reviewed": "2025-09-13"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-019",
+        "agent_name": "Payment-operations exceptions and wire repair (group)",
+        "deployment_status": "production",
+        "business_line": "payments",
+        "use_case_id": "ODD.16",
+        "use_case": "Payment-operations exceptions and wire repair",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6",
+          "A9"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "documented_only",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Payments Operations",
+        "last_reviewed": "2025-10-16"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-020",
+        "agent_name": "Internal audit support v2",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.50",
+        "use_case": "Internal audit support",
+        "customer_facing": "no",
+        "autonomy_tier": "T1",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2025-06-05"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-024",
+        "agent_name": "Security operations triage",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.48",
+        "use_case": "Security operations triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "L1",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2025-12-28",
+        "full_profile_ref": "northbridge.nor-ag-024.v1.L1"
+      },
+      "profile": {
+        "profile_id": "northbridge.nor-ag-024.v1.L1",
+        "stage": "issued",
+        "headline": 1,
+        "valid_until": "2026-12-31",
+        "sha256": "sha256:5b82a71a83d7071e4076de72b8583fb5b1b501512d32b712c41c8fe1b412f6c4"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-027",
+        "agent_name": "Real-time fraud interdiction (group)",
+        "deployment_status": "pilot",
+        "business_line": "payments",
+        "use_case_id": "ODD.19",
+        "use_case": "Real-time fraud interdiction",
+        "customer_facing": "no",
+        "autonomy_tier": "T4",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A5",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "unknown",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Payments Operations",
+        "last_reviewed": "2025-01-19"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-028",
+        "agent_name": "Alert triage for structuring and rapid movement",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.20",
+        "use_case": "Alert triage for structuring and rapid movement",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "tested_held",
+          "harness.kill_switch": "tested_held",
+          "harness.immutable_tool_call_logging": "tested_held",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "L2",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2025-12-11",
+        "full_profile_ref": "northbridge.nor-ag-028.v1.L2"
+      },
+      "profile": {
+        "profile_id": "northbridge.nor-ag-028.v1.L2",
+        "stage": "issued",
+        "headline": 2,
+        "valid_until": "2026-12-31",
+        "sha256": "sha256:fda4ab1d16bb4182a013a7deab97149dd0f23ea990afa787369d1fd895ba5da0"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-034",
+        "agent_name": "Software development v2",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.46",
+        "use_case": "Software development",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A11",
+          "A12"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2025-06-30"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-037",
+        "agent_name": "Screening alert triage v2",
+        "deployment_status": "production",
+        "business_line": "payments",
+        "use_case_id": "ODD.17",
+        "use_case": "Screening alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Payments Operations",
+        "last_reviewed": "2025-10-15"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-041",
+        "agent_name": "Financial close and reconciliation",
+        "deployment_status": "production",
+        "business_line": "treasury_finance",
+        "use_case_id": "ODD.44",
+        "use_case": "Financial close and reconciliation",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "L1",
+        "accountable_owner_role": "Group Financial Controller",
+        "last_reviewed": "2025-06-16",
+        "full_profile_ref": "northbridge.nor-ag-041.v1.L1"
+      },
+      "profile": {
+        "profile_id": "northbridge.nor-ag-041.v1.L1",
+        "stage": "issued",
+        "headline": 1,
+        "valid_until": "2026-12-31",
+        "sha256": "sha256:2c3c5847b4d2b0cbcc45aa64a93d344c0e4a3ac4566c9ef66529312cbd2f4d38"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-042",
+        "agent_name": "Software development (UK)",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.46",
+        "use_case": "Software development",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A11",
+          "A12"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "L1",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2025-12-09",
+        "full_profile_ref": "northbridge.nor-ag-042.v1.L1"
+      },
+      "profile": {
+        "profile_id": "northbridge.nor-ag-042.v1.L1",
+        "stage": "issued",
+        "headline": 1,
+        "valid_until": "2026-12-31",
+        "sha256": "sha256:77d117f94abcb9379451957d9eb9d5207c5d73de0d3fd5ae5eb254466d5d8728"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-046",
+        "agent_name": "Collections and hardship",
+        "deployment_status": "in_development",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.6",
+        "use_case": "Collections and hardship",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "unknown"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-11-19"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-047",
+        "agent_name": "Consumer underwriting (back office)",
+        "deployment_status": "production",
+        "business_line": "lending_credit",
+        "use_case_id": "ODD.9",
+        "use_case": "Consumer underwriting",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Credit Officer",
+        "last_reviewed": "2025-12-21"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-048",
+        "agent_name": "Complaint handling",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.2",
+        "use_case": "Complaint handling",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "absent",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-07-19"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-050",
+        "agent_name": "Financial close and reconciliation v2",
+        "deployment_status": "production",
+        "business_line": "treasury_finance",
+        "use_case_id": "ODD.44",
+        "use_case": "Financial close and reconciliation",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Group Financial Controller",
+        "last_reviewed": "2025-10-09"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-055",
+        "agent_name": "Screening alert triage v2",
+        "deployment_status": "production",
+        "business_line": "payments",
+        "use_case_id": "ODD.17",
+        "use_case": "Screening alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "unknown",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "absent",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Payments Operations",
+        "last_reviewed": "2025-12-06"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-060",
+        "agent_name": "Servicing chat (contact centre)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.1",
+        "use_case": "Servicing chat",
+        "customer_facing": "yes",
+        "autonomy_tier": "T1",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-12-08"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Northbridge Bank plc (fictional)",
+        "inventory_ref": "NOR-AG-061",
+        "agent_name": "Monitoring-rule tuning",
+        "deployment_status": "production",
+        "business_line": "financial_crime_compliance",
+        "use_case_id": "ODD.24",
+        "use_case": "Monitoring-rule tuning",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "substantiated",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "absent",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "In-house agent platform",
+        "profile_level": "none",
+        "accountable_owner_role": "MLRO",
+        "last_reviewed": "2025-12-22"
+      }
+    }
+  ],
+  "attestation": {
+    "name": "Sample Signer (fictional)",
+    "role": "Chief Operating Officer",
+    "statement": "This snapshot lists every agent deployment of the institution in development, pilot or production at the as-of date, and any retired since the previous snapshot, as recorded in its inventory."
+  },
+  "signatures": [
+    {
+      "role": "institution",
+      "name": "Sample Signer (fictional)",
+      "alg": "ed25519",
+      "public_key": "b7kprWdCkEoh3c1Q2lStTYKg5D/oLL1/xCZfvx5umio=",
+      "signed_hash": "sha256:bbd772e36faf3a0d0d5addb453ad83a096710887cfb14fa73393663a6d16b6b4",
+      "value": "3/XgYu2RdB8HTJiwbN5JsvF6uzozTagFETsWveSoaQxjjJ/h2dK8kRw/8Wqap2ic5vvWV3oOMl/TsrXzaOSICA=="
+    }
+  ]
+}

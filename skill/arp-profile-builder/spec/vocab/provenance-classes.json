@@ -1,0 +1,33 @@
+{
+  "vocabulary": "arp/1.0-rc2/provenance-classes",
+  "version": "1.0-rc2",
+  "ordered_weakest_first": [
+    "absent",
+    "owner_attested",
+    "document_derived",
+    "configuration_derived",
+    "measured"
+  ],
+  "terms": [
+    {
+      "id": "absent",
+      "meaning": "No artifact in the evidence package was entitled to establish this field."
+    },
+    {
+      "id": "owner_attested",
+      "meaning": "Asserted by the named accountable owner; no supporting artifact."
+    },
+    {
+      "id": "document_derived",
+      "meaning": "Extracted from a signed institutional document (policy, design, procedure). Establishes intent, not as-built."
+    },
+    {
+      "id": "configuration_derived",
+      "meaning": "Checked against configuration exported from the running deployment. Establishes as-built, not effectiveness."
+    },
+    {
+      "id": "measured",
+      "meaning": "Observed by executing tests against the deployment (Level 2 or above only)."
+    }
+  ]
+}

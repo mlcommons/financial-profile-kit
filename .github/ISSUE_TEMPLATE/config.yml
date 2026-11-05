@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Propose a change to the shared vocabulary (tiers, use cases, action classes, controls)
+    url: https://github.com/mlcommons/agent-reliability-profile-taxonomy/issues
+    about: The taxonomy repository is the official source of the vocabulary. Propose vocabulary changes there.
+  - name: Report a security problem or a checker that accepts what it should reject
+    url: https://github.com/mlcommons/agent-reliability-profile-kit/blob/main/SECURITY.md
+    about: Report privately, as described in SECURITY.md. Do not open a public issue.

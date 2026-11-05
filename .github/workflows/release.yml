@@ -1,0 +1,43 @@
+name: Release
+
+# Builds the download zip from tools/RELEASE-MANIFEST.txt and a separate Builder skill zip,
+# and attaches both, with SHA-256 checksums, to a draft GitHub release for the pushed tag.
+# A maintainer reviews the draft against governance/release-checklist.md before publishing it.
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Build the Kit zip
+        run: |
+          mkdir -p dist
+          python tools/make_release_zip.py --out dist
+
+      - name: Build the Builder skill zip
+        run: |
+          python tools/sync_skill_bundle.py --check
+          (cd skill && zip -qr "../dist/arp-profile-builder-skill-${GITHUB_REF_NAME}.zip" arp-profile-builder -x '*/__pycache__/*')
+
+      - name: Checksums
+        run: (cd dist && sha256sum *.zip > SHA256SUMS.txt && cat SHA256SUMS.txt)
+
+      - name: Draft the GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/* --draft --title "Agent Reliability Profile Kit $GITHUB_REF_NAME" --notes "See CHANGELOG.md and COMPATIBILITY.md. Review against governance/release-checklist.md before publishing."

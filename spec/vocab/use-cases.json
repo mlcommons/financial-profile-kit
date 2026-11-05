@@ -1,0 +1,267 @@
+{
+  "vocabulary": "arp/1.0-rc2/use-cases",
+  "version": "1.0-rc2",
+  "note": "Candidate use cases from preprint Appendix B.2, numbered in order (ODD.1-ODD.52). An open set: ODD.x_<name> marks an extension, which the Profile Summary does not carry.",
+  "terms": [
+    {
+      "id": "ODD.1",
+      "business_line": "retail_consumer_banking",
+      "label": "Servicing chat"
+    },
+    {
+      "id": "ODD.2",
+      "business_line": "retail_consumer_banking",
+      "label": "Complaint handling"
+    },
+    {
+      "id": "ODD.3",
+      "business_line": "retail_consumer_banking",
+      "label": "Dispute resolution"
+    },
+    {
+      "id": "ODD.4",
+      "business_line": "retail_consumer_banking",
+      "label": "Account opening and onboarding"
+    },
+    {
+      "id": "ODD.5",
+      "business_line": "retail_consumer_banking",
+      "label": "Fraud alert triage"
+    },
+    {
+      "id": "ODD.6",
+      "business_line": "retail_consumer_banking",
+      "label": "Collections and hardship"
+    },
+    {
+      "id": "ODD.7",
+      "business_line": "retail_consumer_banking",
+      "label": "Personal financial guidance"
+    },
+    {
+      "id": "ODD.8",
+      "business_line": "retail_consumer_banking",
+      "label": "Deposit operations exceptions"
+    },
+    {
+      "id": "ODD.9",
+      "business_line": "lending_credit",
+      "label": "Consumer underwriting"
+    },
+    {
+      "id": "ODD.10",
+      "business_line": "lending_credit",
+      "label": "Mortgage origination"
+    },
+    {
+      "id": "ODD.11",
+      "business_line": "lending_credit",
+      "label": "Commercial underwriting and spreading"
+    },
+    {
+      "id": "ODD.12",
+      "business_line": "lending_credit",
+      "label": "Credit-line management"
+    },
+    {
+      "id": "ODD.13",
+      "business_line": "lending_credit",
+      "label": "Covenant monitoring"
+    },
+    {
+      "id": "ODD.14",
+      "business_line": "lending_credit",
+      "label": "Loan servicing and modifications"
+    },
+    {
+      "id": "ODD.15",
+      "business_line": "lending_credit",
+      "label": "Appraisal and collateral review"
+    },
+    {
+      "id": "ODD.16",
+      "business_line": "payments",
+      "label": "Payment-operations exceptions and wire repair"
+    },
+    {
+      "id": "ODD.17",
+      "business_line": "payments",
+      "label": "Screening alert triage"
+    },
+    {
+      "id": "ODD.18",
+      "business_line": "payments",
+      "label": "Chargeback and representment processing"
+    },
+    {
+      "id": "ODD.19",
+      "business_line": "payments",
+      "label": "Real-time fraud interdiction"
+    },
+    {
+      "id": "ODD.20",
+      "business_line": "financial_crime_compliance",
+      "label": "Alert triage for structuring and rapid movement"
+    },
+    {
+      "id": "ODD.21",
+      "business_line": "financial_crime_compliance",
+      "label": "Alert triage for trade-based laundering, terrorist financing, sanctions evasion, and shell structures"
+    },
+    {
+      "id": "ODD.22",
+      "business_line": "financial_crime_compliance",
+      "label": "Periodic customer review and enhanced diligence"
+    },
+    {
+      "id": "ODD.23",
+      "business_line": "financial_crime_compliance",
+      "label": "Narrative drafting and quality assurance"
+    },
+    {
+      "id": "ODD.24",
+      "business_line": "financial_crime_compliance",
+      "label": "Monitoring-rule tuning"
+    },
+    {
+      "id": "ODD.25",
+      "business_line": "financial_crime_compliance",
+      "label": "Trade surveillance"
+    },
+    {
+      "id": "ODD.26",
+      "business_line": "financial_crime_compliance",
+      "label": "Communications surveillance"
+    },
+    {
+      "id": "ODD.27",
+      "business_line": "financial_crime_compliance",
+      "label": "Regulatory-change monitoring"
+    },
+    {
+      "id": "ODD.28",
+      "business_line": "financial_crime_compliance",
+      "label": "Marketing and conduct review"
+    },
+    {
+      "id": "ODD.29",
+      "business_line": "financial_crime_compliance",
+      "label": "Conflicts monitoring"
+    },
+    {
+      "id": "ODD.30",
+      "business_line": "markets",
+      "label": "Research generation"
+    },
+    {
+      "id": "ODD.31",
+      "business_line": "markets",
+      "label": "Execution and algorithm selection"
+    },
+    {
+      "id": "ODD.32",
+      "business_line": "markets",
+      "label": "Post-trade reconciliation and settlement exceptions"
+    },
+    {
+      "id": "ODD.33",
+      "business_line": "markets",
+      "label": "Corporate actions"
+    },
+    {
+      "id": "ODD.34",
+      "business_line": "markets",
+      "label": "Margin calls"
+    },
+    {
+      "id": "ODD.35",
+      "business_line": "markets",
+      "label": "Institutional onboarding"
+    },
+    {
+      "id": "ODD.36",
+      "business_line": "wealth_asset_management",
+      "label": "Portfolio rebalancing"
+    },
+    {
+      "id": "ODD.37",
+      "business_line": "wealth_asset_management",
+      "label": "Proposal generation"
+    },
+    {
+      "id": "ODD.38",
+      "business_line": "wealth_asset_management",
+      "label": "Suitability review"
+    },
+    {
+      "id": "ODD.39",
+      "business_line": "wealth_asset_management",
+      "label": "Client reporting"
+    },
+    {
+      "id": "ODD.40",
+      "business_line": "wealth_asset_management",
+      "label": "Tax-loss harvesting"
+    },
+    {
+      "id": "ODD.41",
+      "business_line": "insurance",
+      "label": "Claims triage and adjudication"
+    },
+    {
+      "id": "ODD.42",
+      "business_line": "insurance",
+      "label": "Underwriting"
+    },
+    {
+      "id": "ODD.43",
+      "business_line": "treasury_finance",
+      "label": "Liquidity forecasting"
+    },
+    {
+      "id": "ODD.44",
+      "business_line": "treasury_finance",
+      "label": "Financial close and reconciliation"
+    },
+    {
+      "id": "ODD.45",
+      "business_line": "treasury_finance",
+      "label": "Regulatory reporting preparation"
+    },
+    {
+      "id": "ODD.46",
+      "business_line": "internal_corporate",
+      "label": "Software development"
+    },
+    {
+      "id": "ODD.47",
+      "business_line": "internal_corporate",
+      "label": "IT operations and incident response"
+    },
+    {
+      "id": "ODD.48",
+      "business_line": "internal_corporate",
+      "label": "Security operations triage"
+    },
+    {
+      "id": "ODD.49",
+      "business_line": "internal_corporate",
+      "label": "Model validation support"
+    },
+    {
+      "id": "ODD.50",
+      "business_line": "internal_corporate",
+      "label": "Internal audit support"
+    },
+    {
+      "id": "ODD.51",
+      "business_line": "internal_corporate",
+      "label": "Procurement and third-party review"
+    },
+    {
+      "id": "ODD.52",
+      "business_line": "internal_corporate",
+      "label": "Employee services"
+    }
+  ]
+}

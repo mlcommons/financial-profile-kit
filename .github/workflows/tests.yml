@@ -1,0 +1,52 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          # jsdom for the dashboard rendering tests, installed outside the Kit folder
+          npm install --prefix "$RUNNER_TEMP/jsdom" jsdom@24
+          echo "ARP_JSDOM=$RUNNER_TEMP/jsdom/node_modules/jsdom/lib/api.js" >> "$GITHUB_ENV"
+
+      - name: Conformance vectors
+        run: python conformance/run_suite.py
+
+      - name: Builder skill bundle in step with the Kit
+        run: python tools/sync_skill_bundle.py --check
+
+      - name: Workbooks and Profile Lite
+        run: |
+          python templates/test_roundtrip.py
+          python templates/test_lite.py
+
+      - name: Viewer agrees with the reference checker
+        run: node templates/viewer/test_viewer.mjs
+
+      - name: Regulator Kit preview
+        run: |
+          python regulator/test_schemas.py
+          node regulator/console/test_console.mjs
+
+      - name: Redaction procedure (DISCLOSURE.md)
+        run: python conformance/test_redaction.py
+
+      - name: Release zip ships only listed files
+        run: python tools/test_release_zip.py

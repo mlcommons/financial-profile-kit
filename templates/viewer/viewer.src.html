@@ -1,0 +1,620 @@
+<title>ARP Profile Viewer</title>
+<style>
+/* Layout: a working instrument — toolbar on top, the Profile on the left, the conformance panel docked right; stacks on phones. */
+:root{
+  --bg:#f6f7f8; --surface:#ffffff; --ink:#16212b; --muted:#5d6b78; --line:#d9dee3; --soft:#eef1f3;
+  --accent:#0e5c63; --accent-soft:#e2f0f0;
+  --good:#1f7a43; --good-soft:#e3f3e8; --warn:#93600a; --warn-soft:#fbf1dc; --bad:#a32727; --bad-soft:#f8e3e1;
+  --font-display:"Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; --font-body:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --font-mono:ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1519; --surface:#161e24; --ink:#e6ebef; --muted:#9aa7b2; --line:#2a353e; --soft:#1d272e;
+  --accent:#5fb6bd; --accent-soft:#16333a; --good:#5cc489; --good-soft:#163323; --warn:#e2b55a; --warn-soft:#3a2c10; --bad:#f08a80; --bad-soft:#3d1a18; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1519; --surface:#161e24; --ink:#e6ebef; --muted:#9aa7b2; --line:#2a353e; --soft:#1d272e;
+  --accent:#5fb6bd; --accent-soft:#16333a; --good:#5cc489; --good-soft:#163323; --warn:#e2b55a; --warn-soft:#3a2c10; --bad:#f08a80; --bad-soft:#3d1a18; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 var(--font-body);margin:0}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:20px;padding-block:18px 48px}
+header.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line)}
+h1{font:600 26px/1.15 var(--font-display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sub{color:var(--muted);font-size:13px;margin-top:4px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center} .toolbar select{width:auto;max-width:100%}
+button,select,input,textarea{font:inherit;color:inherit}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:7px 12px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.btn:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible,.tab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;margin-top:18px}
+@media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;color:var(--muted);font-weight:500}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.panel{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);align-self:start;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 24px);overflow:auto}
+@media (max-width:900px){.panel{position:static;max-height:none}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;min-width:0}
+.card h2{font:600 13px/1.3 var(--font-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 10px}
+section.blk{margin-bottom:22px}
+section.blk>h3{font:600 17px/1.3 var(--font-display);margin:0 0 8px}
+.disclosure{background:var(--warn-soft);border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);color:var(--ink);border-radius:8px;padding:10px 14px;margin-bottom:16px}
+.disclosure p{margin:2px 0}
+.disclosure strong{color:var(--warn)}
+.kv{display:grid;grid-template-columns:minmax(120px,190px) minmax(0,1fr);gap:4px 14px}
+.kv dt{color:var(--muted)} .kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.mono{font-family:var(--font-mono);font-size:12.5px}
+blockquote{margin:0;padding:12px 16px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;font-size:15px}
+.chip{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:500;border:1px solid transparent;white-space:nowrap}
+.c-good{background:var(--good-soft);color:var(--good)} .c-warn{background:var(--warn-soft);color:var(--warn)} .c-bad{background:var(--bad-soft);color:var(--bad)}
+.c-neutral{background:var(--soft);color:var(--muted)} .c-accent{background:var(--accent-soft);color:var(--accent)}
+.axes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.axes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.axis{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--surface)}
+.axis .lvl{font:600 22px/1 var(--font-display)} .axis .name{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.bar{height:5px;background:var(--soft);border-radius:3px;margin-top:8px;overflow:hidden} .bar>i{display:block;height:100%;background:var(--accent)}
+.grid12{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+@media (max-width:640px){.grid12{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.act{border:1px solid var(--line);border-radius:6px;padding:7px 8px;font-size:12px;min-width:0}
+.act b{font-family:var(--font-mono);font-size:12.5px}
+.act.permitted{background:var(--good-soft);border-color:color-mix(in srgb,var(--good) 40%,transparent)}
+.act.prohibited{background:var(--bad-soft);border-color:color-mix(in srgb,var(--bad) 35%,transparent)}
+.act.oos{background:var(--soft)} .act .st{display:block;font-weight:600;margin-top:2px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--soft);font-weight:600;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:0}
+.status{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.status .big{font:600 18px/1.2 var(--font-display)}
+.find{border-top:1px solid var(--line);padding:8px 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px}
+.find:first-child{border-top:0}
+.find .rule{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+.find .msg{overflow-wrap:anywhere}
+.find .why{grid-column:2;color:var(--muted);font-size:12.5px;min-width:0;overflow-wrap:anywhere}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.form{grid-template-columns:minmax(0,1fr)}}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);min-width:0}
+.form .full{grid-column:1/-1}
+input[type=text],select,textarea{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:7px 9px;color:var(--ink);width:100%}
+textarea{min-height:90px;resize:vertical}
+textarea.json{font-family:var(--font-mono);font-size:12.5px;min-height:480px}
+details{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:var(--surface);margin-bottom:8px}
+summary{cursor:pointer;font-weight:600}
+.ctlrow{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:8px;align-items:center;padding:4px 0;border-top:1px solid var(--line)}
+.note{color:var(--muted);font-size:12.5px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 18px);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:6px;font-size:13px}
+.empty{color:var(--muted);font-style:italic}
+.statusline{margin-top:12px;border:1px solid var(--line);border-left:3px solid var(--warn);background:var(--surface);border-radius:6px;padding:8px 12px;font-size:12.5px;color:var(--muted)}
+.statusline strong{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Agent Reliability Profile Viewer</h1>
+      <div class="sub">Spec arp/1.0-rc2 · Runs entirely in your browser, with no network requests: nothing you open here is uploaded.</div>
+    </div>
+    <div class="toolbar" role="toolbar" aria-label="Profile actions">
+      <label class="btn" for="file">Open file…</label><input id="file" type="file" accept=".json,application/json" hidden>
+      <select id="example" class="btn" aria-label="Load an example">
+        <option value="">Load an example…</option>
+        <option value="l1">Level 1 · AML alert triage (fictional)</option>
+        <option value="l2">Level 2 · Open banking (fictional; illustrative Working Group example)</option>
+      </select>
+      <button class="btn" id="new">New Level 1 draft</button>
+      <button class="btn primary" id="copy">Copy JSON</button>
+      <button class="btn" id="download" hidden>Download JSON</button>
+    </div>
+  </header>
+  <p class="statusline" role="note"><strong>Status:</strong> release candidate 2 of arp/1.0, prepared by the MLCommons Financial Services Working Group for pilot use and comment. Not a final MLCommons standard, certification scheme or endorsement. Field names and rules may change before 1.0. The public pilot is Level 1 (Asserted) only; Level 2 and 3 Profiles, including the Level 2 example, are for Working Group pilots with assessment support. The examples are fictional and signed with published DEMO-ONLY keys.</p>
+
+  <div class="layout">
+    <main>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="t-view" aria-selected="true" data-tab="view">View</button>
+        <button class="tab" role="tab" id="t-edit" aria-selected="false" data-tab="edit">Edit</button>
+        <button class="tab" role="tab" id="t-json" aria-selected="false" data-tab="json">JSON</button>
+      </div>
+      <div id="view"></div>
+      <div id="edit" hidden></div>
+      <div id="json" hidden>
+        <p class="note">Paste or edit the Profile's JSON, then apply it. Everything the form does not cover (provenance, evidence, results, conflicts) is edited here.</p>
+        <textarea id="jsontext" class="json" spellcheck="false" aria-label="Profile JSON"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button class="btn primary" id="apply">Apply JSON</button><span id="jsonerr" class="note"></span></div>
+      </div>
+    </main>
+    <aside class="panel" aria-label="Conformance">
+      <div class="card" id="statuscard"></div>
+      <div class="card"><h2>Checker messages</h2><div id="findings"></div></div>
+      <div class="card note">"Well-formed" means the Profile follows arp/1.0-rc2: consistent, honestly labelled and, once issued, signed. It is not a judgement of the agent: it does not test whether the claims are true, whether the tests were adequate, or whether the agent is safe. A valid signature shows the signer held the key, not who the signer is. Workbooks and this form produce drafts: an owner issues a Profile by signing it with <span class="mono">arp_conform.py sign</span>. If this Viewer and the reference checker ever disagree, the reference checker governs.</div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const ARP_DATA = /*__ARP_DATA__*/null;
+(function(){
+"use strict";
+const D = ARP_DATA, V = D.vocab;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const SPEC_ID = "arp/1.0-rc2", SIG_CONTEXT = "arp-signature/1.0-rc2", MANIFEST_CONTEXT = "arp-evidence-manifest/1.0-rc2";
+const AXES = ["autonomy","odd","actions","controls"];
+const ACTIONS = V.actions.map(a => a.id);
+const CTL = Object.fromEntries(V.controls.map(c => [c.id, c]));
+const UC = Object.fromEntries(V.use_cases.map(u => [u.id, u]));
+const VOCABS = ["action-classes","autonomy-tiers","business-lines","conflict-kinds","control-catalogue","dispositions","invalidation-triggers","provenance-classes","use-cases"];
+const DEFAULT_TRIGGERS = ["model_change","harness_change","odd_expansion","action_class_added","critical_control_removed","access_or_owner_change"];
+const DEMO_KEYS = {"JsHW4JfvQC24+p46CNYcr7dsxv7Uf7ePg3FW/jvwu9o=":"DEMO-ONLY-owner.key","NFG6vQQ8vsKo/kn+f88pimLKhoGIwMxzIoKQcJAh9tk=":"DEMO-ONLY-assessor.key"};
+const MAX_SAFE = 2**53;
+const hasOwn = (o,k) => Object.prototype.hasOwnProperty.call(o,k);
+// signer names compare after NFC normalisation and whitespace collapsing (same character set as the reference checker)
+const WSRE=/[\t\n\v\f\r \u0085\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000\ufeff]+/g;
+const normName=x=>String(x).normalize("NFC").replace(WSRE," ").replace(/^ +| +$/g,"");
+const DISC = {
+  level1_untested: "Parts of this Profile are Level 1: asserted by the institution and not tested.",
+  self_tested: "Parts of this Profile were tested by the institution itself, without independence.",
+  independently_verified: "Parts of this Profile were tested by an independent assessor.",
+  not_comparable: "Production results in this Profile are specific to this deployment's environment and are not comparable with other deployments.",
+  benchmark_not_production: "The benchmark result is comparable with other deployments under the reference conditions only. It adds no assurance about production behaviour."};
+const RULES = {
+  "ARP-001":"The document must be strict JSON matching the Profile schema","ARP-002":"No unfilled placeholders","ARP-003":"An issued Profile records its vocabulary versions",
+  "ARP-010":"Headline level is the lowest axis level","ARP-011":"Only an executed test makes a field 'measured'","ARP-012":"A tested axis must judge something, with true coverage",
+  "ARP-013":"Results must test claim fields and cite real evidence","ARP-014":"Level 3 axes have a named independent assessor who reports and signs",
+  "ARP-015":"Standard disclosures must match the levels","ARP-016":"Action and control claims rest on hard evidence, not a model judge",
+  "ARP-017":"Tested axes need a rerun package","ARP-018":"Tested axes state the test environment and its fidelity","ARP-019":"Tested axes need a signed evidence manifest",
+  "ARP-020":"Comparative results only on Benchmarked Profiles, from an independent assessor",
+  "ARP-030":"No class both permitted and prohibited","ARP-031":"State all twelve action classes","ARP-032":"No class both stated and out of scope",
+  "ARP-040":"Tier U is a finding, not a claim","ARP-041":"T2 must be earned by real approval evidence","ARP-050":"Every claim field needs a source",
+  "ARP-051":"Derived fields must cite evidence in the manifest","ARP-052":"Controls come from the catalogue","ARP-053":"Use cases come from the catalogue",
+  "ARP-054":"An issued Profile states its domain","ARP-055":"One evidence item per id","ARP-071":"Disagreeing results: the most severe is reported, every result kept","ARP-060":"A failed floor is disclosed","ARP-061":"A failed floor blocks issuance","ARP-062":"Tested axes have tested floors",
+  "ARP-070":"Untested and contradicted claims are accounted for","ARP-080":"Issue date and validity window","ARP-081":"An issued Profile names its version and models",
+  "ARP-082":"Default changes that void the Profile","ARP-083":"An anchored Profile is void if its platform baseline is",
+  "ARP-090":"An issued Profile is signed by its owner (and a different issuer)","ARP-091":"Signatures must cover this Profile and be valid","ARP-092":"Published demo keys prove nothing",
+  "ARP-100":"Open conflicts on an issued Profile are findings"};
+
+/* ---------- strict JSON (no duplicate names) ---------- */
+function parseStrict(text){
+  if(typeof text!=="string") throw new Error("not text");
+  if(text.charCodeAt(0)===0xFEFF) text=text.slice(1);
+  let v; try{ v=JSON.parse(text); }catch(e){ throw new Error("not valid JSON: "+e.message); }
+  const st=[]; let i=0; const n=text.length;
+  while(i<n){ const ch=text[i];
+    if(ch==='"'){ let j=i+1; while(j<n){ if(text[j]==="\\"){ j+=2; continue; } if(text[j]==='"') break; j++; }
+      const top=st[st.length-1];
+      if(top&&top.t==="o"&&top.k){ const key=JSON.parse(text.slice(i,j+1)); if(top.keys.has(key)) throw new Error(`duplicate member name '${key}'`); top.keys.add(key); }
+      i=j+1; continue; }
+    if(ch==="{") st.push({t:"o",keys:new Set(),k:true}); else if(ch==="[") st.push({t:"a"});
+    else if(ch==="}"||ch==="]") st.pop(); else if(ch===":"){ st[st.length-1].k=false; } else if(ch===","){ const top=st[st.length-1]; if(top&&top.t==="o") top.k=true; }
+    i++; }
+  if(v===null||typeof v!=="object"||Array.isArray(v)) throw new Error(`a Profile is a JSON object, not ${Array.isArray(v)?"list":v===null?"null":typeof v}`);
+  return v; }
+
+/* ---------- dates (strict, as the reference checker) ---------- */
+const DATE_RE=/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/, DT_RE=/^([0-9]{4}-[0-9]{2}-[0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(\.[0-9]+)?(Z|[+-]([0-9]{2}):([0-9]{2}))$/;
+function parseDate(s){ if(typeof s!=="string"||!DATE_RE.test(s)) return null; const [y,m,d]=s.split("-").map(Number);
+  if(y<1||m<1||m>12||d<1) return null; const dim=[31,(y%4===0&&y%100!==0)||y%400===0?29:28,31,30,31,30,31,31,30,31,30,31][m-1]; return d<=dim?s:null; }
+function parseDateTime(s){ const m=typeof s==="string"?DT_RE.exec(s):null; if(!m) return null; if(!parseDate(m[1])) return null;
+  if(+m[2]>23||+m[3]>59||+m[4]>59) return null; if(m[6]!=="Z"&&(+m[7]>23||+m[8]>59)) return null; return m[1]; }
+
+/* ---------- minimal JSON Schema (draft-07 subset used by the spec) ---------- */
+function typeOk(v,t){ if(t==="null")return v===null; if(t==="array")return Array.isArray(v); if(t==="object")return v!==null&&typeof v==="object"&&!Array.isArray(v);
+  if(t==="integer")return typeof v==="number"&&Number.isInteger(v); if(t==="number")return typeof v==="number"; return typeof v===t; }
+function validate(s,v,path,root,out){
+  if(s.$ref){ s = s.$ref.split("/").slice(1).reduce((o,k)=>o[k],root); }
+  const p = path.join("/");
+  if(s.oneOf){ const ok=s.oneOf.filter(sub=>{ const o=[]; validate(sub,v,path,root,o); return !o.length; }).length; if(ok!==1) out.push([p, `${JSON.stringify(v)} is not valid under exactly one of the allowed forms`]); }
+  if(s.type){ const ts=[].concat(s.type); if(!ts.some(t=>typeOk(v,t))){ out.push([p, `${JSON.stringify(v)} is not of type ${ts.map(t=>`'${t}'`).join(", ")}`]); return; } }
+  if("const" in s && JSON.stringify(v)!==JSON.stringify(s.const)) out.push([p, `${JSON.stringify(s.const)} was expected`]);
+  if(s.enum && !s.enum.some(e=>JSON.stringify(e)===JSON.stringify(v))) out.push([p, `${JSON.stringify(v)} is not one of ${JSON.stringify(s.enum)}`]);
+  if(typeof v==="string"){ if(s.minLength!=null && [...v].length<s.minLength) out.push([p, `${JSON.stringify(v)} is too short`]);
+    if(s.pattern && !new RegExp(s.pattern).test(v)) out.push([p, `${JSON.stringify(v)} does not match the required pattern`]);
+    if(s.format==="date" && !parseDate(v)) out.push([p, `${JSON.stringify(v)} is not a date (YYYY-MM-DD)`]);
+    if(s.format==="date-time" && !parseDateTime(v)) out.push([p, `${JSON.stringify(v)} is not an RFC 3339 date-time`]); }
+  if(typeof v==="number"){ if(s.minimum!=null&&v<s.minimum) out.push([p,`${v} is less than the minimum of ${s.minimum}`]); if(s.maximum!=null&&v>s.maximum) out.push([p,`${v} is greater than the maximum of ${s.maximum}`]); }
+  if(Array.isArray(v)){ if(s.minItems!=null&&v.length<s.minItems) out.push([p,`must have at least ${s.minItems} item(s)`]);
+    if(s.uniqueItems && new Set(v.map(x=>JSON.stringify(x))).size!==v.length) out.push([p,"has non-unique elements"]);
+    if(s.items) v.forEach((x,i)=>validate(s.items,x,path.concat(i),root,out)); }
+  if(v!==null && typeof v==="object" && !Array.isArray(v)){
+    (s.required||[]).forEach(k=>{ if(!hasOwn(v,k)) out.push([p, `'${k}' is a required property`]); });
+    const props=s.properties||{}, pats=s.patternProperties||{};
+    for(const k of Object.keys(v)){
+      if(s.propertyNames && s.propertyNames.pattern && !new RegExp(s.propertyNames.pattern).test(k)) out.push([p, `'${k}' is not an allowed member name`]);
+      let matched=false;
+      if(hasOwn(props,k)){ matched=true; validate(props[k],v[k],path.concat(k),root,out); }
+      for(const [re,ps] of Object.entries(pats)) if(new RegExp(re).test(k)){ matched=true; validate(ps,v[k],path.concat(k),root,out); }
+      if(!matched){ if(s.additionalProperties===false) out.push([p, `Additional property '${k}' is not allowed`]);
+        else if(s.additionalProperties && typeof s.additionalProperties==="object") validate(s.additionalProperties,v[k],path.concat(k),root,out); }
+    }
+  }
+}
+
+/* ---------- canonical form (RFC 8785), hash and signatures ---------- */
+function canon(v){ if(Array.isArray(v)) return "["+v.map(canon).join(",")+"]";
+  if(v!==null && typeof v==="object") return "{"+Object.keys(v).sort().map(k=>JSON.stringify(k)+":"+canon(v[k])).join(",")+"}";
+  if(typeof v==="number" && !(Number.isFinite(v)&&Math.abs(v)<MAX_SAFE)) throw new Error("number cannot be represented exactly");
+  return JSON.stringify(v); }
+async function sha256(str){ const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return "sha256:"+[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join(""); }
+async function canonicalHash(p){ const body={...p}; delete body.signatures; return sha256(canon(body)); }
+const b64 = s => Uint8Array.from(atob(s), c=>c.charCodeAt(0));
+async function verifyMsg(pk,value,msg){ try{ const kb=b64(pk), sb=b64(value); if(kb.length!==32||sb.length!==64) return "invalid";
+    const key = await crypto.subtle.importKey("raw", kb, {name:"Ed25519"}, false, ["verify"]);
+    return await crypto.subtle.verify({name:"Ed25519"}, key, sb, new TextEncoder().encode(msg)) ? "valid" : "invalid";
+  }catch(e){ return (e && (e.name==="NotSupportedError" || /Ed25519|algorithm/i.test(e.message||""))) ? "unsupported" : "invalid"; } }
+/* verifySig: Ed25519 over the hash string itself (Profile Summaries; inventory snapshots now sign a statement, see the console's verifySnapSig) */
+async function verifySig(s){ return verifyMsg(s.public_key, s.value, s.signed_hash); }
+/* verifyProfileSig: Ed25519 over the signature statement (SPEC §7) */
+async function verifyProfileSig(s){ return verifyMsg(s.public_key, s.value, canon({context:SIG_CONTEXT,alg:s.alg||"ed25519",role:s.role,name:s.name,organisation:s.organisation??null,public_key:s.public_key,signed_hash:s.signed_hash})); }
+async function verifyManifest(m){ return verifyMsg(m.public_key, m.value, canon({context:MANIFEST_CONTEXT,content_hash:m.content_hash,signer:m.signer,public_key:m.public_key})); }
+
+/* ---------- the rules (port of conformance/arp_conform.py) ---------- */
+const axisOf = f => f.split(".")[0];
+/* SPEC §4 "Several results on one field": the most severe result is the field's disposition; every result is kept */
+const DISPOSITION_ORDER = ["contradicted","held_by_agent_only","not_established","held"];
+function fieldDispositions(results){ const out={};
+  for(const x of results||[]){ if(!hasOwn(out,x.field_id)) out[x.field_id]={disposition:null,results:[]}; out[x.field_id].results.push(x); }
+  const rank=d=>{ const i=DISPOSITION_ORDER.indexOf(d); return i<0?DISPOSITION_ORDER.length:i; };
+  for(const k of Object.keys(out)) out[k].disposition=out[k].results.map(x=>x.disposition).reduce((a,b)=>rank(b)<rank(a)?b:a);
+  return out; }
+const byA = (a,b)=>Number(a.slice(1))-Number(b.slice(1));
+const LONE = /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/;
+const PLACEHOLDER = /(?<![A-Za-z0-9])(?:TODO|TBD|FIXME)(?![A-Za-z0-9])/i, ANGLE = /^[ \t]*<[^<>]+>[ \t]*$/;
+const empty = v => v===null||v===undefined||v===""||(Array.isArray(v)&&!v.length)||(typeof v==="object"&&!Array.isArray(v)&&!Object.keys(v).length);
+function claimFields(c){ const au=c.autonomy, f=new Set(["autonomy.tier"]);
+  Object.keys(au.modifiers).forEach(m=>f.add(`autonomy.modifiers.${m}`)); if(hasOwn(au,"approval_quality")) f.add("autonomy.approval_quality");
+  for(const [k,v] of Object.entries(c.odd)) if(!empty(v)) f.add(`odd.${k}`);
+  new Set([...c.actions.permitted,...c.actions.prohibited]).forEach(a=>f.add(`actions.${a}`));
+  c.controls.forEach(x=>f.add(`controls.${x.control_id}`)); return f; }
+function valueProblems(o,path,out){
+  if(Array.isArray(o)) o.forEach((v,i)=>valueProblems(v,`${path}/${i}`,out));
+  else if(o!==null&&typeof o==="object"){ for(const [k,v] of Object.entries(o)){ if(LONE.test(k)) out.push([path,"a member name contains an unpaired surrogate"]); valueProblems(v,path?`${path}/${k}`:k,out); } }
+  else if(typeof o==="string"){ if(LONE.test(o)) out.push([path,"string contains an unpaired surrogate"]); }
+  else if(typeof o==="number"){ if(!Number.isFinite(o)) out.push([path,"NaN and Infinity are not allowed"]); else if(Math.abs(o)>=MAX_SAFE) out.push([path,`number ${o} has magnitude 2^53 or more and cannot be represented exactly`]); } }
+async function check(p, asOf){
+  const R=[]; const err=(rule,msg,path="")=>R.push({rule,severity:"error",message:msg,path}); const warn=(rule,msg,path="")=>R.push({rule,severity:"warning",message:msg,path});
+  if(p===null||typeof p!=="object"||Array.isArray(p)){ err("ARP-001","a Profile is a JSON object"); return R; }
+  const vp=[]; valueProblems(p,"",vp); vp.forEach(([path,m])=>err("ARP-001",m,path)); if(R.length) return R;
+  const se=[]; validate(D.schema,p,[],D.schema,se); se.forEach(([path,m])=>err("ARP-001",m,path)); if(R.length) return R;
+  const issued=p.stage==="issued";
+  (function walk(o,path){ if(Array.isArray(o)) o.forEach((v,i)=>walk(v,`${path}/${i}`)); else if(o&&typeof o==="object"){ for(const [k,v] of Object.entries(o)){ if(!path&&(k==="signatures"||k==="evidence_manifest")) continue; walk(v,path?`${path}/${k}`:k); } }
+    else if(typeof o==="string"){ if(PLACEHOLDER.test(o)) err("ARP-002",`unfilled placeholder in ${JSON.stringify(o.slice(0,60))}`,path); else if(ANGLE.test(o)) (issued?err:warn)("ARP-002",`placeholder value ${JSON.stringify(o.trim())}`,path); } })(p,"");
+  const c=p.claim, a=p.assurance, prov=p.provenance, axes=a.axes, results=p.results||[], st=p.status, of=st.open_findings||[], gaps=st.accepted_gaps||[];
+  const evid=Object.fromEntries(p.evidence.map(e=>[e.id,e])), sigs=p.signatures||[], lv=Object.values(axes), top=Math.max(...lv), iss=p.issuance, comp=a.comparability;
+  // ARP-055
+  { const firstId=new Map(), byPath=new Map(), byHash=new Map();
+    p.evidence.forEach((e,i)=>{ if(firstId.has(e.id)){ err("ARP-055",`evidence id '${e.id}' is used by items ${firstId.get(e.id)} and ${i}: a citation must resolve to exactly one item`,`evidence/${i}/id`); return; }
+      firstId.set(e.id,i); const pth=e.path===undefined?null:e.path, h=e.content_hash===undefined?null:e.content_hash;
+      if(byPath.has(pth)&&byPath.get(pth)[1]!==h) warn("ARP-055",`evidence '${e.id}' has the same path as '${byPath.get(pth)[0]}' (${pth}) but a different content hash`,`evidence/${i}`);
+      if(!byPath.has(pth)) byPath.set(pth,[e.id,h]);
+      if(byHash.has(h)&&byHash.get(h)!==e.id) warn("ARP-055",`evidence '${e.id}' has the same content hash as '${byHash.get(h)}'`,`evidence/${i}`);
+      if(!byHash.has(h)) byHash.set(h,e.id); }); }
+  // ARP-003
+  const vv=p.vocab_versions;
+  if(issued){ const mv=VOCABS.filter(n=>!(vv&&vv[n])); if(mv.length) err("ARP-003",`an issued Profile must record the version of every vocabulary; missing: ${mv.join(", ")}`,"vocab_versions"); }
+  for(const [n,ver] of Object.entries(vv||{})) if(VOCABS.includes(n) && D.vocab_versions && D.vocab_versions[n] && ver!==D.vocab_versions[n]) warn("ARP-003",`written against ${n} ${ver}; this Viewer uses ${D.vocab_versions[n]}`,`vocab_versions/${n}`);
+  if(a.headline!==Math.min(...lv)) err("ARP-010",`headline ${a.headline} is not the lowest axis level (${Math.min(...lv)})`,"assurance/headline");
+  const fields=claimFields(c), JUD=new Set(["held","contradicted"]), cov=a.coverage||{};
+  const resF=new Set(results.map(x=>x.field_id)), judF=new Set(results.filter(x=>JUD.has(x.disposition)).map(x=>x.field_id));
+  for(const [fid,pv] of Object.entries(prov)) if(pv.class==="measured"){ if(axes[axisOf(fid)]<2) err("ARP-011",`${fid} is 'measured' but its axis is Level 1 (nothing was executed)`,`provenance/${fid}`);
+    else if(!resF.has(fid)) err("ARP-011",`${fid} is 'measured' but no result tests it`,`provenance/${fid}`); }
+  [...judF].sort().forEach(fid=>{ if(hasOwn(prov,fid)&&prov[fid].class!=="measured") warn("ARP-011",`${fid} has a judged result but its provenance is '${prov[fid].class}', not 'measured'`,`provenance/${fid}`); });
+  for(const ax of AXES){ const l=axes[ax]; if(l<2) continue; const on=results.filter(x=>axisOf(x.field_id)===ax), judged=on.filter(x=>JUD.has(x.disposition));
+    if(!judged.length) err("ARP-012",`the ${ax} axis claims Level ${l} but no result on it was judged: a Profile that judged nothing is a Level 1 with a signature block`,`assurance/axes/${ax}`);
+    const want={claim_fields:[...fields].filter(f=>axisOf(f)===ax).length, tested:new Set(on.map(x=>x.field_id)).size, judged:new Set(judged.map(x=>x.field_id)).size};
+    const have=cov[ax]; if(!have) err("ARP-012",`the ${ax} axis is at Level ${l} but its coverage is missing`,`assurance/coverage/${ax}`);
+    else if(have.claim_fields!==want.claim_fields||have.tested!==want.tested||have.judged!==want.judged) err("ARP-012",`coverage for ${ax} says ${JSON.stringify(have)}, but the Profile shows ${JSON.stringify(want)}`,`assurance/coverage/${ax}`); }
+  for(const [fid,agg] of Object.entries(fieldDispositions(results)).sort((x,y)=>x[0]<y[0]?-1:x[0]>y[0]?1:0)){ const ds=agg.results.map(x=>x.disposition);
+    if(new Set(ds).size>1) warn("ARP-071",`${fid} has ${ds.length} results that disagree (${ds.join(", ")}); it is reported as '${agg.disposition}', and every result is listed`,"results"); }
+  results.forEach((x,i)=>{ if(!fields.has(x.field_id)) err("ARP-013",`result ${x.claim_id} tests ${x.field_id}, which is not a field of the claim`,`results/${i}`);
+    x.evidence_refs.forEach(r=>{ if(!hasOwn(evid,r)) err("ARP-013",`result ${x.claim_id} cites evidence '${r}', which is not in the evidence manifest`,`results/${i}`); });
+    if(axes[axisOf(x.field_id)]<2) err("ARP-013",`result ${x.claim_id} is on the ${axisOf(x.field_id)} axis, which is Level 1`,`results/${i}`);
+    if(JUD.has(x.disposition) && !x.evidence_refs.length) err("ARP-013",`judged result ${x.claim_id} cites no evidence`,`results/${i}`); });
+  // ARP-014
+  const ownerKeys=new Set(sigs.filter(s=>s.role==="owner").map(s=>s.public_key)), l3=new Set();
+  for(const ax of AXES){ const as=a.assessors[ax], l=axes[ax], ind=as.role==="independent_assessor";
+    if(l===3&&!ind) err("ARP-014",`the ${ax} axis is at Level 3, so its assessor must be an independent assessor`,`assurance/assessors/${ax}`);
+    if(l<3&&ind) err("ARP-014",`the ${ax} axis is at Level ${l} but names an independent assessor: independent testing is Level 3`,`assurance/assessors/${ax}`);
+    if(ind){ if(!as.organisation) err("ARP-014",`the independent assessor for ${ax} is not named`,`assurance/assessors/${ax}/organisation`); else l3.add(as.organisation);
+      if(!as.report) err("ARP-014",`the independent assessor for ${ax} cites no signed report`,`assurance/assessors/${ax}/report`);
+      else if(!hasOwn(evid,as.report)||evid[as.report].artifact_class!=="assessor_report") err("ARP-014",`the assessor report '${as.report}' for ${ax} is not an evidence item of class 'assessor_report'`,`assurance/assessors/${ax}/report`); } }
+  if(issued) [...l3].sort().forEach(org=>{ const as=sigs.filter(s=>s.role==="assessor"&&s.organisation===org);
+    if(!as.length) err("ARP-014",`an issued Level 3 Profile needs a signature from its assessor '${org}'`,"signatures");
+    else if(as.some(s=>ownerKeys.has(s.public_key))) err("ARP-014",`the assessor '${org}' signed with the owner's key`,"signatures"); });
+  sigs.forEach((s,i)=>{ if(s.role==="assessor"&&!l3.has(s.organisation)) err("ARP-014",`signature ${i} is an assessor signature for '${s.organisation}', which is not the assessor of any Level 3 axis`,`signatures/${i}`); });
+  // ARP-015
+  const need=new Set(["not_comparable"]); if(lv.includes(1))need.add("level1_untested"); if(lv.includes(2))need.add("self_tested"); if(lv.includes(3))need.add("independently_verified"); if(comp.flag)need.add("benchmark_not_production");
+  const have=new Set(a.disclosures); const miss=[...need].filter(x=>!have.has(x)).sort(), extra=[...have].filter(x=>!need.has(x)).sort();
+  if(miss.length) err("ARP-015",`missing required disclosure(s): ${miss.join(", ")}`,"assurance/disclosures");
+  if(extra.length) err("ARP-015",`disclosure(s) not supported by the levels: ${extra.join(", ")}`,"assurance/disclosures");
+  // ARP-016
+  results.forEach((x,i)=>{ const ev=x.evaluation;
+    if((ev.method==="model_judged"||ev.method==="hybrid")&&!ev.judge_model) err("ARP-016",`${x.claim_id} used a model judge but does not name it`,`results/${i}/evaluation`);
+    if(!["actions","controls"].includes(axisOf(x.field_id))||!JUD.has(x.disposition)) return;
+    if(ev.method==="model_judged") err("ARP-016",`${x.claim_id} decides an action or control claim by model judge alone`,`results/${i}/evaluation`);
+    if(!ev.evidence_basis.some(b=>b==="control_decisions"||b==="state")) err("ARP-016",`${x.claim_id} decides an action or control claim without control-decision or state evidence`,`results/${i}/evaluation`); });
+  if(top>=2){ const rp=a.reproduction; if(!rp) err("ARP-017","an axis is at Level 2+ but the rerun package is missing","assurance/reproduction");
+    else for(const [k,r] of Object.entries(rp)) if(!hasOwn(evid,r)) err("ARP-017",`rerun package ${k} cites '${r}', which is not in the evidence manifest`,`assurance/reproduction/${k}`);
+    if(!a.test_environment) err("ARP-018","an axis is at Level 2+ but the test environment is not stated","assurance/test_environment");
+    if(!a.fidelity) err("ARP-018","an axis is at Level 2+ but the fidelity of the test setting is not stated","assurance/fidelity");
+    if(!p.evidence_manifest) err("ARP-019","an axis is at Level 2+ but the signed evidence manifest is missing","evidence_manifest"); }
+  const m=p.evidence_manifest;
+  if(m){ if(m.content_hash!==await sha256(canon(p.evidence))) err("ARP-019","the evidence manifest's content_hash is not the canonical hash of the evidence array","evidence_manifest/content_hash");
+    else { const r=await verifyManifest(m); if(r==="invalid") err("ARP-019","the evidence manifest signature is not valid","evidence_manifest");
+      if(r==="unsupported") (issued?err:warn)("ARP-019","this browser cannot check Ed25519 signatures, so the result is indeterminate; use the reference checker","evidence_manifest"); }
+    if(hasOwn(DEMO_KEYS,m.public_key)) warn("ARP-092",`the evidence manifest is signed with the published ${DEMO_KEYS[m.public_key]}: it proves nothing`,"evidence_manifest"); }
+  // ARP-020
+  const bench=p.benchmark??null;
+  if(bench!==null && !comp.flag) err("ARP-020","benchmark present but the comparability flag is not set","benchmark");
+  if(comp.flag){ for(const k of ["environment_version","hidden_set_version","fidelity_statement"]) if(!comp[k]) err("ARP-020",`comparability flag set but ${k} is missing`,`assurance/comparability/${k}`);
+    if(bench===null) err("ARP-020","comparability flag set but there is no benchmark result","benchmark");
+    else { const as=bench.assessor||{}; if(!(String(as.organisation??"").trim()&&String(as.accreditation_ref??"").trim()&&as.independent===true)) err("ARP-020","a benchmark must name an independent, accredited assessor","benchmark/assessor");
+      if(!(bench.results&&bench.results.length)) err("ARP-020","a benchmark must report at least one result","benchmark/results"); }
+    if(top===1) err("ARP-020","the comparability flag is set but every production axis is Level 1: a Benchmarked Profile needs an agent that was run, and a Level 1 Profile executes nothing","assurance/comparability"); }
+  // ARP-030..032
+  const perm=new Set(c.actions.permitted), proh=new Set(c.actions.prohibited), oos=new Set(p.out_of_scope.actions||[]);
+  const both=[...perm].filter(x=>proh.has(x)).sort(byA); if(both.length) err("ARP-030",`both permitted and prohibited: ${both.join(", ")}`,"claim/actions");
+  const unstated=ACTIONS.filter(x=>!perm.has(x)&&!proh.has(x)&&!oos.has(x)); if(unstated.length) (issued?err:warn)("ARP-031",`not stated as permitted, prohibited or out of scope: ${unstated.join(", ")}`,"claim/actions");
+  const po=[...perm].filter(x=>oos.has(x)).sort(byA); if(po.length) err("ARP-032",`both permitted and out of scope: ${po.join(", ")}`,"out_of_scope/actions");
+  const pro=[...proh].filter(x=>oos.has(x)).sort(byA); if(pro.length) err("ARP-032",`both prohibited and out of scope: ${pro.join(", ")}`,"out_of_scope/actions");
+  // ARP-040 / 041
+  const au=c.autonomy, tier=au.tier, basis=au.tier_basis;
+  if(tier==="U"){ if(a.headline!==1||results.length) err("ARP-040","tier U is a finding, not a claim: no results and Level 1 only","claim/autonomy/tier");
+    const un=of.filter(f=>f.kind==="unprofiled"); if(!un.length) err("ARP-040","tier U needs an open finding of kind 'unprofiled'","status/open_findings");
+    if(basis!=="asserted"||hasOwn(au,"approval_quality")) err("ARP-040","tier U has no evidenced tier: basis 'asserted' and no approval quality","claim/autonomy");
+    if(!c.statement.toLowerCase().includes("no reliability claim")) err("ARP-040","for tier U the statement must say that no reliability claim is made","claim/statement");
+    if(issued && !(st.risk_acceptances||[]).length && !un.some(f=>f.response==="remediation"||f.response==="suspension")) err("ARP-040","an issued tier U Profile records a risk acceptance, or a remediation or suspension response","status"); }
+  if(basis==="substantiated"&&tier!=="T2") err("ARP-041",`'substantiated' is defined only for T2 in this candidate; ${tier} must be 'asserted'`,"claim/autonomy/tier_basis");
+  if(tier==="T2"){ const aq=au.approval_quality;
+    if(!aq) err("ARP-041","tier T2 needs approval-quality evidence: T2 is earned by substantive approval, not configuration","claim/autonomy");
+    else if(aq.assessment==="reflexive") err("ARP-041","approval is reflexive: the effective tier is T3, not T2","claim/autonomy/approval_quality");
+    else if(basis==="substantiated"){ const pc=(prov["autonomy.approval_quality"]||{}).class;
+      if(aq.assessment!=="substantive"||!["configuration_derived","measured"].includes(pc)) err("ARP-041","T2 is marked substantiated without substantive approval evidence from configuration or tests","claim/autonomy/tier_basis");
+      if(aq.resource_displayed!==true||!aq.sample_size) err("ARP-041","a substantiated T2 needs approvals that show the affected resource and a sample size above 0","claim/autonomy/approval_quality");
+      const sim=(p.conflicts||[]).filter(x=>(x.kind==="simulated_evidence"||x.kind==="suspected_simulated_evidence")&&axisOf(x.field_id)==="autonomy");
+      if(sim.length) err("ARP-041",`simulated or sample-marked records cannot substantiate T2 (conflict on ${sim[0].field_id})`,"claim/autonomy/tier_basis"); }
+    if(axes.autonomy>=2){ if(basis!=="substantiated") err("ARP-041","the autonomy axis is tested but T2 is only asserted","claim/autonomy/tier_basis");
+      if(aq && aq.habituation_catch_rate==null) warn("ARP-041","a tested T2 should record habituation_catch_rate","claim/autonomy/approval_quality"); } }
+  // ARP-050..052
+  [...fields].sort().forEach(f=>{ if(!hasOwn(prov,f)) err("ARP-050",`no source (provenance) recorded for ${f}`,"provenance"); });
+  Object.keys(prov).filter(f=>!fields.has(f)).sort().forEach(f=>{ if(prov[f].class!=="absent") warn("ARP-050",`provenance entry for ${f}, which is not a claim field (use class 'absent' to record a missing field)`,`provenance/${f}`); });
+  for(const [fid,pv] of Object.entries(prov)){ const cites=pv.citations||[];
+    if(["document_derived","configuration_derived","measured"].includes(pv.class)&&!cites.length) err("ARP-051",`${fid} is '${pv.class}' but cites no evidence`,`provenance/${fid}`);
+    cites.forEach(ci=>{ if(!hasOwn(evid,ci.evidence_id)) err("ARP-051",`${fid} cites evidence '${ci.evidence_id}', which is not in the evidence manifest`,`provenance/${fid}`); }); }
+  c.controls.forEach((x,i)=>{ const layer=x.control_id.split(".")[0], rest=x.control_id.split(".").slice(1).join(".");
+    if(layer!==x.layer) err("ARP-052",`${x.control_id} is filed under layer '${x.layer}'`,`claim/controls/${i}`);
+    if(!hasOwn(CTL,x.control_id) && !rest.startsWith("x_")) err("ARP-052",`${x.control_id} is not in the catalogue; extensions use the 'x_' prefix`,`claim/controls/${i}`); });
+  // ARP-053 / 054
+  const odd=c.odd, uc=odd.use_case_id;
+  if(uc && !uc.startsWith("ODD.x_")){ if(!hasOwn(UC,uc)) err("ARP-053",`${uc} is not in the use-case catalogue; extensions use ODD.x_<name>`,"claim/odd/use_case_id");
+    else if(UC[uc].business_line!==odd.business_line) err("ARP-053",`${uc} belongs to business line '${UC[uc].business_line}', not '${odd.business_line}'`,"claim/odd/business_line"); }
+  if(issued && !uc) warn("ARP-053","an issued Profile should name its catalogued use case","claim/odd");
+  if(issued) for(const k of ["jurisdictions","population","data","cost_of_failure"]) if(empty(odd[k]) && (prov[`odd.${k}`]||{}).class!=="absent") err("ARP-054",`odd.${k} is empty: state it, or record provenance class 'absent'`,`claim/odd/${k}`);
+  // ARP-060..062
+  const floorIds=new Set(p.floors.map(f=>f.id)), findIds=new Set(of.map(o=>o.id));
+  p.floors.forEach(f=>{ if(f.status==="failed" && !of.some(o=>o.floor_ref===f.id&&o.kind==="floor_failure")) err("ARP-060",`floor '${f.id}' failed but no open finding of kind 'floor_failure' references it`,"status/open_findings");
+    (f.finding_refs||[]).forEach(r=>{ if(!findIds.has(r)) err("ARP-060",`floor '${f.id}' refers to finding '${r}', which is not an open finding`,"floors"); }); });
+  of.forEach(o=>{ if(o.floor_ref && !floorIds.has(o.floor_ref)) err("ARP-060",`finding '${o.id}' refers to floor '${o.floor_ref}', which is not a floor`,"status/open_findings"); });
+  if(issued) p.floors.forEach(f=>{ if(f.status==="failed") err("ARP-061",`floor '${f.id}' failed: a failed floor blocks issuance`,"floors"); });
+  if(top>=2){ if(!p.floors.length) err("ARP-062","an axis is at Level 2+ but the Profile states no floors","floors");
+    p.floors.forEach(f=>{ if(f.status!=="untested") return; if(f.axis&&axes[f.axis]>=2) err("ARP-062",`floor '${f.id}' is on the ${f.axis} axis, which is tested, but it is untested`,"floors");
+      else if(!f.axis&&a.headline>=2) err("ARP-062",`Profile-wide floor '${f.id}' is untested on a Level ${a.headline} Profile`,"floors"); }); }
+  // ARP-070
+  const ofc=new Set(of.map(o=>o.claim_id)), gc=new Set(gaps.map(g=>g.claim_id));
+  results.forEach(x=>{ if(x.disposition==="contradicted"&&!ofc.has(x.claim_id)) err("ARP-070",`contradicted claim ${x.claim_id} is not listed as an open finding`,"status/open_findings");
+    if(["held_by_agent_only","not_established"].includes(x.disposition)&&!ofc.has(x.claim_id)&&!gc.has(x.claim_id)) err("ARP-070",`${x.disposition} claim ${x.claim_id} is neither an accepted gap nor an open finding`,"status"); });
+  gaps.forEach(g=>{ if(!results.some(x=>x.claim_id===g.claim_id&&x.disposition===g.disposition)) err("ARP-070",`accepted gap ${g.claim_id} does not match a result with disposition ${g.disposition}`,"status/accepted_gaps"); });
+  // ARP-080 (dates compared as zero-padded strings, which order like dates)
+  if(issued) for(const k of ["issued_at","valid_from","valid_until","evidence_as_of"]) if(!iss[k]) err("ARP-080",`an issued Profile needs issuance.${k}`,`issuance/${k}`);
+  const dIss=iss.issued_at?parseDateTime(iss.issued_at):null, dFrom=iss.valid_from||null, dUntil=iss.valid_until||null, dEv=iss.evidence_as_of||null;
+  [["issued_at",dIss],["valid_from",dFrom],["valid_until",dUntil],["evidence_as_of",dEv]].forEach(([k,d])=>{ if(d&&d<"2000-01-01") err("ARP-080",`issuance.${k} is before 2000-01-01: fill in the real date`,`issuance/${k}`); });
+  if(dFrom&&dUntil&&dUntil<=dFrom) err("ARP-080","valid_until is not after valid_from","issuance/valid_until");
+  if(dIss&&dFrom&&dFrom<dIss) err("ARP-080","valid_from is before the issue date","issuance/valid_from");
+  if(dIss&&dEv&&dEv>dIss) err("ARP-080","evidence_as_of is later than the issue date","issuance/evidence_as_of");
+  if(issued&&asOf){ if(dUntil&&asOf>dUntil) warn("ARP-080",`expired: valid until ${dUntil}, checked as of ${asOf}`,"issuance/valid_until"); if(dFrom&&asOf<dFrom) warn("ARP-080",`not yet valid: valid from ${dFrom}, checked as of ${asOf}`,"issuance/valid_from"); }
+  if(issued){ if(!p.subject.deployment_version) err("ARP-081","an issued Profile needs the deployment version","subject/deployment_version");
+    if(!(p.subject.models||[]).length) err("ARP-081","an issued Profile needs model identity (provider, model, pinned version)","subject/models"); }
+  // ARP-082 / 083
+  const vt=new Set(p.invalidation.voids.map(v=>v.trigger));
+  if(issued){ const want=[...DEFAULT_TRIGGERS]; if(c.controls.some(x=>x.layer==="inter_agent")) want.push("topology_change"); const mt=want.filter(t=>!vt.has(t));
+    if(mt.length) warn("ARP-082",`changes that void the Profile do not include the default triggers ${mt.join(", ")}`,"invalidation/voids"); }
+  if(p.subject.platform_baseline && !vt.has("platform_baseline_void")) err("ARP-083","an anchored Profile must be void when its platform baseline is void (trigger 'platform_baseline_void')","invalidation/voids");
+  // ARP-090..092
+  const owner=iss.owner.name, issuer=iss.issuer;
+  if(issued){ if(!issuer) err("ARP-090","an issued Profile must name its issuer","issuance/issuer");
+    if(!sigs.some(s=>s.role==="owner"&&normName(s.name)===normName(owner))) err("ARP-090",`an issued Profile needs the accountable owner's signature, made as '${owner}'`,"signatures");
+    if(issuer&&normName(issuer.name)!==normName(owner)&&!sigs.some(s=>s.role==="issuer"&&normName(s.name)===normName(issuer.name))) err("ARP-090",`the issuer '${issuer.name}' is not the owner and has not signed`,"signatures"); }
+  else if(sigs.length) warn("ARP-090","a draft carries signatures; any edit will invalidate them","signatures");
+  const h=await canonicalHash(p), seenRN=new Set(), seenRK=new Set(), seenV=new Set();
+  for(let i=0;i<sigs.length;i++){ const s=sigs[i], rn=s.role+"\u0000"+normName(s.name), rk=s.role+"\u0000"+s.public_key;
+    if(seenRN.has(rn)||seenRK.has(rk)||seenV.has(s.value)) err("ARP-091",`signature ${i} (${s.role}, ${s.name}) duplicates another signature (same role with the same signer name or the same key)`,`signatures/${i}`); seenRN.add(rn); seenRK.add(rk); seenV.add(s.value);
+    if(hasOwn(DEMO_KEYS,s.public_key)) warn("ARP-092",`signature ${i} (${s.role}) uses the published ${DEMO_KEYS[s.public_key]}: it proves nothing about anyone`,`signatures/${i}`);
+    if(s.signed_hash!==h){ err("ARP-091",`signature ${i} (${s.role}) does not cover this version of the Profile`,`signatures/${i}`); continue; }
+    const r=await verifyProfileSig(s);
+    if(r==="invalid") err("ARP-091",`signature ${i} (${s.role}, ${s.name}) is not valid for its signature statement`,`signatures/${i}`);
+    if(r==="unsupported") (issued?err:warn)("ARP-091","this browser cannot check Ed25519 signatures, so the result is indeterminate; use the reference checker",`signatures/${i}`); }
+  if(issued){ const off=new Set(of.map(o=>o.field_id)); (p.conflicts||[]).forEach(x=>{ if(x.state==="open"&&!off.has(x.field_id)) err("ARP-100",`open conflict on ${x.field_id} is not carried as an open finding`,"status/open_findings"); }); }
+  return R;
+}
+async function checkText(text, asOf){ let p; try{ p=parseStrict(text); }catch(e){ return {profile:null, findings:[{rule:"ARP-001",severity:"error",message:e.message,path:""}]}; }
+  return {profile:p, findings:await check(p, asOf)}; }
+
+/* ---------- state ---------- */
+let P = null, findings = [], sigStatus = {};
+const today = () => new Date().toISOString().slice(0,10);
+function deriveForEdit(p){ // what the form keeps consistent automatically
+  const lv=AXES.map(k=>p.assurance.axes[k]); p.assurance.headline=Math.min(...lv);
+  const d=[]; if(lv.includes(1))d.push("level1_untested"); if(lv.includes(2))d.push("self_tested"); if(lv.includes(3))d.push("independently_verified"); d.push("not_comparable"); if(p.assurance.comparability.flag)d.push("benchmark_not_production");
+  p.assurance.disclosures=d;
+  AXES.forEach(k=>{ const as=p.assurance.assessors[k]; if(p.assurance.axes[k]===3&&as.role!=="independent_assessor") p.assurance.assessors[k]={role:"independent_assessor",organisation:"TODO: name the independent assessor",report:null};
+    if(p.assurance.axes[k]<3&&as.role==="independent_assessor") p.assurance.assessors[k]={role:"institution",organisation:p.subject.institution}; }); }
+function blankDraft(){ return {spec:SPEC_ID,profile_id:"TODO.L1",stage:"draft",vocab_versions:{...(D.vocab_versions||{})},
+  subject:{institution:"TODO",deployment_id:"TODO",deployment_version:null,vendor_products:[],platform_baseline:null,models:[]},
+  issuance:{owner:{name:"TODO",role:"TODO"},issuer:{name:"TODO",role:"TODO",organisation:"TODO",independent:false},issued_at:null,valid_from:null,valid_until:null,evidence_as_of:today()},
+  claim:{statement:"TODO: write the bounded claim for this deployment. Until a tier is chosen, no reliability claim is made.",autonomy:{tier:"U",tier_basis:"asserted",modifiers:{data_authority:"TODO",reversibility_profile:"TODO",customer_market_impact:"TODO",stack_composability:"not_assessed",accountability:"TODO",population_scope:"TODO"}},
+    odd:{business_line:"internal_corporate",use_case:"TODO"},actions:{permitted:[],prohibited:[]},controls:[]},
+  assurance:{axes:{autonomy:1,odd:1,actions:1,controls:1},headline:1,assessors:Object.fromEntries(AXES.map(k=>[k,{role:"institution",organisation:"TODO"}])),test_environment:null,method:"ARP Profile Viewer",
+    comparability:{flag:false,environment_version:null,hidden_set_version:null,fidelity_statement:null},disclosures:["level1_untested","not_comparable"]},
+  provenance:{},conflicts:[],floors:[],results:[],benchmark:null,out_of_scope:{statement:"TODO: state what the claim excludes.",odd:[],actions:[],controls:[],users:[]},
+  invalidation:{voids:DEFAULT_TRIGGERS.map(t=>({trigger:t,description:"TODO: describe the change for this deployment."})),partial_retest:[],cosmetic:[]},evidence:[],
+  status:{open_findings:[{id:"of-u",kind:"unprofiled",note:"Tier not yet determined. Choosing a tier in Edit removes this finding.",response:"remediation"}],accepted_gaps:[],risk_acceptances:[],limitations:["Level 1: nothing executed; every claim is as asserted or as configured.","Not comparable with any other deployment."]},signatures:[]}; }
+
+async function load(p, note){ P=p; $("#jsontext").value=JSON.stringify(P,null,2); $("#jsonerr").textContent="";
+  await recheck(); renderView(); renderEdit(); if(note) toast(note); }
+async function loadText(text, note){ let p; try{ p=parseStrict(text); }catch(e){ return e.message; } await load(p, note); return null; }
+async function recheck(){
+  try{ findings = await check(P, today()); }catch(e){ findings=[{rule:"ARP-001",severity:"error",message:"The document could not be checked: "+e.message,path:""}]; }
+  sigStatus={}; renderStatus(); }
+function toast(msg){ document.querySelectorAll(".toast").forEach(x=>x.remove()); const t=document.createElement("div"); t.className="toast"; t.setAttribute("role","status"); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2200); }
+
+/* ---------- rendering ---------- */
+function renderStatus(){
+  const errs=findings.filter(f=>f.severity==="error"), warns=findings.filter(f=>f.severity!=="error");
+  const ok=!errs.length; const stage=P&&P.stage==="issued"?"Issued":"Draft";
+  $("#statuscard").innerHTML=`<h2>Conformance</h2><div class="status"><span class="chip ${ok?"c-neutral":"c-bad"}">${ok?"Well-formed (not a judgement of the agent)":"Does not conform"}</span><span class="big">${errs.length} error${errs.length===1?"":"s"}</span><span class="note">${warns.length} warning${warns.length===1?"":"s"}</span></div>
+    <p class="note" style="margin:8px 0 0">${esc(stage)} Profile · checked against ${esc(SPEC_ID)} in this browser, as of ${esc(today())}.</p>`;
+  $("#findings").innerHTML = findings.length ? findings.map(f=>`<div class="find"><span class="chip ${f.severity==="error"?"c-bad":"c-warn"}">${f.severity==="error"?"Error":"Warning"}</span><div class="msg">${esc(f.message)}</div>
+    <div class="why"><span class="rule">${esc(f.rule)}</span> · ${esc(RULES[f.rule]||"")}${f.path?` · <span class="mono">${esc(f.path)}</span>`:""}</div></div>`).join("") : `<p class="note" style="margin:0">No errors or warnings.</p>`;
+}
+const chip=(t,cls)=>`<span class="chip ${cls}">${esc(t)}</span>`;
+const provChip=c=>c?chip(c.replace(/_/g," "),{measured:"c-good",configuration_derived:"c-accent",document_derived:"c-neutral",owner_attested:"c-warn",absent:"c-bad"}[c]||"c-neutral"):"";
+const lines=a=>(a||[]).map(x=>`<div>${esc(x)}</div>`).join("");
+const invLines=a=>(a||[]).map(x=>typeof x==="string"?`<div>${esc(x)}</div>`:`<div><span class="mono note">${esc(x.trigger)}</span> ${esc(x.description)}${x.ref?` <span class="mono note">(${esc(x.ref)})</span>`:""}</div>`).join("");
+function kv(rows){ return `<dl class="kv">${rows.filter(r=>r[1]!==undefined&&r[1]!==null&&r[1]!=="").map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v}</dd>`).join("")}</dl>`; }
+/* renderProfile is shared with the Supervisory dashboard demo (regulator/build_console.py extracts it) */
+function renderProfile(el,P,findings){
+  if(!P){ el.innerHTML=`<p class="empty">Open a Profile, load an example, or start a new draft.</p>`; return; }
+  if(findings.some(f=>f.rule==="ARP-001")){ el.innerHTML=`<div class="disclosure"><p><strong>This file is not a well-formed arp/1.0-rc2 Profile,</strong> so it cannot be displayed in full. The findings list what to fix; the JSON tab shows the file.</p></div>`; return; }
+  const p=P,s=p.subject,iss=p.issuance,c=p.claim,a=p.assurance,au=c.autonomy,odd=c.odd,res=p.results||[];
+  const resBy=fieldDispositions(res); // SPEC §4: the most severe result is shown; other results are always listed
+  const dispChip=d=>chip(d.replace(/_/g," "),d==="held"?"c-good":d==="contradicted"?"c-bad":"c-warn");
+  const allRes=r=>r.results.length>1?`<div class="note">${r.results.length} results: ${r.results.map(x=>esc(`${x.claim_id} ${x.disposition.replace(/_/g," ")}`)).join(" · ")}</div>`:"";
+  const disc=(a.disclosures||[]).map(d=>`<p>${esc(DISC[d]||d)}</p>`).join("");
+  const tierV=V.tiers.find(t=>t.id===au.tier)||{};
+  const aq=au.approval_quality, asr=a.assessors||{};
+  const expired=findings.find(f=>f.rule==="ARP-080"&&f.severity==="warning");
+  const axesHtml=AXES.map(k=>{ const cv=(a.coverage||{})[k]; const pct=cv&&cv.claim_fields?Math.round(100*cv.tested/cv.claim_fields):0; const as=asr[k]||{};
+    return `<div class="axis"><div class="name">${{autonomy:"Autonomy",odd:"Domain",actions:"Actions",controls:"Controls"}[k]}</div><div class="lvl">Level ${esc(a.axes[k])}</div>
+    ${cv?`<div class="note">${esc(cv.tested)} of ${esc(cv.claim_fields)} fields tested · ${esc(cv.judged)} judged</div><div class="bar" aria-hidden="true"><i style="width:${pct}%"></i></div>`:`<div class="note">${a.axes[k]===1?"Asserted, not tested":""}</div>`}
+    <div class="note">${as.role==="independent_assessor"?`Verified by ${esc(as.organisation||"an unnamed assessor")}`:a.axes[k]===2?"Tested by the institution":"Compiled by the institution"}</div></div>`; }).join("");
+  const perm=new Set(c.actions.permitted), proh=new Set(c.actions.prohibited), oos=new Set(p.out_of_scope.actions||[]);
+  const acts=V.actions.map(x=>{ const st=perm.has(x.id)?"permitted":proh.has(x.id)?"prohibited":oos.has(x.id)?"oos":""; const r=resBy["actions."+x.id];
+    return `<div class="act ${st}"><b>${esc(x.id)}</b> ${esc(x.label)}<span class="st">${{permitted:"Permitted",prohibited:"Prohibited",oos:"Out of scope","":"Not stated"}[st]}</span>${r?`<span class="note">Tested: ${esc(r.disposition.replace(/_/g," "))}${r.results.length>1?` (${r.results.length} results: ${esc(r.results.map(x=>x.disposition.replace(/_/g," ")).join(", "))})`:""}</span>`:""}</div>`; }).join("");
+  const asserted=a.axes.controls===1;
+  const ctlRows=c.controls.map(x=>{ const r=resBy["controls."+x.control_id]; const pv=p.provenance["controls."+x.control_id]||{};
+    const stt=x.applicable===false?chip("not applicable","c-neutral"):x.present===true?chip(asserted?"present (asserted)":"present",asserted?"c-neutral":"c-good"):x.present===false?chip("absent","c-bad"):chip("not established","c-warn");
+    return `<tr><td><div>${esc((CTL[x.control_id]||{}).label||x.control_id)}</div><div class="mono note">${esc(x.control_id)}</div></td><td>${stt}</td><td>${provChip(pv.class)}</td><td>${r?dispChip(r.disposition)+allRes(r):'<span class="note">—</span>'}</td></tr>`; }).join("");
+  const sigRows=(p.signatures||[]).map((x,i)=>{ const f=findings.find(f=>f.rule==="ARP-091"&&f.path===`signatures/${i}`); const demo=DEMO_KEYS[x.public_key];
+    return `<tr><td>${esc(x.role)}</td><td>${esc(x.name)}${x.organisation?`<div class="note">${esc(x.organisation)}</div>`:""}</td><td>${f?chip(f.severity==="error"?"not valid":"not checked","c-bad"):chip("valid signature","c-neutral")}${demo?" "+chip("DEMO KEY: proves nothing","c-warn"):""}</td><td class="mono">${esc(String(x.signed_hash).slice(0,23))}…</td></tr>`; }).join("");
+  const tbl=(head,rows)=>rows.length?`<div class="tablewrap"><table><thead><tr>${head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`:`<p class="empty">None recorded.</p>`;
+  const fid=a.fidelity, bench=p.benchmark;
+  el.innerHTML=`
+  <div class="disclosure" role="note" aria-label="Standard disclosures">${disc||'<p><strong>No disclosures recorded.</strong> Every Profile must carry its standard disclosures.</p>'}</div>
+  <section class="blk"><h3>${esc(s.institution)} · ${esc(s.deployment_id)}</h3>
+    ${kv([["Profile id",`<span class="mono">${esc(p.profile_id)}</span> <span class="note">${esc(p.spec)}</span>`],["Status",p.stage==="issued"?chip("Issued","c-neutral"):chip("Draft","c-warn")],
+      ["Deployment version",esc(s.deployment_version)||'<span class="note">not stated</span>'],["Description",esc(s.description)],
+      ["Models",(s.models||[]).map(m=>esc(`${m.provider} ${m.model} ${m.version}`)).join("<br>")||'<span class="note">not stated</span>'],
+      ["Accountable owner",esc(`${iss.owner.name}, ${iss.owner.role}`)],["Issuer",iss.issuer?esc(`${iss.issuer.name}, ${iss.issuer.organisation}`):""],["Evidence as of",esc(iss.evidence_as_of)],
+      ["Valid",iss.valid_from?esc(`${iss.valid_from} to ${iss.valid_until||"—"}`)+(expired?" "+chip(expired.message.split(":")[0],"c-bad"):""):'<span class="note">not yet issued</span>'],
+      ["Platform baseline",s.platform_baseline?`<span class="mono">${esc(s.platform_baseline.profile_id)} ${esc(s.platform_baseline.version)}</span>`:""]])}</section>
+  <section class="blk"><h3>Bounded claim</h3><blockquote>${esc(c.statement)}</blockquote></section>
+  <section class="blk"><h3>Assurance · headline Level ${esc(a.headline)}</h3><div class="axes">${axesHtml}</div>
+    <p class="note">${a.test_environment?`Test environment: ${esc(a.test_environment)} · `:""}${a.comparability.flag?"Benchmarked (separate from the levels)":"Not benchmarked"}${a.method?` · Method: ${esc(a.method)}`:""}</p>
+    ${fid?kv([["Fidelity: tools",esc(fid.tools)],["Data",esc(fid.data)],["Policies",esc(fid.policies)],["Permissions",esc(fid.permissions)],["Response times",esc(fid.response_times)],["Failure conditions",esc(fid.failure_conditions)],["Population",esc(fid.population)],["Known differences",lines(fid.known_differences)]]):""}
+    ${bench?kv([["Benchmark assessor",esc(`${(bench.assessor||{}).organisation||""} (${(bench.assessor||{}).accreditation_ref||""})`)],["Benchmark results",(bench.results||[]).map(r=>esc(`${r.metric}: ${r.value}${r.grade?" ("+r.grade+")":""}`)).join("<br>")]]):""}</section>
+  <section class="blk"><h3>Autonomy · ${esc(au.tier)} ${esc(tierV.label?`(${tierV.label})`:"")}</h3>
+    ${kv([["Tier basis",chip(au.tier_basis,au.tier_basis==="substantiated"?"c-accent":"c-warn")],["What the agent does",esc(tierV.agent)],["Fallback",esc(tierV.fallback)],
+      ["Approval quality",aq?`${chip(aq.assessment.replace(/_/g," "),{substantive:"c-accent",reflexive:"c-bad"}[aq.assessment]||"c-neutral")} ${aq.sample_size!=null?`n = ${esc(aq.sample_size)}`:""}${aq.median_seconds_to_approve!=null?` · median ${esc(aq.median_seconds_to_approve)} s`:""}${aq.edit_rate!=null?` · edits ${esc(Math.round(aq.edit_rate*100))}%`:""}${aq.rejection_rate!=null?` · rejections ${esc(Math.round(aq.rejection_rate*100))}%`:""}${aq.resource_displayed!=null?` · resource shown: ${aq.resource_displayed?"yes":"no"}`:""}${aq.consequence_displayed!=null?` · consequence shown: ${aq.consequence_displayed?"yes":"no"}`:""}${aq.habituation_catch_rate!=null?` · habituation catch ${esc(Math.round(aq.habituation_catch_rate*100))}%`:""}`:""],
+      ...Object.entries(au.modifiers).map(([k,v])=>[k.replace(/_/g," ").replace(/^./,x=>x.toUpperCase()),esc(v)])])}</section>
+  <section class="blk"><h3>Operational design domain</h3>
+    ${kv([["Business line",esc(odd.business_line.replace(/_/g," "))],["Use case",esc(odd.use_case)],["Catalogued use case",odd.use_case_id?esc(`${odd.use_case_id}${hasOwn(UC,odd.use_case_id)?" · "+UC[odd.use_case_id].label:" (extension)"}`):""],
+      ["Description",esc(odd.description)],["Operational scope",esc(odd.operational_scope)],["Jurisdictions",esc((odd.jurisdictions||[]).join(", "))],["Population",esc(odd.population)],["Data",esc((odd.data||[]).join("; "))],["Cost of failure",esc(odd.cost_of_failure)]])}</section>
+  <section class="blk"><h3>Action classes</h3><div class="grid12">${acts}</div></section>
+  <section class="blk"><h3>Controls</h3>${tbl(["Control","Status","Source","Tested"],ctlRows?[ctlRows]:[])}</section>
+  ${res.length?`<section class="blk"><h3>Test results</h3>${tbl(["Claim","Field","Result","How decided","Evidence"],res.map(r=>`<tr><td class="mono">${esc(r.claim_id)}</td><td class="mono">${esc(r.field_id)}</td><td>${chip(r.disposition.replace(/_/g," "),r.disposition==="held"?"c-good":r.disposition==="contradicted"?"c-bad":"c-warn")}${r.note?`<div class="note">${esc(r.note)}</div>`:""}</td><td>${esc(r.evaluation.method)} · ${esc(r.evaluation.evidence_basis.join(", "))}</td><td class="mono">${esc(r.evidence_refs.join(", "))}</td></tr>`))}</section>`:""}
+  <section class="blk"><h3>Floors</h3>${tbl(["Floor","Condition","Axis","Status"],p.floors.map(f=>`<tr><td class="mono">${esc(f.id)}</td><td>${esc(f.condition)}</td><td>${esc(f.axis||"whole Profile")}</td><td>${chip(f.status,{passed:"c-good",failed:"c-bad"}[f.status]||"c-neutral")}</td></tr>`))}</section>
+  <section class="blk"><h3>Open findings and conflicts</h3>${tbl(["Finding","Kind","About","Note"],(p.status.open_findings||[]).map(f=>`<tr><td class="mono">${esc(f.id)}</td><td>${esc(f.kind.replace(/_/g," "))}${f.response?`<div class="note">${esc(f.response.replace(/_/g," "))}</div>`:""}</td><td class="mono">${esc(f.field_id||f.floor_ref||f.claim_id||"")}</td><td>${esc(f.note)}</td></tr>`))}
+    ${(p.status.accepted_gaps||[]).length?`<p class="note" style="margin-top:10px">Accepted gaps: ${(p.status.accepted_gaps).map(g=>`${esc(g.claim_id)} (${esc(g.disposition.replace(/_/g," "))}): ${esc(g.reason)}`).join("; ")}</p>`:""}</section>
+  <section class="blk"><h3>Scope and validity</h3>${kv([["Out of scope",esc(p.out_of_scope.statement)],["Void if",invLines(p.invalidation.voids)],["Partial retest if",invLines(p.invalidation.partial_retest)],["Monitoring",esc(p.invalidation.monitoring)],["Exceptions",lines(p.status.exceptions)],["Limitations",lines(p.status.limitations)]])}</section>
+  <section class="blk"><h3>Evidence</h3>${tbl(["Id","Path","Class"],p.evidence.map(e=>`<tr><td class="mono">${esc(e.id)}</td><td class="mono">${esc(e.path)}</td><td>${esc((e.artifact_class||"").replace(/_/g," "))}</td></tr>`))}
+    ${p.evidence_manifest?`<p class="note">Evidence manifest signed by ${esc(p.evidence_manifest.signer)}${DEMO_KEYS[p.evidence_manifest.public_key]?" "+chip("DEMO KEY: proves nothing","c-warn"):""}</p>`:""}</section>
+  <section class="blk"><h3>Signatures</h3>${tbl(["Role","Name","Check","Covers"],sigRows?[sigRows]:[])}
+    <p class="note">A valid signature shows the signer held the key. It does not show who the signer is.</p></section>`;
+}
+
+/* ---------- edit form ---------- */
+function renderView(){ renderProfile($("#view"),P,findings); }
+function opts(list,cur,labeler=x=>x){ return list.map(v=>`<option value="${esc(v)}"${v===cur?" selected":""}>${esc(labeler(v))}</option>`).join(""); }
+function renderEdit(){
+  const el=$("#edit"); if(!P){ el.innerHTML=`<p class="empty">Open or start a Profile to edit it.</p>`; return; }
+  if(findings.some(f=>f.rule==="ARP-001")){ el.innerHTML=`<p class="empty">Fix the schema problems in the JSON tab first; the form needs a well-formed Profile.</p>`; return; }
+  const p=P,c=p.claim,ac=c.actions;
+  const actStatus=id=>ac.permitted.includes(id)?"permitted":ac.prohibited.includes(id)?"prohibited":(p.out_of_scope.actions||[]).includes(id)?"out of scope":"not stated";
+  const ctlStatus=id=>{ const x=c.controls.find(k=>k.control_id===id); if(!x) return "not listed"; if(x.applicable===false) return "not applicable"; return x.present===true?"present":x.present===false?"absent":"not established"; };
+  const layers=[...new Set(V.controls.map(x=>x.layer))];
+  el.innerHTML=`
+  <p class="note">The form covers the fields most often edited. Headline level, disclosures and assessors follow the levels automatically. Editing a signed Profile returns it to draft and removes its signatures.</p>
+  <h3 style="font:600 17px var(--font-display);margin:14px 0 8px">Identity</h3>
+  <div class="form">
+    <label>Profile id<input type="text" id="f-profile_id" value="${esc(p.profile_id)}"></label>
+    <label>Institution<input type="text" id="f-institution" value="${esc(p.subject.institution)}"></label>
+    <label>Deployment id<input type="text" id="f-deployment_id" value="${esc(p.subject.deployment_id)}"></label>
+    <label>Deployment version<input type="text" id="f-deployment_version" value="${esc(p.subject.deployment_version||"")}"></label>
+    <label>Accountable owner — name<input type="text" id="f-owner_name" value="${esc(p.issuance.owner.name)}"></label>
+    <label>Accountable owner — role<input type="text" id="f-owner_role" value="${esc(p.issuance.owner.role)}"></label>
+    <label>Evidence as of<input type="text" id="f-evidence_as_of" value="${esc(p.issuance.evidence_as_of)}" placeholder="YYYY-MM-DD"></label>
+    <label>Description<input type="text" id="f-description" value="${esc(p.subject.description||"")}"></label>
+  </div>
+  <h3 style="font:600 17px var(--font-display);margin:18px 0 8px">Claim</h3>
+  <div class="form">
+    <label class="full">Bounded claim<textarea id="f-statement">${esc(c.statement)}</textarea></label>
+    <label>Autonomy tier<select id="f-tier">${opts(V.tiers.map(t=>t.id),c.autonomy.tier,id=>`${id} · ${V.tiers.find(t=>t.id===id).label}`)}</select></label>
+    <label>Tier basis<select id="f-tier_basis">${opts(["asserted","substantiated"],c.autonomy.tier_basis)}</select></label>
+    <label>Business line<select id="f-business_line">${opts(V.business_lines,c.odd.business_line,x=>x.replace(/_/g," "))}</select></label>
+    <label>Catalogued use case<select id="f-use_case_id"><option value="">— none —</option>${opts(V.use_cases.map(u=>u.id),c.odd.use_case_id,id=>`${id} · ${UC[id].label}`)}</select></label>
+    <label class="full">Use case (your words)<input type="text" id="f-use_case" value="${esc(c.odd.use_case)}"></label>
+  </div>
+  <h3 style="font:600 17px var(--font-display);margin:18px 0 8px">Assurance levels</h3>
+  <div class="form">${AXES.map(k=>`<label>${{autonomy:"Autonomy",odd:"Domain",actions:"Actions",controls:"Controls"}[k]} axis<select id="f-axis-${k}">${opts([1,2,3],p.assurance.axes[k],l=>`Level ${l}`)}</select></label>`).join("")}</div>
+  <h3 style="font:600 17px var(--font-display);margin:18px 0 8px">Action classes</h3>
+  <div class="form">${V.actions.map(x=>`<label>${esc(x.id)} · ${esc(x.label)}<select id="f-act-${x.id}">${opts(["permitted","prohibited","out of scope","not stated"],actStatus(x.id))}</select></label>`).join("")}</div>
+  <h3 style="font:600 17px var(--font-display);margin:18px 0 8px">Controls</h3>
+  ${layers.map(L=>`<details${c.controls.some(x=>x.layer===L)?" open":""}><summary>${esc(L.replace(/_/g," "))} · ${V.controls.filter(x=>x.layer===L).length} controls</summary>
+    ${V.controls.filter(x=>x.layer===L).map(x=>`<div class="ctlrow"><label for="f-ctl-${esc(x.id)}">${esc(x.label)}<div class="mono note">${esc(x.id)}</div></label><select id="f-ctl-${esc(x.id)}">${opts(["not listed","present","absent","not established","not applicable"],ctlStatus(x.id))}</select></div>`).join("")}</details>`).join("")}
+  <p class="note">Sources (provenance), evidence, results, floors, invalidation triggers and conflicts are edited in the JSON tab. The checker lists any that are missing.</p>`;
+  el.querySelectorAll("input,select,textarea").forEach(x=>x.addEventListener("change",applyForm));
+}
+async function applyForm(){
+  const p=JSON.parse(JSON.stringify(P)); const v=id=>{ const e=document.getElementById(id); return e?e.value:null; };
+  p.profile_id=v("f-profile_id"); p.subject.institution=v("f-institution"); p.subject.deployment_id=v("f-deployment_id");
+  p.subject.deployment_version=v("f-deployment_version")||null; p.issuance.owner.name=v("f-owner_name"); p.issuance.owner.role=v("f-owner_role");
+  p.issuance.evidence_as_of=v("f-evidence_as_of"); if(v("f-description")) p.subject.description=v("f-description"); else delete p.subject.description;
+  p.claim.statement=v("f-statement"); p.claim.autonomy.tier=v("f-tier"); p.claim.autonomy.tier_basis=v("f-tier_basis");
+  if(p.claim.autonomy.tier!=="U") p.status.open_findings=p.status.open_findings.filter(f=>!(f.id==="of-u"&&f.kind==="unprofiled"));
+  p.claim.odd.business_line=v("f-business_line"); p.claim.odd.use_case=v("f-use_case"); if(v("f-use_case_id")) p.claim.odd.use_case_id=v("f-use_case_id"); else delete p.claim.odd.use_case_id;
+  AXES.forEach(k=>p.assurance.axes[k]=Number(v(`f-axis-${k}`)));
+  const perm=[],proh=[],oos=[]; V.actions.forEach(x=>{ const s=v(`f-act-${x.id}`); if(s==="permitted")perm.push(x.id); else if(s==="prohibited")proh.push(x.id); else if(s==="out of scope")oos.push(x.id); });
+  p.claim.actions={permitted:perm,prohibited:proh}; p.out_of_scope.actions=oos;
+  const kept=Object.fromEntries(p.claim.controls.map(x=>[x.control_id,x])); const next=[];
+  V.controls.forEach(x=>{ const s=v(`f-ctl-${x.id}`); if(s==="not listed"||s==null) return; const o={...(kept[x.id]||{}),control_id:x.id,layer:x.layer};
+    delete o.applicable; o.present={present:true,absent:false}[s] ?? null; if(s==="not applicable") o.applicable=false; next.push(o); });
+  p.claim.controls=next.concat(p.claim.controls.filter(x=>!hasOwn(CTL,x.control_id)));
+  deriveForEdit(p);
+  if(p.signatures.length||p.stage==="issued"){ p.signatures=[]; p.stage="draft"; toast("Edited: the Profile is now a draft and its signatures were removed"); }
+  await load(p);
+  switchTab("edit");
+}
+
+/* ---------- wiring ---------- */
+function switchTab(t){ document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.tab===t))); ["view","edit","json"].forEach(id=>{$("#"+id).hidden=id!==t;}); if(t==="json") $("#jsontext").value=JSON.stringify(P,null,2); }
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+$("#file").addEventListener("change",async e=>{ const f=e.target.files[0]; if(!f) return; const m=await loadText(await f.text(),`Opened ${f.name}`); if(m) toast("That file cannot be read: "+m); else switchTab("view"); e.target.value=""; });
+$("#example").addEventListener("change",async e=>{ const k=e.target.value; if(!k) return; await load(JSON.parse(JSON.stringify(D.examples[k])),"Example loaded (fictional, signed with a DEMO-ONLY key)"); switchTab("view"); e.target.value=""; });
+$("#new").addEventListener("click",async()=>{ await load(blankDraft(),"New Level 1 draft"); switchTab("edit"); });
+$("#apply").addEventListener("click",async()=>{ const m=await loadText($("#jsontext").value,"JSON applied"); if(m) $("#jsonerr").textContent="Cannot apply: "+m; });
+$("#copy").addEventListener("click",async()=>{ const txt=JSON.stringify(P,null,2)+"\n"; try{ await navigator.clipboard.writeText(txt); toast("Copied the Profile JSON"); }catch(e){ switchTab("json"); const t=$("#jsontext"); t.focus(); t.select(); toast("Select-all is ready: press Ctrl/⌘+C to copy"); } });
+if(location.protocol==="file:"){ const d=$("#download"); d.hidden=false; d.addEventListener("click",()=>{ const b=new Blob([JSON.stringify(P,null,2)+"\n"],{type:"application/json"}); const a=document.createElement("a"); a.href=URL.createObjectURL(b); a.download=(P.profile_id||"profile")+".json"; a.click(); }); }
+window.ARP={check,checkText,parseStrict,canonicalHash,load,get profile(){return P;}};
+load(JSON.parse(JSON.stringify(D.examples.l1)));
+})();
+</script>

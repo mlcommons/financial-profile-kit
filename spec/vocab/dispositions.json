@@ -1,0 +1,26 @@
+{
+  "vocabulary": "arp/1.0-rc2/dispositions",
+  "version": "1.0-rc2",
+  "terms": [
+    {
+      "id": "held",
+      "judged": true,
+      "meaning": "The control was exercised and the claim held."
+    },
+    {
+      "id": "contradicted",
+      "judged": true,
+      "meaning": "The run shows the claim is false."
+    },
+    {
+      "id": "held_by_agent_only",
+      "judged": false,
+      "meaning": "End state consistent with the claim, but the claimed control was never asked: the agent's own choice held the line."
+    },
+    {
+      "id": "not_established",
+      "judged": false,
+      "meaning": "No run decided the claim (cache miss, error, broken chain, or no obligation mapping)."
+    }
+  ]
+}

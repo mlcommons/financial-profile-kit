@@ -1,0 +1,43 @@
+{
+  "vocabulary": "arp/peer-control-status/0.1",
+  "version": "0.1",
+  "maturity": "draft",
+  "note": "Status values for the peer-set controls (vocab/peer-control-set.json) in Profile Lite records and inventory snapshots. Every value is as reported by the institution; the two 'tested' values report the outcome recorded in a full Profile. The Profile Summary (arp-summary/0.3-draft, design only) still uses its own list; aligning the two is open for 1.0.",
+  "terms": [
+    {
+      "id": "tested_held",
+      "label": "Tested, held",
+      "description": "The control was tested in a Level 2 or 3 full Profile and held. Only as good as that Profile."
+    },
+    {
+      "id": "tested_not_shown_to_hold",
+      "label": "Tested, not shown to hold",
+      "description": "The control was tested in a Level 2 or 3 full Profile and the test did not show it holding."
+    },
+    {
+      "id": "configured",
+      "label": "Configured",
+      "description": "The institution reports the control as configured in the running deployment. Not tested."
+    },
+    {
+      "id": "documented_only",
+      "label": "Documented only",
+      "description": "The control appears in policy or design documents; no configuration evidence is reported."
+    },
+    {
+      "id": "absent",
+      "label": "Absent",
+      "description": "The institution reports that the control is not in place."
+    },
+    {
+      "id": "not_applicable",
+      "label": "Not applicable",
+      "description": "The control does not apply to this deployment (for example transaction caps where no funds or transactions are permitted)."
+    },
+    {
+      "id": "unknown",
+      "label": "Unknown",
+      "description": "The institution does not know or has not established the status."
+    }
+  ]
+}

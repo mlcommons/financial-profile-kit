@@ -1,0 +1,107 @@
+[
+  {
+    "id": "e1",
+    "path": "docs/change_control_records.csv",
+    "content_hash": "sha256:bab1b0629ecccd573fbdf1ff5fb1d643cb09ed50be2e1faa83aba7dacfe5986b",
+    "artifact_class": "attestation_governance",
+    "bytes": 644
+  },
+  {
+    "id": "e2",
+    "path": "docs/change_control_records.pdf",
+    "content_hash": "sha256:16597ea367e6da80132b5ea0d568f71c83b93495cb9bb380091c478b04ce3b71",
+    "artifact_class": "console_rendering",
+    "bytes": 2305
+  },
+  {
+    "id": "e3",
+    "path": "docs/change_control_records_header.csv",
+    "content_hash": "sha256:de96d55d3f6bf71afdda1407032ac53096d82fb181f8675768cbc6596613441c",
+    "artifact_class": "attestation_governance",
+    "bytes": 157
+  },
+  {
+    "id": "e4",
+    "path": "docs/mrm_validation_report_v2.docx",
+    "content_hash": "sha256:5c0819f9a19a26b006c54c1761c448cb6f5255c72247c2fd1a9e6df0fc2e25f9",
+    "artifact_class": "attestation_governance",
+    "bytes": 2701
+  },
+  {
+    "id": "e5",
+    "path": "docs/operating_procedure_v6.docx",
+    "content_hash": "sha256:7168c3e16eb27b32a49dffd17a0e21a9d83ae50e1d147baafc1a9d84f85ec46e",
+    "artifact_class": "operational_documentation",
+    "bytes": 2161
+  },
+  {
+    "id": "e6",
+    "path": "docs/policy_memo_v1.docx",
+    "content_hash": "sha256:e4a0577d0a4326278ef189bb3214197233b5ac4949de29bfd4ba572f7006280a",
+    "artifact_class": "product_documentation",
+    "bytes": 2491
+  },
+  {
+    "id": "e7",
+    "path": "exports/admin_console_controls.csv",
+    "content_hash": "sha256:32da52b6ae612dca2cc90a10ddbc124367c793c60822adaf545c39626cb39613",
+    "artifact_class": "configuration_export",
+    "bytes": 532
+  },
+  {
+    "id": "e8",
+    "path": "exports/admin_console_controls.pdf",
+    "content_hash": "sha256:4e95ae288a2f4dddee8621628ed42c608abcfc3531397b1f43bff04d743f2392",
+    "artifact_class": "console_rendering",
+    "bytes": 4340
+  },
+  {
+    "id": "e9",
+    "path": "exports/approval_log_extract.csv",
+    "content_hash": "sha256:5c0c0840022548aa1fd5964fdd93fc056425bf0a4e60514f97260078bc3ed3e6",
+    "artifact_class": "approval_workflow",
+    "bytes": 376
+  },
+  {
+    "id": "e10",
+    "path": "exports/approval_log_extract.meta.json",
+    "content_hash": "sha256:67622483d698c83e7ee8124cae08757e1bef085e5a0ea79db6688c5056e1adec",
+    "artifact_class": "approval_workflow",
+    "bytes": 192
+  },
+  {
+    "id": "e11",
+    "path": "exports/approval_log_extract.pdf",
+    "content_hash": "sha256:c7b6f5e423c712f363b66148695dc276d5890fce7be9abe017fd5a4a3df58436",
+    "artifact_class": "console_rendering",
+    "bytes": 1681
+  },
+  {
+    "id": "e12",
+    "path": "exports/entitlements_report.csv",
+    "content_hash": "sha256:2f0e07196eaf90b5970f6b121f80bb341089f40b40dc8ef0dca15f2464eb0f3d",
+    "artifact_class": "identity_entitlements",
+    "bytes": 2195
+  },
+  {
+    "id": "e13",
+    "path": "exports/entitlements_report_header.csv",
+    "content_hash": "sha256:dba08671ce73469075fc9a9ee7dbdac550c28f682770047a59c9ce4b3dee389b",
+    "artifact_class": "identity_entitlements",
+    "bytes": 201
+  },
+  {
+    "id": "e14",
+    "path": "exports/gateway_policy_export.xml",
+    "content_hash": "sha256:0e4f6774717bbddc35ff25eef7cf6c5b8ab7acb52642588c5f98a1c2d505546b",
+    "artifact_class": "configuration_export",
+    "bytes": 4835
+  },
+  {
+    "id": "e15",
+    "path": "exports/workflow_event_extract.csv",
+    "content_hash": "sha256:8016578f1d56f5a1ed009983df45932934ea4d325712075ffccbc7511223dff2",
+    "artifact_class": "run_log",
+    "bytes": 10681
+  }
+]

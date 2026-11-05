@@ -1,0 +1,131 @@
+<title>ARP Supervisory dashboard demo</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src https:; base-uri 'none'; form-action 'none'">
+<style>
+/*__VIEWER_CSS__*/
+/* ---------- Supervisory dashboard demo additions. Same tokens as the Profile Viewer, plus chart roles. ---------- */
+/* Chart roles: categorical slots, an ordinal blue ramp for tiers and levels, and a sequential ramp for the pivot. */
+:root{
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#008300; --s7:#4a3aa7; --s8:#e34948; --sother:#a3a7ab;
+  --o0:#86b6ef; --o1:#5598e7; --o2:#2a78d6; --o3:#1c5cab; --o4:#104281; --ou:#a3a7ab;
+  --h1:#e3eefb; --h2:#b7d3f6; --h3:#86b6ef; --h4:#3987e5; --h5:#1c5cab; --h6:#0d366b;
+  --h1-ink:var(--ink); --h2-ink:var(--ink); --h3-ink:var(--ink); --h4-ink:#ffffff; --h5-ink:#ffffff; --h6-ink:#ffffff;
+  --grid:#e6e9ec; --axis:#c3c9cf; --tip-bg:#16212b; --tip-ink:#ffffff;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300; --s7:#9085e9; --s8:#e66767; --sother:#5d666e;
+  --o0:#184f95; --o1:#256abf; --o2:#3987e5; --o3:#6da7ec; --o4:#9ec5f4; --ou:#5d666e;
+  --h1:#13283f; --h2:#104281; --h3:#1c5cab; --h4:#2a78d6; --h5:#6da7ec; --h6:#b7d3f6;
+  --h1-ink:var(--ink); --h2-ink:#ffffff; --h3-ink:#ffffff; --h4-ink:#ffffff; --h5-ink:#0f1519; --h6-ink:#0f1519;
+  --grid:#232d35; --axis:#3a4650; --tip-bg:#e6ebef; --tip-ink:#0f1519}}
+:root[data-theme="dark"]{
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300; --s7:#9085e9; --s8:#e66767; --sother:#5d666e;
+  --o0:#184f95; --o1:#256abf; --o2:#3987e5; --o3:#6da7ec; --o4:#9ec5f4; --ou:#5d666e;
+  --h1:#13283f; --h2:#104281; --h3:#1c5cab; --h4:#2a78d6; --h5:#6da7ec; --h6:#b7d3f6;
+  --h1-ink:var(--ink); --h2-ink:#ffffff; --h3-ink:#ffffff; --h4-ink:#ffffff; --h5-ink:#0f1519; --h6-ink:#0f1519;
+  --grid:#232d35; --axis:#3a4650; --tip-bg:#e6ebef; --tip-ink:#0f1519}
+.wrap{max-width:1360px}
+.filters{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end;padding:12px 0 4px}
+.filters label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted);min-width:0}
+.filters select,.filters input[type=search]{width:auto;min-width:150px;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 8px;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.fchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--accent);background:var(--accent-soft);color:var(--ink);border-radius:999px;padding:2px 4px 2px 10px;font-size:12.5px}
+.fchip button{border:0;background:none;color:var(--muted);cursor:pointer;font-size:15px;line-height:1;padding:0 4px;border-radius:999px}
+.fchip button:hover{color:var(--ink)}
+.tabs{flex-wrap:wrap;margin-top:6px}
+.tab .count{font-size:11px;background:var(--soft);border-radius:999px;padding:0 6px;margin-left:4px;color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:18px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-width:0}
+.tile .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.tile .v{font:600 26px/1.15 var(--font-display);margin-top:4px}
+.tile .d{font-size:12.5px;color:var(--muted);margin-top:2px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:900px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.lead{max-width:72ch;color:var(--muted);margin:0 0 14px}
+h3.sec{font:600 17px/1.3 var(--font-display);margin:22px 0 8px}
+h3.sec:first-child{margin-top:4px}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.click{cursor:pointer} tr.click:hover td{background:var(--soft)}
+tr.click:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.mark{display:inline-block;font-size:11px;font-weight:600;border-radius:4px;padding:0 5px;margin-left:5px;vertical-align:1px}
+.mark.up{background:var(--bad-soft);color:var(--bad)} .mark.down{background:var(--bad-soft);color:var(--bad)} .mark.neutral{background:var(--soft);color:var(--muted)}
+.linkbtn{background:none;border:0;padding:0;color:var(--accent);cursor:pointer;font:inherit;text-decoration:underline;text-underline-offset:2px}
+.sev{display:inline-flex;align-items:center;gap:4px}
+.sev::before{content:"";width:8px;height:8px;border-radius:2px;background:currentColor;flex:none}
+.sev.high{color:var(--bad)} .sev.medium{color:var(--warn)} .sev.low{color:var(--muted)}
+.heat td.cell{text-align:right;font-variant-numeric:tabular-nums;cursor:pointer;min-width:64px;border-left:2px solid var(--surface)}
+.heat td.cell:hover,.heat td.cell:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.heat td.total,.heat th.total{font-weight:600;background:var(--soft);text-align:right}
+.heat th.rowh{text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink);font-weight:500;background:var(--surface);white-space:nowrap}
+.heat thead th{white-space:nowrap}
+.chart{position:relative;width:100%;min-width:0}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{fill:var(--muted);font:12px var(--font-body)}
+.chart .lbl{fill:var(--ink);font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;margin:2px 0 8px;color:var(--ink)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.legend i.line{height:3px;border-radius:2px;width:16px}
+.tip{position:fixed;z-index:20;pointer-events:none;background:var(--tip-bg);color:var(--tip-ink);border-radius:6px;padding:7px 10px;font-size:12.5px;max-width:300px;white-space:pre-line;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.strip{display:grid;grid-template-columns:minmax(150px,230px) minmax(0,1fr);gap:4px 16px;align-items:center}
+@media (max-width:640px){.strip{grid-template-columns:minmax(0,1fr)}}
+.strip .lab{font-size:13px} .strip .lab .note{display:block}
+.drill-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.drill-head h2{font:600 22px/1.2 var(--font-display);margin:0;text-wrap:balance}
+.ctlgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:6px}
+.ctlgrid div{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:6px;padding:6px 9px;background:var(--surface);font-size:13px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:6px 0 14px}
+.flow .node{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 12px;font-size:13px;min-width:0;flex:1 1 180px}
+.flow .node b{display:block;font-weight:600}
+.flow .arrow{align-self:center;color:var(--muted);font-size:18px}
+.profile-embed{border:1px solid var(--line);border-radius:8px;padding:16px;background:var(--bg)}
+.msgs{margin:6px 0 0;padding-left:18px;font-size:12.5px}
+.msgs li{margin:2px 0;overflow-wrap:anywhere}
+.ok{color:var(--good)} .bad{color:var(--bad)}
+.proto{background:var(--warn-soft);border:1px solid color-mix(in srgb,var(--warn) 35%,transparent);color:var(--ink);border-radius:8px;padding:8px 14px;margin-bottom:14px;font-size:13px}
+.proto strong{color:var(--warn)}
+.hide-sm{} @media (max-width:640px){.hide-sm{display:none}}
+.sample-badge{display:inline-block;background:var(--warn);color:#fff;font:600 12px/1 var(--font-body);letter-spacing:.06em;border-radius:4px;padding:5px 8px;margin-left:10px;vertical-align:4px}
+.reginfo{font-size:12.5px;color:var(--muted);margin-top:4px}
+.empty-state{max-width:640px;margin:24px 0}.empty-state p{margin:8px 0}
+</style>
+
+<div class="wrap">
+  <div class="proto" role="note"><strong>Status:</strong> release candidate 2 of arp/1.0, prepared by the MLCommons Financial Services Working Group for pilot use and comment. Not a final MLCommons standard, certification scheme or endorsement. Flags and outlier tests in this console are supervisory heuristics, not findings.</div>
+  <header class="top">
+    <div>
+      <h1>ARP Supervisory dashboard demo<span class="sample-badge" id="sample-badge" hidden title="All firms, deployments, models and keys shown are fictional">SAMPLE DATA · FICTIONAL</span></h1>
+      <div class="sub" id="sub">Agent inventories and Profiles from the firms you supervise · feed arp-inventory/0.1 (draft) · arp/1.0-rc2 · runs in your browser</div>
+      <div class="reginfo" id="register-info" aria-live="polite"></div>
+    </div>
+    <div class="toolbar" role="toolbar" aria-label="Data">
+      <label class="btn" for="regfile" title="Your register of firms and their signing keys. Loaded separately from snapshots, because it decides whose signatures are trusted.">Load key register…</label><input id="regfile" type="file" accept=".json,application/json" hidden>
+      <label class="btn" for="files">Open snapshot files…</label><input id="files" type="file" accept=".json,application/json" multiple hidden>
+      <button class="btn" id="reset">Load sample (fictional) feed</button>
+    </div>
+  </header>
+  <div class="filters" role="group" aria-label="Scope">
+    <label>Scope<select id="f-scope"></select></label>
+    <label>As of<select id="f-date"></select></label>
+    <label>Deployments<select id="f-status">
+      <option value="production">In production</option>
+      <option value="live">Production and pilot</option>
+      <option value="active">Production, pilot and in development</option>
+      <option value="all">All, including retired</option></select></label>
+    <div class="chips" id="f-chips" aria-live="polite"></div>
+  </div>
+  <div class="disclosure" id="trust-banner" role="alert" hidden></div>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <main id="main"></main>
+  <p class="note" style="margin-top:28px"><span id="sample-note" hidden>Sample data: five fictional firms, four quarterly snapshots, DEMO-ONLY keys. </span>Records are what each firm reports; flags and outlier tests are supervisory heuristics configured in this console, not findings. Nothing you open here leaves your browser; <b>Pull now</b> requests only the firm endpoints named in your key register.</p>
+</div>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+const ARP_DATA = /*__ARP_DATA__*/null;
+(function(){
+"use strict";
+/*__ARP_CORE__*/
+/*__ARP_RENDER__*/
+/*__CONSOLE_JS__*/
+})();
+</script>

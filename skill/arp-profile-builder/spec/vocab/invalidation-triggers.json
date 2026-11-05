@@ -1,0 +1,62 @@
+{
+  "vocabulary": "arp/1.0-rc2/invalidation-triggers",
+  "version": "1.0-rc2",
+  "note": "Trigger ids for invalidation items (preprint §5.3). ARP-082 lists the defaults an issued Profile SHOULD carry among the changes that void it; ARP-083 makes platform_baseline_void mandatory for an anchored Profile. Extensions use x_<name>.",
+  "terms": [
+    {
+      "id": "model_change",
+      "meaning": "Any change to a model the deployment calls, including its pinned version.",
+      "default": true
+    },
+    {
+      "id": "harness_change",
+      "meaning": "Any change to the harness or its policy configuration (approval workflow, gate policy).",
+      "default": true
+    },
+    {
+      "id": "odd_expansion",
+      "meaning": "A new or wider operational design domain: use case, data, population, jurisdiction or cost of failure.",
+      "default": true
+    },
+    {
+      "id": "action_class_added",
+      "meaning": "A higher-consequence action class becomes reachable, or a prohibited class becomes permitted.",
+      "default": true
+    },
+    {
+      "id": "critical_control_removed",
+      "meaning": "Removal or weakening of a control the claim relies on.",
+      "default": true
+    },
+    {
+      "id": "access_or_owner_change",
+      "meaning": "New access (credentials, scopes, entitlements, tools) or a revised accountable owner.",
+      "default": true
+    },
+    {
+      "id": "topology_change",
+      "meaning": "A changed multi-agent topology: agents added or removed, new delegation or communication paths.",
+      "default": "where inter-agent controls are listed"
+    },
+    {
+      "id": "platform_baseline_void",
+      "meaning": "The parent Platform Baseline Profile is voided or replaced; an anchored Profile is void if the parent claim is void.",
+      "default": "mandatory for anchored Profiles"
+    },
+    {
+      "id": "evidence_document_change",
+      "meaning": "A new version of a cited document or configuration export.",
+      "default": false
+    },
+    {
+      "id": "cosmetic_change",
+      "meaning": "A change with no effect on the claim (formatting, typographical corrections).",
+      "default": false
+    },
+    {
+      "id": "other",
+      "meaning": "Anything else; describe it.",
+      "default": false
+    }
+  ]
+}

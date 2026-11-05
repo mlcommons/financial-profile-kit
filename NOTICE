@@ -1,0 +1,36 @@
+Agent Reliability Profile Kit
+Copyright 2026 MLCommons
+
+arp/1.0 release candidate 2, prepared by the MLCommons Financial Services Working Group.
+Licensed under the Apache License, Version 2.0 (see LICENSE). You may not use these files
+except in compliance with the License. Distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+OR CONDITIONS OF ANY KIND, either express or implied.
+
+Status
+  A release candidate for pilot use and comment. Not a final MLCommons standard, certification
+  scheme or endorsement. Conformance means a Profile is well-formed, consistent, honestly labelled
+  and signed; it does not mean its claims are true or the agent is safe.
+
+Source of the concepts
+  Agent Reliability Profiles in Financial Services, arXiv:2610.04123 (October 2026).
+  https://arxiv.org/abs/2610.04123
+
+Third-party sources
+  - The control catalogue (spec/vocab/control-catalogue.json, 55 controls in six layers) is the
+    Working Group's own wording (preprint Appendix B.4). It is designed to be crosswalked to OWASP,
+    NIST and other public frameworks; those frameworks are referred to, not copied.
+  - spec/interop/assert-and-acs.md describes how Profiles relate to Microsoft's ASSERT project
+    (MIT licence) and to agent control specifications. It refers to, and does not include,
+    their code or text.
+  - The browser tools use only the browser's built-in cryptography (Ed25519 via Web Crypto where
+    available) and include no third-party libraries.
+
+Fictional data
+  Every institution, deployment, person, model, endpoint and key in examples/, templates/examples/,
+  skill-trial/ and regulator/sample-feed/ is fictional, and names carry "(fictional)". Any
+  resemblance to a real institution is unintended; report it and it will be renamed. Keys marked
+  DEMO-ONLY are public and must never sign a real Profile. Some evidence hashes are placeholders.
+  The sample feed contains deliberately planted problems, listed in README.md
+  ("Sample and demo data"). The Level 2 example
+  (examples/l2-open-banking.json) is an illustrative Working Group example, not a model for the
+  public pilot, which is Level 1 only (README, "Public pilot").

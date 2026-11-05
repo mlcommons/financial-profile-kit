@@ -1,0 +1,15 @@
+{
+  "vocabulary": "arp-summary/peer-control-set",
+  "version": "1.0-rc2",
+  "note": "The only controls a Profile Summary reports on. Chosen to answer defined peer questions; subject to disclosure review before any release. Changing the set is a versioned decision.",
+  "terms": [
+    "harness.human_approval_gates",
+    "harness.kill_switch",
+    "harness.immutable_tool_call_logging",
+    "harness.high_risk_routing",
+    "tool.action_allowlists",
+    "tool.least_privilege_credentials",
+    "tool.transaction_caps",
+    "environment.rollback_snapshot"
+  ]
+}

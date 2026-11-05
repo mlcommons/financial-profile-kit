@@ -1,0 +1,66 @@
+{
+  "vocabulary": "arp/1.0-rc2/action-classes",
+  "version": "1.0-rc2",
+  "terms": [
+    {
+      "id": "A1",
+      "label": "Read / retrieve",
+      "reversibility": "n/a"
+    },
+    {
+      "id": "A2",
+      "label": "Analyse / compute",
+      "reversibility": "n/a"
+    },
+    {
+      "id": "A3",
+      "label": "Draft for a person",
+      "reversibility": "fully_reversible"
+    },
+    {
+      "id": "A4",
+      "label": "Recommend / route",
+      "reversibility": "fully_reversible"
+    },
+    {
+      "id": "A5",
+      "label": "Write internal",
+      "reversibility": "reversible"
+    },
+    {
+      "id": "A6",
+      "label": "Submit / commit internal",
+      "reversibility": "semi_reversible"
+    },
+    {
+      "id": "A7",
+      "label": "External communication",
+      "reversibility": "hard_to_reverse"
+    },
+    {
+      "id": "A8",
+      "label": "Transact, bounded",
+      "reversibility": "partially_reversible"
+    },
+    {
+      "id": "A9",
+      "label": "Move funds",
+      "reversibility": "irreversible"
+    },
+    {
+      "id": "A10",
+      "label": "Regulatory filing",
+      "reversibility": "irreversible_legal_effect"
+    },
+    {
+      "id": "A11",
+      "label": "Access and infrastructure change",
+      "reversibility": "irreversible_amplifying"
+    },
+    {
+      "id": "A12",
+      "label": "Delegate / spawn",
+      "reversibility": "amplifying"
+    }
+  ]
+}

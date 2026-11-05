@@ -1,0 +1,87 @@
+{
+  "spec": "arp-summary/0.3-draft",
+  "summary_id": "sum-dda6dde6809e27c0",
+  "profile_hash": "sha256:b9443b7455cd83a4c6f95028364f65bf0403116e717d5543ae440b90378b76ef",
+  "profile_spec": "arp/1.0-rc2",
+  "contributor_ref": "c-demo0001",
+  "deployment_ref": "d-b3fe20229e4cf587",
+  "segment": {
+    "institution_type": "large_bank",
+    "region": "uk"
+  },
+  "dates": {
+    "evidence_as_of_month": "2026-09",
+    "issued_month": "2026-10",
+    "valid_until_month": "2027-04"
+  },
+  "claim": {
+    "tier": "T2",
+    "tier_basis": "substantiated",
+    "approval_quality": "substantive",
+    "business_line": "financial_crime_compliance",
+    "use_case_id": "ODD.20",
+    "actions": {
+      "permitted": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "prohibited": [
+        "A5",
+        "A6",
+        "A7",
+        "A8",
+        "A9",
+        "A10",
+        "A11",
+        "A12"
+      ]
+    },
+    "peer_controls": {
+      "harness.human_approval_gates": "configured",
+      "harness.kill_switch": "asserted",
+      "harness.immutable_tool_call_logging": "asserted",
+      "harness.high_risk_routing": "not_declared",
+      "tool.action_allowlists": "configured",
+      "tool.least_privilege_credentials": "not_declared",
+      "tool.transaction_caps": "not_declared",
+      "environment.rollback_snapshot": "not_declared"
+    },
+    "platform_anchored": false
+  },
+  "assurance": {
+    "axes": {
+      "autonomy": 1,
+      "odd": 1,
+      "actions": 1,
+      "controls": 1
+    },
+    "headline": 1,
+    "assessor_roles": {
+      "autonomy": "institution",
+      "odd": "institution",
+      "actions": "institution",
+      "controls": "institution"
+    },
+    "comparability_flag": false,
+    "disclosures": [
+      "level1_untested",
+      "not_comparable"
+    ]
+  },
+  "derivation": {
+    "tool": "arp_summary.py (reference implementation)",
+    "tool_version": "0.3",
+    "owner_attestation": "I attest that this Summary was derived by the named tool, without alteration, from the issued Profile identified by profile_hash."
+  },
+  "signatures": [
+    {
+      "role": "owner",
+      "alg": "ed25519",
+      "public_key": "JsHW4JfvQC24+p46CNYcr7dsxv7Uf7ePg3FW/jvwu9o=",
+      "signed_hash": "sha256:979d38e3deba239d33327846f1c8762f1dddadc775cbba631c594f6808052dcc",
+      "value": "vxKR9BETG7PWGz8182HxC7SbucSlSGjpRMYAQcPdsxVmzgM/4wbr+q8eMtIxG6L5LGLUjuTgeUsV1hMgDxT4BQ=="
+    }
+  ]
+}

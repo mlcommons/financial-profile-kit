@@ -1,0 +1,1256 @@
+{
+  "inventory_spec": "arp-inventory/0.1",
+  "institution": {
+    "name": "Lumen Digital Bank Ltd (fictional)",
+    "firm_id": "DEMO-FIRM-03",
+    "jurisdictions": [
+      "GB"
+    ]
+  },
+  "snapshot": {
+    "sequence": 3,
+    "as_of": "2026-06-30",
+    "produced_at": "2026-07-04T09:12:00Z",
+    "trigger": "scheduled",
+    "previous_hash": "sha256:13831199311289642fe564c6e22f61de7b0465316b56267cff0d129749038119"
+  },
+  "records": [
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-001",
+        "agent_name": "Security operations triage (back office)",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.48",
+        "use_case": "Security operations triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "unknown",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2025-11-29"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-002",
+        "agent_name": "Collections and hardship (contact centre)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.6",
+        "use_case": "Collections and hardship",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-10-02"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-005",
+        "agent_name": "Account opening and onboarding",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.4",
+        "use_case": "Account opening and onboarding",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "unknown",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "unknown",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-02-12"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-006",
+        "agent_name": "Dispute resolution (group)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.3",
+        "use_case": "Dispute resolution",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "unknown"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-04-22"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-008",
+        "agent_name": "Payment-operations exceptions and wire repair v2",
+        "deployment_status": "production",
+        "business_line": "payments",
+        "use_case_id": "ODD.16",
+        "use_case": "Payment-operations exceptions and wire repair",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6",
+          "A9"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "absent",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "unknown",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "unknown",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "absent",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Payments Operations",
+        "last_reviewed": "2025-04-28"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-009",
+        "agent_name": "Personal financial guidance (business banking)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.7",
+        "use_case": "Personal financial guidance",
+        "customer_facing": "yes",
+        "autonomy_tier": "U",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-06-14"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-011",
+        "agent_name": "Personal financial guidance (premier)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.7",
+        "use_case": "Personal financial guidance",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "absent",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "unknown"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-04-16"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-012",
+        "agent_name": "Collections and hardship (business banking)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.6",
+        "use_case": "Collections and hardship",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "unknown"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-11-26"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-013",
+        "agent_name": "Dispute resolution (back office)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.3",
+        "use_case": "Dispute resolution",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "absent",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-05-02"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-014",
+        "agent_name": "Collections and hardship (premier)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.6",
+        "use_case": "Collections and hardship",
+        "customer_facing": "yes",
+        "autonomy_tier": "T4",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "unknown"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-06-24"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-015",
+        "agent_name": "Personal financial guidance (contact centre)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.7",
+        "use_case": "Personal financial guidance",
+        "customer_facing": "yes",
+        "autonomy_tier": "T1",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-05-27"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-016",
+        "agent_name": "Personal financial guidance (contact centre)",
+        "deployment_status": "pilot",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.7",
+        "use_case": "Personal financial guidance",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "absent",
+          "harness.kill_switch": "unknown",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-03-14"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-018",
+        "agent_name": "Complaint handling",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.2",
+        "use_case": "Complaint handling",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "unknown",
+          "harness.kill_switch": "unknown",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "unknown",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2023-11-23"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-019",
+        "agent_name": "Account opening and onboarding v2",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.4",
+        "use_case": "Account opening and onboarding",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "absent"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-05-09"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-020",
+        "agent_name": "Collections and hardship (back office)",
+        "deployment_status": "in_development",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.6",
+        "use_case": "Collections and hardship",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "absent",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "absent"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-01-10"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-022",
+        "agent_name": "Dispute resolution (back office)",
+        "deployment_status": "in_development",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.3",
+        "use_case": "Dispute resolution",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "unknown",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-01-25"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-023",
+        "agent_name": "Security operations triage (back office)",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.48",
+        "use_case": "Security operations triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "unknown"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2026-01-11"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-024",
+        "agent_name": "Payment-operations exceptions and wire repair (UK)",
+        "deployment_status": "in_development",
+        "business_line": "payments",
+        "use_case_id": "ODD.16",
+        "use_case": "Payment-operations exceptions and wire repair",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A6",
+          "A9"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A7",
+          "A8",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "documented_only",
+          "harness.kill_switch": "unknown",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "absent",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "absent",
+          "tool.transaction_caps": "unknown",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Head of Payments Operations",
+        "last_reviewed": "2026-05-13"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-025",
+        "agent_name": "Servicing chat (business banking)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.1",
+        "use_case": "Servicing chat",
+        "customer_facing": "yes",
+        "autonomy_tier": "T4",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "absent",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-09-12"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-026",
+        "agent_name": "Personal financial guidance (premier)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.7",
+        "use_case": "Personal financial guidance",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "unknown",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "absent",
+          "harness.high_risk_routing": "documented_only",
+          "tool.action_allowlists": "unknown",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-06-14"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-028",
+        "agent_name": "Fraud alert triage",
+        "deployment_status": "in_development",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.5",
+        "use_case": "Fraud alert triage",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A4",
+          "A5"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "unknown",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "unknown",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-09-26"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-030",
+        "agent_name": "Collections and hardship (back office)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.6",
+        "use_case": "Collections and hardship",
+        "customer_facing": "yes",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "unknown",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "documented_only"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-05-10"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-032",
+        "agent_name": "Software development (back office)",
+        "deployment_status": "production",
+        "business_line": "internal_corporate",
+        "use_case_id": "ODD.46",
+        "use_case": "Software development",
+        "customer_facing": "no",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A5",
+          "A11",
+          "A12"
+        ],
+        "prohibited_actions": [
+          "A3",
+          "A4",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "configured",
+          "harness.immutable_tool_call_logging": "documented_only",
+          "harness.high_risk_routing": "absent",
+          "tool.action_allowlists": "absent",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Chief Operating Officer",
+        "last_reviewed": "2026-02-10"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-033",
+        "agent_name": "Complaint handling",
+        "deployment_status": "pilot",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.2",
+        "use_case": "Complaint handling",
+        "customer_facing": "no",
+        "autonomy_tier": "T2",
+        "tier_basis": "asserted",
+        "human_approval": "every_material_action",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "unknown",
+          "harness.kill_switch": "documented_only",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "configured",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "not_applicable"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-04-12"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-035",
+        "agent_name": "Collections and hardship (back office)",
+        "deployment_status": "production",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.6",
+        "use_case": "Collections and hardship",
+        "customer_facing": "yes",
+        "autonomy_tier": "T3",
+        "tier_basis": "asserted",
+        "human_approval": "some_actions",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "configured",
+          "harness.kill_switch": "absent",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "documented_only",
+          "tool.least_privilege_credentials": "documented_only",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "configured"
+        },
+        "models": "Provider A frontier 2026-03",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2025-01-08"
+      }
+    },
+    {
+      "record": {
+        "lite_spec": "arp-lite/0.1",
+        "institution": "Lumen Digital Bank Ltd (fictional)",
+        "inventory_ref": "LUM-AG-036",
+        "agent_name": "Servicing chat (back office)",
+        "deployment_status": "in_development",
+        "business_line": "retail_consumer_banking",
+        "use_case_id": "ODD.1",
+        "use_case": "Servicing chat",
+        "customer_facing": "yes",
+        "autonomy_tier": "T4",
+        "tier_basis": "asserted",
+        "human_approval": "none",
+        "permitted_actions": [
+          "A1",
+          "A2",
+          "A3",
+          "A7"
+        ],
+        "prohibited_actions": [
+          "A4",
+          "A5",
+          "A6",
+          "A8",
+          "A9",
+          "A10",
+          "A11",
+          "A12"
+        ],
+        "controls": {
+          "harness.human_approval_gates": "not_applicable",
+          "harness.kill_switch": "unknown",
+          "harness.immutable_tool_call_logging": "configured",
+          "harness.high_risk_routing": "unknown",
+          "tool.action_allowlists": "configured",
+          "tool.least_privilege_credentials": "configured",
+          "tool.transaction_caps": "not_applicable",
+          "environment.rollback_snapshot": "absent"
+        },
+        "models": "Provider B general 4.1",
+        "vendor_or_platform": "Vendor P agent builder",
+        "profile_level": "none",
+        "accountable_owner_role": "Managing Director, Retail Banking",
+        "last_reviewed": "2026-04-14"
+      }
+    }
+  ],
+  "attestation": {
+    "name": "Sample Signer (fictional)",
+    "role": "Chief Operating Officer",
+    "statement": "This snapshot lists every agent deployment of the institution in development, pilot or production at the as-of date, and any retired since the previous snapshot, as recorded in its inventory."
+  },
+  "signatures": [
+    {
+      "role": "institution",
+      "name": "Sample Signer (fictional)",
+      "alg": "ed25519",
+      "public_key": "g4rkbBiG1pxNN9/jcVYNs8GjQw7KjtvTGrT0wqqOvbE=",
+      "signed_hash": "sha256:a5fc82f5f55e9ebf881ce4e74b2db270fad77903685b8bc67c1350ec025a74a9",
+      "value": "yZXkcdocfu37xnc1mumxlbT9f26X3csC+bVEysotcMBJB6/UY0/ILo+wyFjkVCGhiGPkGlU1inLWXGoVh3gYBA=="
+    }
+  ]
+}

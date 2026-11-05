@@ -1,0 +1,35 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
+
+# Office lock files (open workbooks)
+~$*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+
+# Node (if jsdom is installed next to the Kit for the rendering tests)
+node_modules/
+package.json
+package-lock.json
+
+# Build output: release zips are attached to GitHub releases, not committed
+dist/
+*.zip
+
+# Never commit real keys; demo keys live only in examples/demo-keys/
+*.key
+!examples/demo-keys/*.key
+
+# Working folders that are never shipped
+history/
+_retired/

@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+title: Agent Reliability Profile Kit
+message: "If you use this Kit, please cite the Agent Reliability Profiles preprint."
+type: software
+license: Apache-2.0
+version: 1.0-rc2
+date-released: 2026-10-22
+url: https://github.com/mlcommons/agent-reliability-profile-kit
+repository-code: https://github.com/mlcommons/agent-reliability-profile-kit
+authors:
+  - name: MLCommons Financial Services Working Group
+keywords:
+  - agentic AI
+  - AI assurance
+  - conformance
+  - financial services
+  - MLCommons
+preferred-citation:
+  type: report
+  title: "Agent Reliability Profiles in Financial Services"
+  status: preprint
+  institution:
+    name: MLCommons Financial Services Working Group
+  authors:
+    - family-names: Hsu
+      given-names: Mike
+    - family-names: Bankhwal
+      given-names: Medha
+    - family-names: Moissinac
+      given-names: Béatrice
+    - family-names: Werbach
+      given-names: Kevin
+    - family-names: Szpruch
+      given-names: Lukasz
+    - family-names: Hillenbrand
+      given-names: Bennett
+  year: 2026
+  url: https://arxiv.org/abs/2610.04123

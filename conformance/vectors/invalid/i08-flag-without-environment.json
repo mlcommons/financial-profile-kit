@@ -1,0 +1,635 @@
+{
+  "spec": "arp/1.0-rc2",
+  "profile_id": "examplebank.fc.alert-triage.v3.L1",
+  "stage": "draft",
+  "vocab_versions": {
+    "action-classes": "1.0-rc2",
+    "autonomy-tiers": "1.0-rc2",
+    "business-lines": "1.0-rc2",
+    "conflict-kinds": "1.0-rc2",
+    "control-catalogue": "1.0-rc2",
+    "dispositions": "1.0-rc2",
+    "invalidation-triggers": "1.0-rc2",
+    "provenance-classes": "1.0-rc2",
+    "use-cases": "1.0-rc2"
+  },
+  "subject": {
+    "institution": "Example Bank plc (fictional)",
+    "deployment_id": "fc-alert-triage-prod",
+    "deployment_version": "3.2.0",
+    "description": "Agent that works a retail transaction-monitoring alert end to end and drafts a disposition recommendation for an analyst.",
+    "vendor_products": [
+      "ExampleFlow agent framework 2.1 (fictional)"
+    ],
+    "platform_baseline": null,
+    "models": [
+      {
+        "provider": "ExampleAI (fictional)",
+        "model": "example-model",
+        "version": "2026-06-01",
+        "role": "planner and drafter"
+      }
+    ]
+  },
+  "issuance": {
+    "owner": {
+      "name": "Jordan Example (fictional)",
+      "role": "Head of Financial Crime Operations"
+    },
+    "issuer": {
+      "name": "Jordan Example (fictional)",
+      "role": "Head of Financial Crime Operations",
+      "organisation": "Example Bank plc (fictional)",
+      "independent": false
+    },
+    "issued_at": null,
+    "valid_from": null,
+    "valid_until": null,
+    "evidence_as_of": "2026-09-20"
+  },
+  "claim": {
+    "statement": "On the evidence supplied, the alert-triage agent operates at autonomy tier T2 within the retail structuring and rapid-movement alert-triage domain, may read, analyse, draft and recommend (A1-A4), is prohibited from A5-A12, and operates under analyst approval before any disposition, read-only customer-data access and evidence-preserving logging. This is a Level 1 Asserted Profile: nothing in it has been tested.",
+    "autonomy": {
+      "tier": "T2",
+      "tier_basis": "substantiated",
+      "modifiers": {
+        "data_authority": "High: customer PII, transaction histories and screening data, read-only",
+        "reversibility_profile": "All permitted actions are reversible drafts or recommendations",
+        "customer_market_impact": "Indirect: dispositions affect customers only after analyst approval",
+        "stack_composability": "predefined",
+        "accountability": "Model vendor under contract; harness and infrastructure owned by the bank's Financial Crime Technology team",
+        "population_scope": "Retail customers in one jurisdiction whose activity raised a monitoring alert"
+      },
+      "approval_quality": {
+        "assessment": "substantive",
+        "sample_size": 40,
+        "median_seconds_to_approve": 212,
+        "edit_rate": 0.18,
+        "rejection_rate": 0.07,
+        "resource_displayed": true,
+        "consequence_displayed": true,
+        "sampled_review_quality": null,
+        "habituation_catch_rate": null
+      }
+    },
+    "odd": {
+      "business_line": "financial_crime_compliance",
+      "use_case": "Alert triage for structuring and rapid movement of funds",
+      "description": "Retail transaction-monitoring alerts: case-management system, transaction histories, customer profiles, screening data, typology playbooks.",
+      "jurisdictions": [
+        "GB"
+      ],
+      "population": "Retail customers",
+      "data": [
+        "case files",
+        "transaction history",
+        "customer profile",
+        "screening results",
+        "typology playbooks"
+      ],
+      "cost_of_failure": "Missed suspicious activity (regulatory penalty); wrongful escalation (customer harm)",
+      "use_case_id": "ODD.20"
+    },
+    "actions": {
+      "permitted": [
+        "A1",
+        "A2",
+        "A3",
+        "A4"
+      ],
+      "prohibited": [
+        "A5",
+        "A6",
+        "A7",
+        "A8",
+        "A9",
+        "A10",
+        "A11",
+        "A12"
+      ]
+    },
+    "controls": [
+      {
+        "control_id": "harness.human_approval_gates",
+        "layer": "harness",
+        "present": true,
+        "configuration": {
+          "gate": "before any disposition",
+          "scope": "per case"
+        }
+      },
+      {
+        "control_id": "tool.read_only_data_scoping",
+        "layer": "tool",
+        "present": true,
+        "configuration": {
+          "customer_data": "read"
+        }
+      },
+      {
+        "control_id": "tool.action_allowlists",
+        "layer": "tool",
+        "present": true,
+        "configuration": {
+          "allow": [
+            "read_case",
+            "query_transactions",
+            "get_typology",
+            "draft_narrative",
+            "recommend_disposition"
+          ]
+        }
+      },
+      {
+        "control_id": "harness.immutable_tool_call_logging",
+        "layer": "harness",
+        "present": true
+      },
+      {
+        "control_id": "model.evidence_grounding",
+        "layer": "model",
+        "present": null
+      },
+      {
+        "control_id": "harness.kill_switch",
+        "layer": "harness",
+        "present": true
+      }
+    ]
+  },
+  "assurance": {
+    "axes": {
+      "autonomy": 1,
+      "odd": 1,
+      "actions": 1,
+      "controls": 1
+    },
+    "headline": 1,
+    "assessors": {
+      "autonomy": {
+        "role": "institution",
+        "organisation": "Example Bank plc (fictional)"
+      },
+      "odd": {
+        "role": "institution",
+        "organisation": "Example Bank plc (fictional)"
+      },
+      "actions": {
+        "role": "institution",
+        "organisation": "Example Bank plc (fictional)"
+      },
+      "controls": {
+        "role": "institution",
+        "organisation": "Example Bank plc (fictional)"
+      }
+    },
+    "test_environment": null,
+    "method": "arp-profile-builder skill (prototype), run on a fictional evidence package",
+    "comparability": {
+      "flag": true,
+      "environment_version": null,
+      "hidden_set_version": null,
+      "fidelity_statement": null
+    },
+    "disclosures": [
+      "level1_untested",
+      "not_comparable",
+      "benchmark_not_production"
+    ]
+  },
+  "provenance": {
+    "autonomy.tier": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e2",
+          "locator": "workflow.approvals[disposition]",
+          "verbatim": "required: true"
+        },
+        {
+          "evidence_id": "e5",
+          "locator": "approval_records.csv rows 1-40"
+        }
+      ],
+      "note": "Configured approval before disposition; 40 sampled approvals show review time and edits consistent with substantive review."
+    },
+    "autonomy.approval_quality": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e5",
+          "locator": "approval_records.csv rows 1-40"
+        }
+      ]
+    },
+    "odd.use_case": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§2 Intended use"
+        }
+      ]
+    },
+    "actions.A1": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools[read_case,query_transactions]"
+        }
+      ]
+    },
+    "actions.A2": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§2 Intended use"
+        }
+      ]
+    },
+    "actions.A3": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools[draft_narrative]"
+        }
+      ]
+    },
+    "actions.A4": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools[recommend_disposition]"
+        }
+      ]
+    },
+    "actions.A5": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools (no tool in class)"
+        }
+      ],
+      "note": "No registered tool falls in this class."
+    },
+    "actions.A7": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools (no tool in class)"
+        }
+      ],
+      "note": "No registered tool falls in this class."
+    },
+    "actions.A8": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools (no tool in class)"
+        }
+      ],
+      "note": "No registered tool falls in this class."
+    },
+    "actions.A9": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools (no tool in class)"
+        }
+      ],
+      "note": "No registered tool falls in this class."
+    },
+    "actions.A11": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools (no tool in class)"
+        }
+      ],
+      "note": "No registered tool falls in this class."
+    },
+    "actions.A12": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools (no tool in class)"
+        }
+      ],
+      "note": "No registered tool falls in this class."
+    },
+    "actions.A6": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§4 Prohibited use"
+        }
+      ],
+      "note": "Case closure is prohibited by policy; see open conflict on the case-management entitlement."
+    },
+    "actions.A10": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools (no filing tool)"
+        },
+        {
+          "evidence_id": "e1",
+          "locator": "§4 Prohibited use"
+        }
+      ]
+    },
+    "controls.harness.human_approval_gates": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e2",
+          "locator": "workflow.approvals"
+        }
+      ]
+    },
+    "controls.tool.read_only_data_scoping": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e4",
+          "locator": "service_account fc-triage-sa scopes"
+        }
+      ]
+    },
+    "controls.tool.action_allowlists": {
+      "class": "configuration_derived",
+      "citations": [
+        {
+          "evidence_id": "e3",
+          "locator": "tools"
+        }
+      ]
+    },
+    "controls.harness.immutable_tool_call_logging": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e6",
+          "locator": "§5 Logging"
+        }
+      ]
+    },
+    "controls.model.evidence_grounding": {
+      "class": "absent",
+      "note": "Claimed in the policy memo; no artifact in the package can establish it."
+    },
+    "controls.harness.kill_switch": {
+      "class": "owner_attested"
+    },
+    "autonomy.modifiers.data_authority": {
+      "class": "owner_attested",
+      "note": "Owner characterisation."
+    },
+    "autonomy.modifiers.reversibility_profile": {
+      "class": "owner_attested",
+      "note": "Owner characterisation."
+    },
+    "autonomy.modifiers.customer_market_impact": {
+      "class": "owner_attested",
+      "note": "Owner characterisation."
+    },
+    "autonomy.modifiers.stack_composability": {
+      "class": "owner_attested",
+      "note": "Owner characterisation."
+    },
+    "autonomy.modifiers.accountability": {
+      "class": "owner_attested",
+      "note": "Owner characterisation."
+    },
+    "autonomy.modifiers.population_scope": {
+      "class": "owner_attested",
+      "note": "Owner characterisation."
+    },
+    "odd.cost_of_failure": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§2 Intended use"
+        }
+      ]
+    },
+    "odd.population": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§2 Intended use"
+        }
+      ]
+    },
+    "odd.data": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§2 Intended use"
+        }
+      ]
+    },
+    "odd.description": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§2 Intended use"
+        }
+      ]
+    },
+    "odd.business_line": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§2 Intended use"
+        }
+      ]
+    },
+    "odd.jurisdictions": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§2 Intended use"
+        }
+      ]
+    },
+    "odd.use_case_id": {
+      "class": "document_derived",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§2 Intended use"
+        }
+      ]
+    }
+  },
+  "conflicts": [
+    {
+      "field_id": "actions.A6",
+      "kind": "document_vs_configuration",
+      "citations": [
+        {
+          "evidence_id": "e1",
+          "locator": "§4 Prohibited use",
+          "verbatim": "The agent may not close or disposition a case."
+        },
+        {
+          "evidence_id": "e4",
+          "locator": "service_account fc-triage-sa scopes",
+          "verbatim": "cases:write"
+        }
+      ],
+      "state": "open"
+    }
+  ],
+  "floors": [
+    {
+      "id": "no_prohibited_disposition_filing_or_contact",
+      "condition": "No attempted prohibited disposition, filing, or customer contact.",
+      "axis": "actions",
+      "status": "untested"
+    },
+    {
+      "id": "no_fabricated_facts",
+      "condition": "No fabricated facts in a drafted narrative.",
+      "status": "untested"
+    },
+    {
+      "id": "customer_data_handling",
+      "condition": "Verified handling of customer data.",
+      "axis": "controls",
+      "status": "untested"
+    }
+  ],
+  "results": [],
+  "benchmark": null,
+  "out_of_scope": {
+    "statement": "Typologies outside structuring and rapid movement (trade-based laundering, terrorist financing, sanctions evasion, complex shell structures), other jurisdictions, and any configuration that loosens the stated envelope.",
+    "odd": [
+      "Trade-based laundering",
+      "Terrorist financing",
+      "Sanctions evasion",
+      "Shell structures"
+    ],
+    "actions": [],
+    "controls": [],
+    "users": [
+      "Non-analyst staff"
+    ]
+  },
+  "invalidation": {
+    "voids": [
+      {
+        "trigger": "model_change",
+        "description": "Any change to the model pin."
+      },
+      {
+        "trigger": "access_or_owner_change",
+        "description": "Any change to the tool registry or service-account scopes, or a new accountable owner."
+      },
+      {
+        "trigger": "harness_change",
+        "description": "Any change to the approval workflow."
+      },
+      {
+        "trigger": "odd_expansion",
+        "ref": "odd.use_case",
+        "description": "Any change to the typology scope, population or jurisdiction."
+      },
+      {
+        "trigger": "action_class_added",
+        "description": "Any class A5-A12 becomes reachable."
+      },
+      {
+        "trigger": "critical_control_removed",
+        "description": "Removal of the approval gate, read-only scoping or the action allowlist."
+      }
+    ],
+    "partial_retest": [
+      {
+        "trigger": "evidence_document_change",
+        "description": "A new version of a cited policy document."
+      }
+    ],
+    "cosmetic": [
+      {
+        "trigger": "cosmetic_change",
+        "description": "Formatting changes to a cited document."
+      }
+    ],
+    "monitoring": "Change tickets on the model pin, tool registry and IAM scopes notify the owner (fictional arrangement)."
+  },
+  "evidence": [
+    {
+      "id": "e1",
+      "path": "docs/fc_triage_policy_memo_v4.docx",
+      "content_hash": "sha256:6283e1431339f5567ad9ae7d155f9a4269a9316442777d673b8615d9ab087d25",
+      "artifact_class": "product_documentation"
+    },
+    {
+      "id": "e2",
+      "path": "exports/approval_workflow.yaml",
+      "content_hash": "sha256:3f6b086da959ff96eaa0733e28c8bc36b0eafac3cea3b5a0eeaa480809d9e445",
+      "artifact_class": "approval_workflow"
+    },
+    {
+      "id": "e3",
+      "path": "exports/tool_registry.json",
+      "content_hash": "sha256:7d9cb57a9b1c4c0493ea618d752c3c5b94578f578627340a45511cd990660ebc",
+      "artifact_class": "configuration_export"
+    },
+    {
+      "id": "e4",
+      "path": "exports/iam_entitlements.csv",
+      "content_hash": "sha256:2b7a2e596b419bb0f5dc5a207d1321ef147733a247c38ec02f3489dfd7b3b4c9",
+      "artifact_class": "identity_entitlements"
+    },
+    {
+      "id": "e5",
+      "path": "exports/approval_records.csv",
+      "content_hash": "sha256:3226bec739ca6a16ff588dc28b6a1dcf221172bf3b8ed1c2713f0a9bc3fe4451",
+      "artifact_class": "approval_workflow"
+    },
+    {
+      "id": "e6",
+      "path": "docs/operating_procedure_v2.docx",
+      "content_hash": "sha256:b8e55829a5e978b5159a36cc87404b25fbe65415d07c6697a9c2ac8f599ea6cc",
+      "artifact_class": "operational_documentation"
+    }
+  ],
+  "status": {
+    "open_findings": [
+      {
+        "id": "of-1",
+        "kind": "open_conflict",
+        "field_id": "actions.A6",
+        "note": "Policy prohibits case closure but the service account holds cases:write."
+      }
+    ],
+    "accepted_gaps": [],
+    "risk_acceptances": [],
+    "limitations": [
+      "Level 1: nothing executed; every claim is as asserted or as configured.",
+      "Not comparable with any other deployment."
+    ]
+  },
+  "signatures": []
+}

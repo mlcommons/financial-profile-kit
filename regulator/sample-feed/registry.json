@@ -1,0 +1,52 @@
+{
+  "registry": "arp-feed-registry/0.1",
+  "sample": true,
+  "note": "SAMPLE register of FICTIONAL firms (spec/FEED.md, Creating your firm register): peer groups, delivery mode and each firm's registered signing key. DEMO-ONLY keys derived from a public seed: anyone can forge them. Never use these keys or firm ids for real data.",
+  "firms": [
+    {
+      "firm_id": "DEMO-FIRM-01",
+      "name": "Northbridge Bank plc (fictional)",
+      "short": "Northbridge",
+      "peer_group": "Large deposit-takers",
+      "delivery": "pull",
+      "endpoint": "https://arp-feed.northbridge.example/arp/v0",
+      "public_key": "b7kprWdCkEoh3c1Q2lStTYKg5D/oLL1/xCZfvx5umio="
+    },
+    {
+      "firm_id": "DEMO-FIRM-02",
+      "name": "Example Bank plc (fictional)",
+      "short": "Example Bank",
+      "peer_group": "Large deposit-takers",
+      "delivery": "pull",
+      "endpoint": "https://arp.examplebank.example/arp/v0",
+      "public_key": "C6mI9HQPh074q2FsJfegEU5U3G/kuyJaiOUrem+JBfM="
+    },
+    {
+      "firm_id": "DEMO-FIRM-03",
+      "name": "Lumen Digital Bank Ltd (fictional)",
+      "short": "Lumen Digital",
+      "peer_group": "Large deposit-takers",
+      "delivery": "push",
+      "endpoint": null,
+      "public_key": "g4rkbBiG1pxNN9/jcVYNs8GjQw7KjtvTGrT0wqqOvbE="
+    },
+    {
+      "firm_id": "DEMO-FIRM-04",
+      "name": "Harbour & Vale Building Society (fictional)",
+      "short": "Harbour & Vale",
+      "peer_group": "Large deposit-takers",
+      "delivery": "file",
+      "endpoint": null,
+      "public_key": "e6dT3y2MEPUhD/SJv1RFNHia8Fd01Bq7b3WJCZb6dGg="
+    },
+    {
+      "firm_id": "DEMO-FIRM-05",
+      "name": "Meridian Capital Markets LLP (fictional)",
+      "short": "Meridian",
+      "peer_group": "Investment firms",
+      "delivery": "pull",
+      "endpoint": "https://feeds.meridian-cm.example/arp/v0",
+      "public_key": "752iMD2ru7ffweeiXDQS0FefukbPPMpZXq961dasLcc="
+    }
+  ]
+}

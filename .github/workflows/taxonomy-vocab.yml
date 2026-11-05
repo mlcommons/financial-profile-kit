@@ -1,0 +1,46 @@
+name: Taxonomy Vocabulary
+
+# Checks that spec/vocab/ matches the taxonomy release pinned in spec/taxonomy.lock.json.
+# While the taxonomy repository is private, add a read-only token as the repository secret
+# TAXONOMY_READ_TOKEN; without it the check is skipped with a notice. Once both repositories
+# are public, no token is needed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - "spec/vocab/**"
+      - "spec/taxonomy.lock.json"
+      - "tools/check_taxonomy_vocab.py"
+      - ".github/workflows/taxonomy-vocab.yml"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the pinned taxonomy release
+        id: lock
+        run: |
+          echo "repo=$(python3 -c "import json;u=json.load(open('spec/taxonomy.lock.json'))['taxonomy_repository'];print(u.split('github.com/')[1])")" >> "$GITHUB_OUTPUT"
+          echo "ref=$(python3 -c "import json;print(json.load(open('spec/taxonomy.lock.json'))['taxonomy_ref'])")" >> "$GITHUB_OUTPUT"
+
+      - name: Check out the taxonomy release
+        id: taxonomy
+        continue-on-error: true
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.lock.outputs.repo }}
+          ref: ${{ steps.lock.outputs.ref }}
+          path: _taxonomy
+          token: ${{ secrets.TAXONOMY_READ_TOKEN || github.token }}
+
+      - name: Compare vocabularies
+        if: steps.taxonomy.outcome == 'success'
+        run: python3 tools/check_taxonomy_vocab.py --taxonomy _taxonomy
+
+      - name: Taxonomy release not reachable
+        if: steps.taxonomy.outcome != 'success'
+        run: echo "::notice::Taxonomy release ${{ steps.lock.outputs.repo }}@${{ steps.lock.outputs.ref }} not reachable; check skipped. Add TAXONOMY_READ_TOKEN while the taxonomy repository is private."
